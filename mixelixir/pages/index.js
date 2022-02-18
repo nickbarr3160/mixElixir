@@ -2,8 +2,8 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {useState,useEffect} from 'react'
-// components imports
 
+// components imports
 import { Input } from '../comps/InputBox'
 
 
@@ -13,26 +13,28 @@ export default function Home() {
   const [arr, setArr] = useState([])
   
   
-// console.log(arr)
+
   const handleValue = (e)=>
   {
     setVal(e.target.value)
+    // updating the state of the input box value on
   }
 
-  const handleList = ()=>
+  const addValueToArr = ()=>
   {
-
+    arr.length <= 4-1 ? setArr([...arr, val]):null 
+    // adding values from the input box to an array names arr if the length of the array is less than or equal to 4
   }
 
-  // console.log(arr)
+
+
   return (
     <div className={styles.container}>
+
       <Input
         val={val}
         onValChange={handleValue}
-        onButtClick={()=>{
-          arr.length <= 4-1 ? setArr([...arr, val]):null 
-        }}
+        onButtClick={addValueToArr}
         
       />
 
@@ -44,13 +46,15 @@ export default function Home() {
         }}>
           
           {arr.map((o,i) => (
-              <div key={i} > 
+              <div key={i}> 
                 <p> {o} </p>
                 <button onClick={()=>{
                   arr.splice(i,1)
                   setArr([...arr])
+                  // delete the i th element of the array when click on the button
                   }}> del 
                   </button>
+
               </div>
               
               ))}
