@@ -3,8 +3,10 @@ const drinks = require('../all_drinks.js')
 var ing = ['orange peel', 'whiskey', 'lemon', 'gin']
 
 
-
-drinks.map(obj =>{
+export function generate (data,ing)
+{
+    var sorted =[]
+    data.map(obj =>{
     let temp =[]
     let temp_two =[]
     let ingredients = []
@@ -24,46 +26,44 @@ drinks.map(obj =>{
     temp_two.map((o,i)=> Object.assign(o,{ingredients:ingredients}))
 
     if(ing)
-
     {
         const filtered = temp_two.map((o)=>
         {
             // console.log(o)
-            var sorted =[]
             var count = 0
-            for(let i=0;i<ing.length;i++)
-                    {
                         o.ingredients.filter((el)=>
                         { 
-                            if (el.toLowerCase().includes(ing[i].toLowerCase()))
+                            var work = false
+                            for(var i = 0; i<ing.length; i++)
                             {
-                                count ++
-                                if(count >= 2)
+                                if (el.toLowerCase().includes(ing[i].toLowerCase()))
                                 {
-                                    // console.log(o)
-                                    return sorted = o
+                                    count ++
+                                    // else if (count < 2)
+                                    // {
+                                    //     // el.splice(0,i)
+                                    //     // sorted.splice(i,1)
+                                    //     return false
+                                    // }
                                 }
-                                else if (count < 2)
-                                {
-                                    
-                                    // el.splice(0,i)
-                                    // sorted.splice(i,1)
-                                    return
-                                }
-                            }
 
-                            else {
-                                return
                             }
-                            
+                            //console.log(el, count, ing)
+
+                            if(count >= 2)
+                            {
+                                sorted.push(o);
+                            }
+                            return work;
 
                         })
-                    }
-            // console.log(sorted)
-            return sorted
-            
+                            
+
         })
-        
-        console.log( filtered)
+                        
+                        //console.log( filtered)
     }
-})
+                })
+                console.log(sorted)
+                return sorted.length === 0 ? null : sorted
+}
