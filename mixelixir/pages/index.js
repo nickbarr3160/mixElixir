@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {useState,useEffect} from 'react'
-
+import ax from 'axios';
 // components imports
 import { Input } from '../comps/InputBox'
 
@@ -26,7 +26,14 @@ export default function Home() {
     // adding values from the input box to an array names arr if the length of the array is less than or equal to 4
   }
 
-
+  const compareIngs = async () =>{
+  const res = await ax.get('/api/all_drinks', {
+    params:{
+      ings:arr
+    }
+  })
+}
+  compareIngs();
 
   return (
     <div className={styles.container}>
