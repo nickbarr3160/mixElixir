@@ -27,13 +27,13 @@ export default function Home() {
   }
 
   const compareIngs = async () =>{
-  const res = await ax.get('/api/all_drinks', {
-    params:{
-      ings:arr
-    }
+  console.log('hiiiii')
+  const res = await ax.get('./api/drinks', {
+    params: arr
   })
+  console.log(res.data)
 }
-  compareIngs();
+
 
   return (
     <div className={styles.container}>
@@ -51,7 +51,7 @@ export default function Home() {
           width:200,
           color:'white'
         }}>
-          
+          <button onClick={compareIngs} > matchhh  </button>
           {arr.map((o,i) => (
               <div key={i}> 
                 <p> {o} </p>
@@ -61,7 +61,8 @@ export default function Home() {
                   // delete the i th element of the array when click on the button
                   }}> del 
                   </button>
-
+                
+                
               </div>
               
               ))}

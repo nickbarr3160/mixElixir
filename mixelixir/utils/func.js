@@ -5,12 +5,13 @@ var ing = ['orange peel', 'whiskey', 'lemon', 'gin']
 
 export function generate (data,ing)
 {
+    try{
     var sorted =[]
     data.map(obj =>{
     let temp =[]
     let temp_two =[]
     let ingredients = []
-    for (i=1; i<16;i++)
+    for (var i=1; i<16;i++)
     {
         temp.push(obj["strIngredient"+i])
         // temp_two.push(Object.entries(obj).includes('strMeasure'+ i))
@@ -24,7 +25,7 @@ export function generate (data,ing)
     temp_two.push(Object.fromEntries(Object.entries(obj).filter(([key]) => !key.includes('strIngredient'))));
 
     temp_two.map((o,i)=> Object.assign(o,{ingredients:ingredients}))
-
+    console.log(temp_two)
     if(ing)
     {
         const filtered = temp_two.map((o)=>
@@ -66,4 +67,6 @@ export function generate (data,ing)
                 })
                 console.log(sorted)
                 return sorted.length === 0 ? null : sorted
+            }
+            catch(err){ console.log(err), 'not workingg'}
 }
