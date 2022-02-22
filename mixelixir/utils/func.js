@@ -1,16 +1,15 @@
 const drinks = require('../all_drinks.js')
 
-var ing = ['orange peel', 'whiskey', 'lemon', 'gin']
+// var ing = ['orange peel', 'whiskey', 'lemon', 'gin']
 
-
-export function generate (data,ing)
+ export function generate(data,ing)
 {
     var sorted =[]
     data.map(obj =>{
     let temp =[]
     let temp_two =[]
     let ingredients = []
-    for (i=1; i<16;i++)
+    for (let i=1; i<16;i++)
     {
         temp.push(obj["strIngredient"+i])
         // temp_two.push(Object.entries(obj).includes('strMeasure'+ i))
@@ -67,3 +66,8 @@ export function generate (data,ing)
                 console.log(sorted)
                 return sorted.length === 0 ? null : sorted
 }
+
+
+
+
+// generate(drinks, ing)
