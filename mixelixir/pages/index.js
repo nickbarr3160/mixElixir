@@ -20,7 +20,7 @@ export default function Home() {
 
   const [val,setVal] = useState('')
   const [arr, setArr] = useState([])
-  const [data, setData] = useState([]);
+  const [searchData, setSearchData] = useState([]);
   
   const {search, setSearch} = useSearch()
   // console.log(search)
@@ -67,7 +67,7 @@ const inputFilter = async (value) =>{
 
     console.log(res.data)
   // store the data in a state for mapping
-    setData(res.data)
+    setSearchData(res.data)
         
   }, 2000)
 
@@ -81,7 +81,7 @@ const inputFilter = async (value) =>{
       <h3> searching by {search} filter </h3>
      
       <DrinkResults>
-      {data.map((o,i)=><DrinkCardUI name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)}
+      {searchData.map((o,i)=><DrinkCardUI key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)}
       </DrinkResults>
 
       <Input
@@ -89,16 +89,14 @@ const inputFilter = async (value) =>{
         onValChange={handleValue}
         onButtClick={addValueToArr}
       />
-      <button onClick={compareIngs}>Test</button>
-
+     
+    <h1>Cocktail Generator</h1>
     <div style={{
           background:'red', 
           height:200, 
           width:200,
           color:'white'
         }}>
-          
-          <h1>Cocktail Generator</h1>
           <MyButton onClick={compareIngs}/>
           {/* <button onClick={compareIngs} > matchhh  </button> */}
           {arr.map((o,i) => (
