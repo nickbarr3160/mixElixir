@@ -10,6 +10,7 @@ export default function Settings() {
       console.log("this is the arg", txt)
       
 
+      setSearch(txt)
       console.log("this is the saved global state", search)
 
       

@@ -9,6 +9,7 @@ import { useSearch } from '../utils/provider';
 import { search_types } from '@/utils/variables';
 import { SearchSelection } from '@/comps/SearchSelection';
 import Link from 'next/link';
+import DrinkCardUI from '@/comps/DrinkCard';
 
 var timer = null
 
@@ -58,6 +59,7 @@ const inputFilter = async (value) =>{
   return (
     <div className={styles.container}>
       <input onChange={(e)=>inputFilter(e.target.value)}></input>
+      <DrinkCardUI/>
       <Link href='/settings'>Head back to settings</Link>
       <Input
         val={val}

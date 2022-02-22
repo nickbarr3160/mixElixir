@@ -10,7 +10,7 @@ export default async function handler(req, res)
   const comparitiveArray = Object.values(receivedParams)
   
   const {value,searchBy} = req.query;
-
+  // console.log(searchBy)
   // console.log(req.query)
 
   if (comparitiveArray)
