@@ -11,6 +11,8 @@ import { SearchSelection } from '@/comps/SearchSelection';
 import Link from 'next/link';
 import { MyButt } from '@/comps/Button/style';
 import { MyButton } from '@/comps/Button';
+import { ListWrapper } from '@/comps/IngredientsList/styles';
+import { IngredientList } from '@/comps/IngredientsList';
 
 var timer = null
 
@@ -78,15 +80,7 @@ const inputFilter = async (value) =>{
       />
       <button onClick={compareIngs}>Test</button>
 
-    <div style={{
-          background:'red', 
-          height:200, 
-          width:200,
-          color:'white'
-        }}>
-          <MyButton onClick={compareIngs}/>
-          {/* <button onClick={compareIngs} > matchhh  </button> */}
-          {arr.map((o,i) => (
+    <IngredientList items={arr.map((o,i) => (
               <div key={i}> 
                 <p> {o} </p>
                 <button onClick={()=>{
@@ -95,11 +89,19 @@ const inputFilter = async (value) =>{
                   // delete the i th element of the array when click on the button
                   }}> del 
                   </button>
-                
-                
               </div>
+                
+                
               
-              ))}
+              ))} />
+    <div style={{
+          background:'red', 
+          height:200, 
+          width:200,
+          color:'white'
+        }}>
+          <MyButton onClick={compareIngs}/>
+        
     </div>
     </div>
   )
