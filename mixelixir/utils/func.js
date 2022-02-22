@@ -79,31 +79,27 @@ const drinks = require('../all_drinks.js')
 
  export function filtering(
     arr=[],
-    config={drinkName:null, alcStatus:null, alcBase:null, glass:null}
+    config={strDrink:null, strAlcoholic:null,strGlass:null}
   ){
     //console.log(arr.slice(0,5));
   
-    const {drinkName, alcStatus, alcBase, glass} = config;
+    const {strDrink, strAlcoholic, strGlass} = config;
   
-    if(drinkName || alcStatus || alcBase || glass){
+    if(strDrink || strAlcoholic || strGlass){
       const filtered_arr = arr.filter((o)=>{
   
         var cond = true;
     
-        if(drinkName){
-          cond = cond && o.strDrink.includes(drinkName);
+        if(strDrink){
+          cond = cond && o.strDrink.toLowerCase().includes(strDrink);
         }
     
-        if(alcStatus){
-            cond = cond && o.strAlcoholic==='Non Alcholic';
-        }
-    
-        if(alcBase){
-          
+        if(strAlcoholic){
+            cond = cond && o.strAlcoholic.toLowerCase()==='Non Alcholic';
         }
 
-        if(glass){
-            cond = cond && o.strGlass.includes(glass);
+        if(strGlass){
+            cond = cond && o.strGlass.toLowerCase().includes(strGlass);
         }
     
         return cond;

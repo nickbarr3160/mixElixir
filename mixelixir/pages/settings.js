@@ -10,9 +10,12 @@ export default function Settings() {
       console.log("this is the arg", txt)
       
 
-      console.log("this is the saved global state", search)
+      setTimeout(()=>{
 
-      
+        setSearch(txt)
+
+      },500)
+
       
     }
 
