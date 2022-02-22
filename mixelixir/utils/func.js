@@ -75,4 +75,47 @@ const drinks = require('../all_drinks.js')
     catch(err){ console.log(err), 'not workingg'}
 }
 
-// generate(all_drinks,ing)
+
+
+ export function filtering(
+    arr=[],
+    config={drinkName:null, alcStatus:null, alcBase:null, glass:null}
+  ){
+    //console.log(arr.slice(0,5));
+  
+    const {drinkName, alcStatus, alcBase, glass} = config;
+  
+    if(drinkName || alcStatus || alcBase || glass){
+      const filtered_arr = arr.filter((o)=>{
+  
+        var cond = true;
+    
+        if(drinkName){
+          cond = cond && o.strDrink.includes(drinkName);
+        }
+    
+        if(alcStatus){
+            cond = cond && o.strAlcoholic==='Non Alcholic';
+        }
+    
+        if(alcBase){
+          
+        }
+
+        if(glass){
+            cond = cond && o.strGlass.includes(glass);
+        }
+    
+        return cond;
+      })
+    
+    //   console.log(filtered_arr);
+      return filtered_arr;
+    } else {
+
+      return [];
+    }
+
+  }
+
+// filtering(all_drinks, {title:"Texas Fire"})

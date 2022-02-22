@@ -7,6 +7,7 @@ import ax from 'axios';
 import { Input } from '../comps/InputBox'
 import { useSearch } from '../utils/provider';
 import { search_types } from '@/utils/variables';
+import { SearchSelection } from '@/comps/SearchSelection';
 
 var timer = null
 
@@ -33,11 +34,20 @@ export default function Home() {
   
   // use the user inputted array of ingredients to compare witht the drinks dataset for cocktail generator feature
   const compareIngs = async () =>{
-  console.log('hiiiii')
   const res = await ax.get('./api/drinks', {
     params: arr
   })
   console.log(res.data)
+}
+
+const inputFilter = async (value) =>{
+  const res = await ax.get('/api/books', {
+    params:{
+      value:value,
+      searchBy: search_types[search]
+    }
+  })
+  console.log(res)
 }
 
 
@@ -74,7 +84,7 @@ export default function Home() {
               ))}
 
     </div>
-
+    <SearchSelection onSearch={(e)=>inputFilter(e.target.value)}/>
     </div>
   )
 }
