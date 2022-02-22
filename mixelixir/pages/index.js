@@ -8,6 +8,7 @@ import { Input } from '../comps/InputBox'
 import { useSearch } from '../utils/provider';
 import { search_types } from '@/utils/variables';
 import { SearchSelection } from '@/comps/SearchSelection';
+import Link from 'next/link';
 
 var timer = null
 
@@ -17,6 +18,7 @@ export default function Home() {
   const [arr, setArr] = useState([])
   
   const {search, setSearch} = useSearch()
+  console.log(search)
 
   const handleValue = (e)=>
   {
@@ -41,19 +43,22 @@ export default function Home() {
 }
 
 const inputFilter = async (value) =>{
-  const res = await ax.get('/api/drinks', {
-    params:{
-      value:value,
-      searchBy: search_types[search]
-    }
-  })
-  console.log(res)
+  setTimeout(async()=>{
+    const res = await ax.get('./api/drinks', {
+      params:{
+        value:value,
+        searchBy: search_types[search]
+      }
+    })
+    console.log(res.data)
+  }, 2000)
 }
 
 
   return (
     <div className={styles.container}>
-
+      <input onChange={(e)=>inputFilter(e.target.value)}></input>
+      <Link href='/settings'>Head back to settings</Link>
       <Input
         val={val}
         onValChange={handleValue}
@@ -82,9 +87,7 @@ const inputFilter = async (value) =>{
               </div>
               
               ))}
-
     </div>
-    <SearchSelection onSearch={(e)=>inputFilter(e.target.value)}/>
     </div>
   )
 }
