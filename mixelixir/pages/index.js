@@ -11,6 +11,8 @@ import { SearchSelection } from '@/comps/SearchSelection';
 import Link from 'next/link';
 import { MyButt } from '@/comps/Button/style';
 import { MyButton } from '@/comps/Button';
+import DrinkCardUI from '@/comps/DrinkCard';
+import { DrinkResults, Wrapper } from '@/styles/styles';
 
 var timer = null
 
@@ -18,6 +20,7 @@ export default function Home() {
 
   const [val,setVal] = useState('')
   const [arr, setArr] = useState([])
+  const [data, setData] = useState([]);
   
   const {search, setSearch} = useSearch()
   // console.log(search)
@@ -44,6 +47,7 @@ export default function Home() {
   console.log(res.data)
 }
 
+// function to pass over a specified search filter to the api
 const inputFilter = async (value) =>{
 
   if (timer)
@@ -60,17 +64,26 @@ const inputFilter = async (value) =>{
         searchBy: search_types[search]
       }
     })
+
     console.log(res.data)
+  // store the data in a state for mapping
+    setData(res.data)
+        
   }, 2000)
 
 }
 
 
   return (
-    <div className={styles.container}>
+    <Wrapper>
+      <h1>Welcome</h1>
       <input onChange={(e)=>inputFilter(e.target.value)}></input>
-      <div> search by {search} </div>
-      <Link href='/settings'>Head back to settings</Link>
+      <h3> searching by {search} filter </h3>
+     
+      <DrinkResults>
+      {data.map((o,i)=><DrinkCardUI name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)}
+      </DrinkResults>
+
       <Input
         val={val}
         onValChange={handleValue}
@@ -84,6 +97,8 @@ const inputFilter = async (value) =>{
           width:200,
           color:'white'
         }}>
+          
+          <h1>Cocktail Generator</h1>
           <MyButton onClick={compareIngs}/>
           {/* <button onClick={compareIngs} > matchhh  </button> */}
           {arr.map((o,i) => (
@@ -101,6 +116,7 @@ const inputFilter = async (value) =>{
               
               ))}
     </div>
-    </div>
+    <Link href='/settings'>Head back to settings</Link>
+    </Wrapper>
   )
 }

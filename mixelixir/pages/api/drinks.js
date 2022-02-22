@@ -25,6 +25,7 @@ export default async function handler(req, res)
     })
   }
 
+  cocktailMatches = cocktailMatches.slice(0,10)
   res.status(200).json(cocktailMatches);
 
   
