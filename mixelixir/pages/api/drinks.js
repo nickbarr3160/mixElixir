@@ -10,7 +10,7 @@ export default async function handler(req, res)
   const comparitiveArray = Object.values(receivedParams)
   
   const {value,searchBy} = req.query;
-
+  // console.log(searchBy)
   // console.log(req.query)
 
   if (comparitiveArray)
@@ -25,6 +25,7 @@ export default async function handler(req, res)
     })
   }
 
+  cocktailMatches = cocktailMatches.slice(0,10)
   res.status(200).json(cocktailMatches);
 
   
