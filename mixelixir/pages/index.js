@@ -9,7 +9,8 @@ import { useSearch } from '../utils/provider';
 import { search_types } from '@/utils/variables';
 import { SearchSelection } from '@/comps/SearchSelection';
 import Link from 'next/link';
-import DrinkCardUI from '@/comps/DrinkCard';
+import { MyButt } from '@/comps/Button/style';
+import { MyButton } from '@/comps/Button';
 
 var timer = null
 
@@ -19,7 +20,7 @@ export default function Home() {
   const [arr, setArr] = useState([])
   
   const {search, setSearch} = useSearch()
-  console.log(search)
+  // console.log(search)
 
   const handleValue = (e)=>
   {
@@ -44,22 +45,31 @@ export default function Home() {
 }
 
 const inputFilter = async (value) =>{
-  setTimeout(async()=>{
+
+  if (timer)
+    {
+      clearTimeout(timer)
+      timer=null
+    }
+
+  if (timer===null)
+  timer = setTimeout(async()=>{
     const res = await ax.get('./api/drinks', {
       params:{
-        value:value,
+        value:value.toLowerCase(),
         searchBy: search_types[search]
       }
     })
     console.log(res.data)
   }, 2000)
+
 }
 
 
   return (
     <div className={styles.container}>
       <input onChange={(e)=>inputFilter(e.target.value)}></input>
-      <DrinkCardUI/>
+      <div> search by {search} </div>
       <Link href='/settings'>Head back to settings</Link>
       <Input
         val={val}
@@ -74,7 +84,8 @@ const inputFilter = async (value) =>{
           width:200,
           color:'white'
         }}>
-          <button onClick={compareIngs} > matchhh  </button>
+          <MyButton onClick={compareIngs}/>
+          {/* <button onClick={compareIngs} > matchhh  </button> */}
           {arr.map((o,i) => (
               <div key={i}> 
                 <p> {o} </p>

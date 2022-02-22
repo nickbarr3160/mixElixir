@@ -1,7 +1,7 @@
 
 export const search_types = {
-    drinkName:'drinkName',
-    alcStatus:'strAlcoholic',
-    alcBase:' strAlcoholic',
-    glass:"strGlass",
+    strDrink:'strDrink',
+    strAlcoholic:'strAlcoholic',
+    strAlcoholic:' strAlcoholic',
+    strGlass:"strGlass",
 }
