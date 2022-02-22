@@ -1,22 +1,17 @@
+import {generate} from '../../utils/func'
+import all_drinks from '@/all_drinks';
 
-import {generate} from '../../utils/func';
-import drinks from '@/all_drinks';
 
-export default async function handler(req, res) {
+export default async function handler(req, res) 
+{
 
-  //HELPER FUNCTIONS FOR YOU TO USE!
-//   console.log(req.query, req.body)
-  //await Save("test", json);
-  //const files = await Read();
+  var cocktailMatches =[]
+  const receivedParams = req.query;
+  const comparitiveArray = Object.values(receivedParams)
 
-  //detect if filter/save/read
-  const ings = req.query;
-  console.log(req.query.ings)
-
-  if (ings){
-    console.log("this is ings when recognized by API:", ings)
-    generate(drinks, ings)
+  if (comparitiveArray)
+  {
+    cocktailMatches = generate(all_drinks, comparitiveArray)
   }
-
-
+    res.status(200).json(cocktailMatches);
 }

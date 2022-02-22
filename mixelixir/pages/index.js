@@ -33,20 +33,12 @@ export default function Home() {
   
   // use the user inputted array of ingredients to compare witht the drinks dataset for cocktail generator feature
   const compareIngs = async () =>{
-    console.log(arr, "=========")
-    if (timer === null){
-      timer = setTimeout(async () =>{
-        console.log("async call")
-        const res = await ax.get('./api/drinks', {
-          params:{
-            ings:arr
-          }
-        })
-      }, 1000);
-      console.log(arr ,'sjdkfasjhfgsadjh')
-    }
+  console.log('hiiiii')
+  const res = await ax.get('./api/drinks', {
+    params: arr
+  })
+  console.log(res.data)
 }
-
 
 
   return (
@@ -65,7 +57,7 @@ export default function Home() {
           width:200,
           color:'white'
         }}>
-          
+          <button onClick={compareIngs} > matchhh  </button>
           {arr.map((o,i) => (
               <div key={i}> 
                 <p> {o} </p>
@@ -75,7 +67,8 @@ export default function Home() {
                   // delete the i th element of the array when click on the button
                   }}> del 
                   </button>
-
+                
+                
               </div>
               
               ))}
