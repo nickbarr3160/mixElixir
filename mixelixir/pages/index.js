@@ -5,14 +5,17 @@ import {useState,useEffect} from 'react'
 import ax from 'axios';
 // components imports
 import { Input } from '../comps/InputBox'
+import { useSearch } from '../utils/provider';
+import { search_types } from '@/utils/variables';
 
+var timer = null
 
 export default function Home() {
 
   const [val,setVal] = useState('')
   const [arr, setArr] = useState([])
   
-  
+  const {search, setSearch} = useSearch()
 
   const handleValue = (e)=>
   {
@@ -20,20 +23,31 @@ export default function Home() {
     // updating the state of the input box value on
   }
 
-  const addValueToArr = ()=>
+  const addValueToArr =()=>
   {
     arr.length <= 4-1 ? setArr([...arr, val]):null 
+    console.log(arr)
     // adding values from the input box to an array names arr if the length of the array is less than or equal to 4
   }
 
+  
+  // use the user inputted array of ingredients to compare witht the drinks dataset for cocktail generator feature
   const compareIngs = async () =>{
-  const res = await ax.get('/api/all_drinks', {
-    params:{
-      ings:arr
+    console.log(arr, "=========")
+    if (timer === null){
+      timer = setTimeout(async () =>{
+        console.log("async call")
+        const res = await ax.get('./api/drinks', {
+          params:{
+            ings:arr
+          }
+        })
+      }, 1000);
+      console.log(arr ,'sjdkfasjhfgsadjh')
     }
-  })
 }
-  compareIngs();
+
+
 
   return (
     <div className={styles.container}>
@@ -42,8 +56,8 @@ export default function Home() {
         val={val}
         onValChange={handleValue}
         onButtClick={addValueToArr}
-        
       />
+      <button onClick={compareIngs}>Test</button>
 
     <div style={{
           background:'red', 
