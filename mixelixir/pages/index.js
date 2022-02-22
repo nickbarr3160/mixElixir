@@ -41,7 +41,7 @@ export default function Home() {
 }
 
 const inputFilter = async (value) =>{
-  const res = await ax.get('/api/books', {
+  const res = await ax.get('/api/drinks', {
     params:{
       value:value,
       searchBy: search_types[search]
