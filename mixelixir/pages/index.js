@@ -63,19 +63,17 @@ export default function Home() {
           onValChange={handleValue}
           onButtClick={addValueToArr}
           />
-          {/* <button onClick={compareIngs} > matchhh  </button> */}
+         
           {arr.map((o,i) => (
             <IngredientCont key={i}> 
                 <p> {o} </p>
                 <button onClick={()=>{
                   arr.splice(i,1)
                   setArr([...arr])
-                  // delete the i th element of the array when click on the button
+             
                   }}> del 
                   </button>
-                
-                
-              </IngredientCont>
+            </IngredientCont>
               
               ))}
         <MyButton onClick={compareIngs}/>
@@ -85,5 +83,5 @@ export default function Home() {
           {generateData.map((o,i)=><DrinkCardUI key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)}
       </DrinkResults>
     </Wrapper>
-  )
+    )
 }
