@@ -35,7 +35,7 @@ display:flex;
 justify-content:space-evenly;
 flex-direction:column;
 align-items:center;
-height:30vh; 
+height:40vh; 
 width:50vw;
 color:white;
 border-radius:10px;
