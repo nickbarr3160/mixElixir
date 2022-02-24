@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { MyButt } from '@/comps/Button/style';
 import { MyButton } from '@/comps/Button';
 import DrinkCardUI from '@/comps/DrinkCard';
-import { DrinkResults, Wrapper } from '@/styles/styles';
+import { DrinkResults, Wrapper, GeneratedCont, IngredientCont } from '@/styles/styles';
 import NavBar from '@/comps/NavBar';
 
 
@@ -56,21 +56,16 @@ export default function Home() {
       <NavBar/>
   
       <h1>Cocktail Generator</h1>
-      <Input
-        val={val}
-        onValChange={handleValue}
-        onButtClick={addValueToArr}
-      />
      
-      <div style={{
-          background:'black', 
-          height:200, 
-          width:200,
-          color:'white'
-        }}>
+      <GeneratedCont>
+          <Input
+          val={val}
+          onValChange={handleValue}
+          onButtClick={addValueToArr}
+          />
           {/* <button onClick={compareIngs} > matchhh  </button> */}
           {arr.map((o,i) => (
-            <div key={i}> 
+            <IngredientCont key={i}> 
                 <p> {o} </p>
                 <button onClick={()=>{
                   arr.splice(i,1)
@@ -80,17 +75,15 @@ export default function Home() {
                   </button>
                 
                 
-              </div>
+              </IngredientCont>
               
               ))}
         <MyButton onClick={compareIngs}/>
-      </div>
+      </GeneratedCont>
        
       <DrinkResults>
           {generateData.map((o,i)=><DrinkCardUI key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)}
       </DrinkResults>
-      
-      <Link href='/settings'>Head back to settings</Link>
     </Wrapper>
   )
 }

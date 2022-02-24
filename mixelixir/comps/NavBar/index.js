@@ -1,13 +1,13 @@
 import React from "react";
 import Link from 'next/link';
 import { NavCont, Logo, LinkCont,  } from "./style";
-
+import {BsSunFill} from 'react-icons/bs';
 
 
 const NavBar = ({
     logoText="LOGO HERE",
     themeToggle=()=>{},
-    icon="darkModeIconToggleHere",
+    icon=<BsSunFill/>,
 }) => {
     return <NavCont>
         <Logo>{logoText}</Logo>

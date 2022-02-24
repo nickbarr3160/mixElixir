@@ -19,10 +19,9 @@ export default function Settings() {
   
   return (
     <SettingsWrapper>
-    <NavBar/>  
-    <h1>Choose your search filter!</h1>
-    <SearchSelection onSearch={(e)=> setType(e.target.value)}/>
-    <Link href='/'>Head back to search</Link>
+      <NavBar/>  
+      <h1>Choose your search filter!</h1>
+      <SearchSelection onSearch={(e)=> setType(e.target.value)}/>
     </SettingsWrapper>
   )
 }
