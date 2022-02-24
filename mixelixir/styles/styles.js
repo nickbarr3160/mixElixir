@@ -9,6 +9,17 @@ height:100vh;
 width:100vw;
 `;
 
+export const SettingsWrapper = styled.div`
+display:flex;
+flex-direction:column;
+justify-content:space-evenly;
+align-items:center;
+height:100vh;
+width:100vw;
+`;
+
+
+
 export const DrinkResults = styled.div`
 display:flex;
 justify-content:center;

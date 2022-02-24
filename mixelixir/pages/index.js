@@ -13,6 +13,8 @@ import { MyButt } from '@/comps/Button/style';
 import { MyButton } from '@/comps/Button';
 import DrinkCardUI from '@/comps/DrinkCard';
 import { DrinkResults, Wrapper } from '@/styles/styles';
+import NavBar from '@/comps/NavBar';
+
 
 var timer = null
 
@@ -21,6 +23,8 @@ export default function Home() {
   const [val,setVal] = useState('')
   const [arr, setArr] = useState([])
   const [searchData, setSearchData] = useState([]);
+  const [generateData, setGenerateData] = useState([]);
+  
   
   const {search, setSearch} = useSearch()
   // console.log(search)
@@ -44,7 +48,7 @@ export default function Home() {
   const res = await ax.get('./api/drinks', {
     params: arr
   })
-  console.log(res.data)
+  setGenerateData(res.data)
 }
 
 // function to pass over a specified search filter to the api
@@ -76,31 +80,31 @@ const inputFilter = async (value) =>{
 
   return (
     <Wrapper>
-      <h1>Welcome</h1>
+      <NavBar/>
+      <h1>Welcome use the search bar below to search for a drink!</h1>
       <input onChange={(e)=>inputFilter(e.target.value)}></input>
-      <h3> searching by {search} filter </h3>
+      <h4> searching by {search} filter </h4>
      
       <DrinkResults>
       {searchData.map((o,i)=><DrinkCardUI key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)}
       </DrinkResults>
 
+      <h1>Cocktail Generator</h1>
       <Input
         val={val}
         onValChange={handleValue}
         onButtClick={addValueToArr}
       />
      
-    <h1>Cocktail Generator</h1>
     <div style={{
-          background:'red', 
+          background:'black', 
           height:200, 
           width:200,
           color:'white'
         }}>
-          <MyButton onClick={compareIngs}/>
           {/* <button onClick={compareIngs} > matchhh  </button> */}
           {arr.map((o,i) => (
-              <div key={i}> 
+            <div key={i}> 
                 <p> {o} </p>
                 <button onClick={()=>{
                   arr.splice(i,1)
@@ -113,7 +117,12 @@ const inputFilter = async (value) =>{
               </div>
               
               ))}
+        <MyButton onClick={compareIngs}/>
     </div>
+       
+    <DrinkResults>
+      {generateData.map((o,i)=><DrinkCardUI key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)}
+    </DrinkResults>
     <Link href='/settings'>Head back to settings</Link>
     </Wrapper>
   )

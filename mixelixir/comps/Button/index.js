@@ -7,7 +7,7 @@ export const MyButton = ({
 }) => {
   return (
     <ButtCont onClick={onClick} >
-        Match it bitch
+        Generate!
     </ButtCont>
   )
 }

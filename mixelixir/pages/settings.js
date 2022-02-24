@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import  {useSearch}  from '@/utils/provider';
 import {SearchSelection} from 'comps/SearchSelection'
+import styled from 'styled-components'
+import { SettingsWrapper } from '@/styles/styles';
 
 export default function Settings() {
   
@@ -21,10 +23,10 @@ export default function Settings() {
 
   
   return (
-    <div>
+    <SettingsWrapper>
     <h1>Choose your search filter!</h1>
     <SearchSelection onSearch={(e)=> setType(e.target.value)}/>
     <Link href='/'>Head back to search</Link>
-    </div>
+    </SettingsWrapper>
   )
 }
