@@ -22,7 +22,6 @@ export default function Home() {
 
   const [val,setVal] = useState('')
   const [arr, setArr] = useState([])
-  const [searchData, setSearchData] = useState([]);
   const [generateData, setGenerateData] = useState([]);
   
   
@@ -51,44 +50,11 @@ export default function Home() {
   setGenerateData(res.data)
 }
 
-// function to pass over a specified search filter to the api
-const inputFilter = async (value) =>{
-
-  if (timer)
-    {
-      clearTimeout(timer)
-      timer=null
-    }
-
-  if (timer===null)
-  timer = setTimeout(async()=>{
-    const res = await ax.get('./api/drinks', {
-      params:{
-        value:value.toLowerCase(),
-        searchBy: search_types[search]
-      }
-    })
-
-    console.log(res.data)
-  // store the data in a state for mapping
-    setSearchData(res.data)
-        
-  }, 2000)
-
-}
-
 
   return (
     <Wrapper>
       <NavBar/>
-      <h1>Welcome use the search bar below to search for a drink!</h1>
-      <input onChange={(e)=>inputFilter(e.target.value)}></input>
-      <h4> searching by {search} filter </h4>
-     
-      <DrinkResults>
-      {searchData.map((o,i)=><DrinkCardUI key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)}
-      </DrinkResults>
-
+  
       <h1>Cocktail Generator</h1>
       <Input
         val={val}
@@ -96,7 +62,7 @@ const inputFilter = async (value) =>{
         onButtClick={addValueToArr}
       />
      
-    <div style={{
+      <div style={{
           background:'black', 
           height:200, 
           width:200,
@@ -118,12 +84,13 @@ const inputFilter = async (value) =>{
               
               ))}
         <MyButton onClick={compareIngs}/>
-    </div>
+      </div>
        
-    <DrinkResults>
-      {generateData.map((o,i)=><DrinkCardUI key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)}
-    </DrinkResults>
-    <Link href='/settings'>Head back to settings</Link>
+      <DrinkResults>
+          {generateData.map((o,i)=><DrinkCardUI key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)}
+      </DrinkResults>
+      
+      <Link href='/settings'>Head back to settings</Link>
     </Wrapper>
   )
 }

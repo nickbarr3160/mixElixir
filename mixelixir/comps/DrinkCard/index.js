@@ -11,9 +11,9 @@ const DrinkCardUI = ({
     return <CardContainer display={display}>
         <DrinkImg src={imgSrc} />
         <TextCont>
-        <h2>
+        <h4>
         {name}
-        </h2>
+        </h4>
         </TextCont>
     </CardContainer>
 }

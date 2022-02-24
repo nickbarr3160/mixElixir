@@ -1,6 +1,5 @@
 import React from "react";
 import Link from 'next/link';
-import {BsSunFill} from 'react-icons/bs';
 import { NavCont, Logo, LinkCont,  } from "./style";
 
 
@@ -8,15 +7,14 @@ import { NavCont, Logo, LinkCont,  } from "./style";
 const NavBar = ({
     logoText="LOGO HERE",
     themeToggle=()=>{},
-    icon=<BsSunFill/>,
+    icon="darkModeIconToggleHere",
 }) => {
-    const {theme} = useTheme();
     return <NavCont>
         <Logo>{logoText}</Logo>
         <LinkCont>
-            <Link href='/'>Projects</Link>
-            <Link href='/'>Stack</Link>
-            <Link href='/'>Contact</Link>
+            <Link href='/'>Home</Link>
+            <Link href='/search'>Search Drinks!</Link>
+            <Link href='/settings'>Settings</Link>
             <div  onClick={themeToggle}>
                 {icon}
             </div>

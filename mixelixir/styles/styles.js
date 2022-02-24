@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
 display:flex;
 flex-direction:column;
-justify-content:space-evenly;
+justify-content:flex-start;
 align-items:center;
 height:100vh;
 width:100vw;
@@ -12,7 +12,7 @@ width:100vw;
 export const SettingsWrapper = styled.div`
 display:flex;
 flex-direction:column;
-justify-content:space-evenly;
+justify-content:flex-start;
 align-items:center;
 height:100vh;
 width:100vw;

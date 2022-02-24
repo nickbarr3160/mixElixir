@@ -4,10 +4,11 @@ export const NavCont = styled.div`
 display:flex;
 justify-content:space-between;
 align-items:center;
-height:20vh;
+height:15vh;
 width:100%;
 padding-left:1em;
 padding-right:1em;
+box-shadow:0 2px 4px rgb(0 0 0/20%);;
 `;
 
 export const Logo = styled.div`
