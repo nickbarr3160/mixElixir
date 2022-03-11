@@ -43,7 +43,7 @@ const inputFilter = async (value) =>{
     })
 
     console.log(res.data)
-  // store the data in a state for mapping
+    // store the data in a state for mapping
     setSearchData(res.data)
         
   }, 2000)
