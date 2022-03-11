@@ -11,10 +11,10 @@ import { SearchSelection } from '@/comps/SearchSelection';
 import Link from 'next/link';
 import { MyButt } from '@/comps/Button/style';
 import { MyButton } from '@/comps/Button';
-import { ListWrapper } from '@/comps/IngredientsList/styles';
-import { IngredientList } from '@/comps/IngredientsList';
 import DrinkCardUI from '@/comps/DrinkCard';
-import { DrinkResults, Wrapper } from '@/styles/styles';
+import { DrinkResults, Wrapper, GeneratedCont, IngredientCont } from '@/styles/styles';
+import NavBar from '@/comps/NavBar';
+
 
 var timer = null
 
@@ -22,7 +22,8 @@ export default function Home() {
 
   const [val,setVal] = useState('')
   const [arr, setArr] = useState([])
-  const [searchData, setSearchData] = useState([]);
+  const [generateData, setGenerateData] = useState([]);
+  
   
   const {search, setSearch} = useSearch()
   // console.log(search)
@@ -46,80 +47,41 @@ export default function Home() {
   const res = await ax.get('./api/drinks', {
     params: arr
   })
-  console.log(res.data)
-}
-
-// function to pass over a specified search filter to the api
-const inputFilter = async (value) =>{
-
-  if (timer)
-    {
-      clearTimeout(timer)
-      timer=null
-    }
-
-  if (timer===null)
-  timer = setTimeout(async()=>{
-    console.log(search)
-    const res = await ax.get('./api/drinks', {
-      params:{
-        value:value.toLowerCase(),
-        searchBy: search_types[search]
-      }
-    })
-    console.log(search)
-
-    console.log(res.data)
-  // store the data in a state for mapping
-    setSearchData(res.data)
-        
-  }, 2000)
-
+  setGenerateData(res.data)
 }
 
 
   return (
     <Wrapper>
-      <h1>Welcome</h1>
-      <input onChange={(e)=>inputFilter(e.target.value)}></input>
-      <h3> searching by {search} filter </h3>
+      <NavBar/>
+  
+      <h1>Cocktail Generator</h1>
      
-      <DrinkResults>
-      {/* {searchData.map((o,i)=><DrinkCardUI key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)} */}
-      </DrinkResults>
-
-      <Input
-        val={val}
-        onValChange={handleValue}
-        onButtClick={addValueToArr}
-      />
-     
-    <h1>Cocktail Generator</h1>
-    <div style={{
-          background:'red', 
-          height:200, 
-          width:200,
-          color:'white'
-        }}>
-          <MyButton onClick={compareIngs}/>
-          {/* <button onClick={compareIngs} > matchhh  </button> */}
+      <GeneratedCont>
+          <Input
+          val={val}
+          onValChange={handleValue}
+          onButtClick={addValueToArr}
+          />
+         
           {arr.map((o,i) => (
-              <div key={i}> 
+            <IngredientCont key={i}> 
                 <p> {o} </p>
                 <button onClick={()=>{
                   arr.splice(i,1)
                   setArr([...arr])
-                  // delete the i th element of the array when click on the button
+             
                   }}> del 
                   </button>
-              </div>
-                
-                
+            </IngredientCont>
               
-              ))} 
-            </div>
-  
-    <Link href='/settings'>Head back to settings</Link>
+              ))}
+        <MyButton onClick={compareIngs}/>
+      </GeneratedCont>
+       
+      <DrinkResults>
+          {generateData.map((o,i)=><DrinkCardUI key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)}
+      </DrinkResults>
     </Wrapper>
-  )
+    )
 }

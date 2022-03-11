@@ -2,12 +2,12 @@ import React from 'react'
 
 import { ButtCont, MyButt } from './style'
 
-export const MyButton = ({
-    onClick=()=>{}
+export const MyText = ({
+    
 }) => {
   return (
-    <ButtCont onClick={onClick} >
-        Generate!
+    <ButtCont>
+       {}
     </ButtCont>
   )
 }

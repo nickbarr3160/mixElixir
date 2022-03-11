@@ -16,7 +16,7 @@ return (
     <InputCont>
         <InputField 
             onChange={onValChange} 
-            placeholder='add upto 4 ingredients' 
+            placeholder='add up to 4 ingredients' 
             value={val}
             />
         <AddButt onClick={onButtClick} > Add Item </AddButt>
