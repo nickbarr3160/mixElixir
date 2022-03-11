@@ -1,4 +1,4 @@
-
+// generate function for matching comparative array of ingredients with the database's drinks' ingredients
 export function generate (data,ing)
 {
     try{
