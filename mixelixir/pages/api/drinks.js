@@ -23,10 +23,10 @@ export default async function handler(req, res)
   console.log(receivedParams)
 
 
-  // if (comparitiveArray)
-  // {
-  //   cocktailMatches = generate(drinks, comparitiveArray)
-  // }
+  if (comparitiveArray)
+  {
+    cocktailMatches = generate(drinks, comparitiveArray)
+  }
   
   if (searchBy) {
     // console.log(searchBy)
