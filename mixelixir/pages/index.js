@@ -60,12 +60,14 @@ const inputFilter = async (value) =>{
 
   if (timer===null)
   timer = setTimeout(async()=>{
+    console.log(search)
     const res = await ax.get('./api/drinks', {
       params:{
         value:value.toLowerCase(),
         searchBy: search_types[search]
       }
     })
+    console.log(search)
 
     console.log(res.data)
   // store the data in a state for mapping
@@ -83,7 +85,7 @@ const inputFilter = async (value) =>{
       <h3> searching by {search} filter </h3>
      
       <DrinkResults>
-      {searchData.map((o,i)=><DrinkCardUI key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)}
+      {/* {searchData.map((o,i)=><DrinkCardUI key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)} */}
       </DrinkResults>
 
       <Input
@@ -116,15 +118,7 @@ const inputFilter = async (value) =>{
               
               ))} 
             </div>
-    <div style={{
-          background:'red', 
-          height:200, 
-          width:200,
-          color:'white'
-        }}>
-          <MyButton onClick={compareIngs}/>
-        
-    </div>
+  
     <Link href='/settings'>Head back to settings</Link>
     </Wrapper>
   )
