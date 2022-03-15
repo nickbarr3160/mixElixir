@@ -23,6 +23,7 @@ export default function Sockets() {
   const {search, setSearch} = useSearch()
   const [drink, setDrink] = useState({})
   
+  const [droppedInfo, setDroppedInfo] = useState([])
   const inputFilter = async (value) =>{
 
     if (timer)
@@ -43,58 +44,63 @@ export default function Sockets() {
       // console.log(res.data)
       // store the data in a state for mapping
       setSearchData(res.data)  
-    }, 2000)
+    }, 500)
   
   }
-  const HandleUpdateDrink = (id, drinkpos) =>{
-    drink[id] = {
-      ...drink[id],
-      ...drinkpos
-    }
-
-    setDrink({
-      ...drink
-    })
-    
-  }
   
+const handleDrop=(item)=>
+{
+            const drink_id = uuidv4()
+            var dropped=[]
+            dropped.push(item)
+            setDroppedInfo(...droppedInfo,item)
+            console.log(dropped)
 
+            setDrink((prev)=>({
+                ...prev,
+                [drink_id]:{obj:item  },
+                // item
+              }
+              ))
+              console.log(drink)
+            // setDrink(...drink,drink.push(item))
+}
 
  
-  useEffect(()=>{
-    const socket = io("http://localhost:8888");
+  // useEffect(()=>{
+  //   const socket = io("http://localhost:8888");
 
-    socket.on("joined", (id, txt)=>{
-      // alert(`${id} says ${txt}`)
+  //   socket.on("joined", (id, txt)=>{
+  //     // alert(`${id} says ${txt}`)
       
-      /*
+  //     /*
       
-      const new_msgs = [
-        ...msgs,
-        `${id} says ${txt}`
-      ]
-      setMsgs(new_msgs)
+  //     const new_msgs = [
+  //       ...msgs,
+  //       `${id} says ${txt}`
+  //     ]
+  //     setMsgs(new_msgs)
 
-      EQUIVALENT TO BELOW
-      */ 
+  //     EQUIVALENT TO BELOW
+  //     */ 
      
-      setMsgs((prev)=>[
-        ...prev,
-        `${id} says ${txt}`
-      ])
+  //     setMsgs((prev)=>[
+  //       ...prev,
+  //       `${id} says ${txt}`
+  //     ])
 
 
-    })
+  //   })
 
-    setMySoc(socket);
-    }, [])
+  //   setMySoc(socket);
+  //   }, [])
   
-    const EmitToIo = async () =>{
-      //mySoc to emit
-      if (mySoc !== null){
-        mySoc.emit("user_ready", txt)
-      }
-    }
+  //   const EmitToIo = async () =>{
+  //     //mySoc to emit
+  //     if (mySoc !== null){
+  //       mySoc.emit("user_ready", txt)
+  //     }
+  //   }
     
     
 
@@ -116,6 +122,7 @@ export default function Sockets() {
      
             <DrinkResults>
                   {searchData.map((o,i)=><DrinkCardUI 
+                  item={o}
                   key={i} 
                   name={o.strDrink} 
                   imgSrc={o.strDrinkThumb}
@@ -132,32 +139,22 @@ export default function Sockets() {
             <EventCard
             onInputChange={(e)=>
             setTxt(e.target.value)}
-            onButtClick={EmitToIo}
+            // onButtClick={EmitToIo}
             descrip={msgs}
             />
 
-            <Dropzone
-            onDropItem={(item)=>{
-           
-            const drink_id = uuidv4()
-            console.log(item)
-            setDrink((prev)=>({
-                ...prev,
-                [drink_id]:{id:drink_id},
-              }
-              ))
-            }}
-            >
-               {Object.values(drink).map(o=><DrinkCardUI 
+            <Dropzone onDropItem={(item)=>{handleDrop(item)}}>
+              {Object.values(drink).map(o=><DrinkCardUI 
                 type='' 
-                // name={o.strDrink} 
-                // imgSrc={o.strDrinkThumb}
+                name={o.obj.strDrink} 
+                imgSrc={o.obj.strDrinkThumb}
                 key={o.id}
                 drinkpos={o.pos}
                 onUpdateDrink={(obj=>HandleUpdateDrink(o.id, obj))}
-
                 >
+
             {o.id}
+            {/* {o.strDrink} */}
             </DrinkCardUI>
             )}
             </Dropzone>
