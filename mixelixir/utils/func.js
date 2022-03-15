@@ -80,3 +80,16 @@ export function filtering(
   }
 
 }
+
+
+// take the drinksjson and paginate it generate 
+export function GoToPage(drinks=[], page=1, num=5)
+{
+    const result = drinks.slice((page-1)*num, page*num)
+    // num is the number of items we wanna display per page
+    //two arguments in the splice function
+    // what item to start from ((page-1)*num)
+    // is the number of items  to be shown page * number ==> creating multiples of the same   
+
+    return result
+}

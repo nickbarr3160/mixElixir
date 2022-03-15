@@ -3,12 +3,14 @@ import React from "react";
 import { CardContainer, DrinkImg, TextCont } from "./style";
 
 const DrinkCardUI = ({
-
+    onClick=()=>{},
     name="Jake",
     display="flex",
     imgSrc="https://placekitten.com/50/50"
 })=> {
-    return <CardContainer display={display}>
+    return <CardContainer 
+                onClick={onClick}
+                display={display}>
         <DrinkImg src={imgSrc} />
         <TextCont>
         <h4>
