@@ -4,6 +4,7 @@ import { CardContainer, DrinkImg, TextCont } from "./style";
 import { useDrag, useDrop } from 'react-dnd'
 
 const DrinkCardUI = ({
+    onClick=()=>{},
     name="Jake",
     display="flex",
     imgSrc="https://placekitten.com/50/50",
@@ -67,6 +68,7 @@ const DrinkCardUI = ({
     return <div ref={drag}>
             <CardContainer 
             onDrag={onCardDrag}
+            onClick={onClick}
             display={display}
             ref={dragPreview} {...sty}
             >

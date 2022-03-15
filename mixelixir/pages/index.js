@@ -25,6 +25,7 @@ export default function Home() {
   const [generateData, setGenerateData] = useState([]);
   
   
+  
   const {search, setSearch} = useSearch()
   // console.log(search)
 
@@ -56,21 +57,21 @@ export default function Home() {
       <NavBar/>
   
       <h1>Cocktail Generator</h1>
-     
+    
       <GeneratedCont>
           <Input
           val={val}
           onValChange={handleValue}
           onButtClick={addValueToArr}
           />
-         
+        
           {arr.map((o,i) => (
             <IngredientCont key={i}> 
                 <p> {o} </p>
                 <button onClick={()=>{
                   arr.splice(i,1)
                   setArr([...arr])
-             
+            
                   }}> del 
                   </button>
             </IngredientCont>
@@ -78,7 +79,7 @@ export default function Home() {
               ))}
         <MyButton onClick={compareIngs}/>
       </GeneratedCont>
-       
+      
       <DrinkResults>
           {generateData.map((o,i)=><DrinkCardUI key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)}
       </DrinkResults>

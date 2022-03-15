@@ -1,39 +1,64 @@
-import {generate, filtering} from '../../utils/func'
+import {generate, filtering,GoToPage} from '../../utils/func'
 import all_drinks from '@/all_drinks';
 import ax from 'axios';
 import { useState } from 'react';
 
+
 export default async function handler(req, res) 
 {
 
-  var drinks = []
+    var drinks = []
 
   
     const result = await ax.get('https://mix-elixir.herokuapp.com/')
     drinks = result.data
     // console.log(drinks)
-
+    // console.log(req.query)
 
   var cocktailMatches =[]
   const receivedParams = req.query;
   const comparitiveArray = Object.values(receivedParams)
 
-  const {value,searchBy} = req.query;
-  // console.log(searchBy)
-  console.log(receivedParams)
+  const {value,searchBy,page,d_id} = req.query;
+
 
 
   if (comparitiveArray)
   {
-    cocktailMatches = generate(drinks, comparitiveArray)
+    var nuDrinks = generate(drinks, comparitiveArray)
+    cocktailMatches = GoToPage(nuDrinks,page,5)
+    
+    // cocktailMatches = GoToPage(nuDrinks, 1,15)
   }
   
+  // if (page && searchBy )
+  //   {
+  //     console.log(page)
+  //     // cocktailMatches = GoToPage(nuDrinks, 1,15)
+  //   }
+    
   if (searchBy) {
-    // console.log(searchBy)
-    cocktailMatches = filtering(drinks, {
+
+    // if(req.query.page)
+    // {
+    //   console.log(req.query.page)
+    // }
+
+    var nuDrinks = filtering(drinks, {
       [searchBy]:value
     })
+
+    cocktailMatches = GoToPage(nuDrinks,page,5)
+    
   }
+    
+    if(req.query.d_id)
+    {
+      cocktailMatches = drinks.filter(o=> o.idDrink === Number(req.query.d_id))
+      console.log(cocktailMatches)
+    }
+
+  
 
   // cocktailMatches = cocktailMatches.slice(0,10)
   // console.log(cocktailMatches)
