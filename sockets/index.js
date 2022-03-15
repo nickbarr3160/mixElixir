@@ -17,31 +17,14 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-
-
 io.on('connection', (socket) => {
   console.log('a user connected', socket.id);
 
-  const users = {}
-
-  users[socket.id] = {left:0, top:0}
-
-  io.emit("init_user", users);
-
-  socket.on("user_ready", (text)=>{
-    io.emit("joined", socket.id, text)
+// io.emit("joined")
+  socket.on("user_ready", (txt)=>{
+    io.emit("joined", socket.id, txt);
   })
 
-  socket.on("disconnect", ()=>{
-    delete users[socket.id]
-  })
-
-  socket.on("coords", (x,y)=>{
-    // io.emit("update_coords", x, y)
-    users[socket.id].left = x
-    users[socket.id].top = y
-    io.emit("init_user", users);
-  })
 });
 
 server.listen(PORT, () => {

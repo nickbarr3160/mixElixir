@@ -3,11 +3,12 @@ import React from 'react'
 import { ButtCont, MyButt } from './style'
 
 export const MyButton = ({
-    onClick=()=>{}
+    onClick=()=>{},
+    label="generate"
 }) => {
   return (
     <ButtCont onClick={onClick} >
-        Generate!
+       {label}
     </ButtCont>
   )
 }

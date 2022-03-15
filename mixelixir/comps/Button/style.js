@@ -7,6 +7,7 @@ background:#FF7259;
 display:flex;
 justify-content:center;
 align-items:center;
+cursor:pointer;
 `
 export const MyButt = styled.div`
 width:100%;

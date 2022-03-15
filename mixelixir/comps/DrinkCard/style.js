@@ -14,6 +14,12 @@ border-radius: 15px;
 box-shadow: 2px 2px 5px 1px black;
 overflow: hidden;
 margin:1em;
+${({position, left, top})=>(position === 'fixed' || position === 'absolute') && `
+  left:${left}px;
+  top:${top}px;
+  position:${position};
+`}
+
 `;
 
 export const DrinkImg = styled.img`

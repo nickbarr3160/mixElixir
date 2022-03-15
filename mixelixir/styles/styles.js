@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+// Main Wrapper for most pages
+
 export const Wrapper = styled.div`
 display:flex;
 flex-direction:column;
@@ -8,6 +10,8 @@ align-items:center;
 height:100vh;
 width:100vw;
 `;
+
+// Settings page styling
 
 export const SettingsWrapper = styled.div`
 display:flex;
@@ -18,7 +22,7 @@ height:100vh;
 width:100vw;
 `;
 
-
+// Landing Page styling
 
 export const DrinkResults = styled.div`
 display:flex;
@@ -50,4 +54,26 @@ border-radius:10px;
 justify-content:space-evenly;
 align-items:center;
 border:2px solid #FF3864;
+`;
+
+
+//Event page styling
+
+export const EventWrapper = styled.div`
+display:flex;
+justify-content:flex-start;
+align-items:center;
+height:100vh;
+width:100vw;
+`;
+
+export const EventContentCont = styled.div`
+display:flex;
+flex-direction:column;
+justify-content:space-evenly;
+align-items:center;
+height:100%;
+width:50%;
+border:2px solid green;
+background:pink;
 `;
