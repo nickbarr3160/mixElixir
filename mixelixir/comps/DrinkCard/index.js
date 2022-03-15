@@ -11,7 +11,8 @@ const DrinkCardUI = ({
     type='drink',
     drinkpos=null,
     onUpdateDrink=()=>{},
-    onCardDrag=()=>{}
+    onCardDrag=()=>{},
+    item= {}
 })=> {
     const [pos, setPos] = useState(drinkpos || {
         left:0,
@@ -33,10 +34,9 @@ const DrinkCardUI = ({
     const [{ isDragging, coords }, drag, dragPreview] = useDrag(() => ({
 		// "type" is required. It is used by the "accept" specification of drop targets.
     type,
-    item: {},
+    item,
     end:(item, monitor)=>{
       if(type==='drinkdrop'){
-        console.log(item, '++++++++++++++++++')
         setPos({
           left:monitor.getClientOffset().x,
           top:monitor.getClientOffset().y,

@@ -11,8 +11,8 @@ const Dropzone = ({
     // The type (or types) to accept - strings or symbols
     accept: 'drink',
     drop:(item, monitor)=>{
-      console.log(item)
       onDropItem(item);
+
     },
     // Props to collect
     collect: (monitor) => ({

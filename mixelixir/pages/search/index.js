@@ -11,10 +11,10 @@ import { useSearch } from '@/utils/provider';
 import { search_types } from '@/utils/variables';
 import { SearchSelection } from '@/comps/SearchSelection';
 
-import DrinkCardUI from '@/comps/DrinkCard';
 import { DrinkResults, Wrapper } from '@/styles/styles';
 import NavBar from '@/comps/NavBar';
 
+import DrinkCardUIStatic from '@/comps/DrinkCardStatic';
 
 var timer = null
 
@@ -72,8 +72,6 @@ const itemsPerPage = 15;
   
   // butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5
   //   )
-    
-  console.log(butt_arr)
 
   return (
     <Wrapper>
@@ -104,12 +102,13 @@ const itemsPerPage = 15;
     <DrinkResults>
     
             {searchData.map((o,i)=>(
-            <DrinkCardUI 
-            onClick={()=>router.push(`/search/${o.idDrink}`)}
-            key={i} 
-            name={o.strDrink} 
-            imgSrc={o.strDrinkThumb}>
-            </DrinkCardUI>))}
+            <DrinkCardUIStatic 
+              onClick={()=>router.push(`/search/${o.idDrink}`)}
+              key={i} 
+              name={o.strDrink} 
+              imgSrc={o.strDrinkThumb}
+              >
+            </DrinkCardUIStatic>))}
               
     </DrinkResults>
 
