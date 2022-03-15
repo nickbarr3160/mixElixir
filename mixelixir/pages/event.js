@@ -138,6 +138,7 @@ export default function Sockets() {
 
             <Dropzone
             onDropItem={(item)=>{
+           
             const drink_id = uuidv4()
             console.log(item)
             setDrink((prev)=>({

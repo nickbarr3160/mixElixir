@@ -35,7 +35,7 @@ export default function Drink  () {
         <DrinkCardUI 
             name={data.strDrink} 
             imgSrc={data.strDrinkThumb}>
-    </DrinkCardUI> 
+        </DrinkCardUI> 
     </div>
   )
 }

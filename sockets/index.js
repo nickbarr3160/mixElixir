@@ -22,7 +22,8 @@ io.on('connection', (socket) => {
 
 // io.emit("joined")
   socket.on("user_ready", (txt)=>{
-    io.emit("joined", socket.id, txt);
+    io.emit("joined", socket.id, txt, );
+    
   })
 
 });
