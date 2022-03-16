@@ -51,13 +51,16 @@ const inputFilter = async (value,p) =>{
   // store the data in a state for mapping
     setKeyWord(value)
     setSearchData(res.data)
-    setCurPage(p)
-
+    setCurPage(p != undefined? p:1 )//fail safe at the time when function runs
+    console.log(p)
   }, 100)  
 
 }
 
-const itemsPerPage = 15;
+
+
+// pagination============
+  const itemsPerPage = 15;
   var butt_arr = [];
 
   var start = 1
@@ -70,8 +73,8 @@ const itemsPerPage = 15;
     start ++
   }
   
-  // butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5
-  //   )
+  butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
+
 
   return (
     <Wrapper>
@@ -83,8 +86,7 @@ const itemsPerPage = 15;
     <div style={{
         display:'flex', 
         border:'2px solid red',
-        height:'100%',
-        width:'100%'
+        cursor:'pointer'
         }} >
     {butt_arr.map((o,i)=>(
         

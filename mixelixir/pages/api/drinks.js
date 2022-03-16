@@ -15,26 +15,21 @@ export default async function handler(req, res)
 
   var cocktailMatches =[]
   const receivedParams = req.query;
-  const comparitiveArray = Object.values(receivedParams)
+  const comparitiveArray = req.query['array[]']
+  const {value,searchBy,page,d_id,curPage} = req.query;
 
-  const {value,searchBy,page,d_id} = req.query;
-
-      // console.log(receivedParams)
+console.log(req.query)
 
 
-  // if (comparitiveArray)
-  // {
-  //   var nuDrinks = generate(drinks, comparitiveArray)
-  //   cocktailMatches = GoToPage(nuDrinks,page,5)
+  if (comparitiveArray)
+  {
+    var nuDrinks = generate(drinks, comparitiveArray)
+    cocktailMatches = GoToPage(nuDrinks,curPage,5)
     
-  //   // cocktailMatches = GoToPage(nuDrinks, 1,15)
-  // }
+    // cocktailMatches = GoToPage(nuDrinks, 1,15)
+  }
   
-  // if (page && searchBy )
-  //   {
-  //     console.log(page)
-  //     // cocktailMatches = GoToPage(nuDrinks, 1,15)
-  //   }
+  
     
   if (searchBy) {
 
@@ -42,7 +37,6 @@ export default async function handler(req, res)
     // {
     //   console.log(req.query.page)
     // }
-    console.log(req.query)
     var nuDrinks = filtering(drinks, {
       [searchBy]:value
     })
