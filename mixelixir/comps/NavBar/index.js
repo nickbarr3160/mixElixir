@@ -14,6 +14,7 @@ const NavBar = ({
         <LinkCont>
             <Link href='/'>Home</Link>
             <Link href='/search'>Search Drinks!</Link>
+            <Link href='/favourites'>favourite Drinks!</Link>
             <Link href='/settings'>Settings</Link>
             <div  onClick={themeToggle}>
                 {icon}

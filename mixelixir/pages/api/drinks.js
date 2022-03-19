@@ -17,15 +17,36 @@ export default async function handler(req, res)
   const comparitiveArray = req.query['array[]']
   const {value,searchBy,page,d_id,curPage} = req.query;
 
+if(req.query.token)
+{
+  var info = JSON.parse(req.query.token)
+  var token = info.token
+  
+  try{
+
+    const getFavs = await ax.get(`https://mix-elixir.herokuapp.com/myFavs`,{
+      params:{
+        token: token
+      }
+    })
+    // const getFavs = await ax.get(`https://mix-elixir.herokuapp.com/myFavs?token=${token}`)
+    cocktailMatches = getFavs.data
+    console.log(getFavs)
+
+  } catch (err) {console.log(err,"yooooo")}
+
+
+}
 
 if (req.body.favDrink)
 {
-  var drink = req.body.favDrink
+  var favDrink = req.body.favDrink
   var user = req.body.user
-  console.log(req.body.user)
+  // console.log(req.body.user)
   try{
     const addFav = await ax.post(`https://mix-elixir.herokuapp.com/fav`,
-      {drink,
+      {
+      favDrink,
       user
     }
     )
@@ -48,7 +69,7 @@ if(req.body.login)
       
       cocktailMatches = [login.status,login.data]
     }
-    console.log(login.data)
+    // console.log(login.data)
   
   }
     catch (err) {console.log(err)}
@@ -57,12 +78,13 @@ if(req.body.login)
 
 if(req.body.signup)
 {
-  var user = req.body.user
+  // console.log(req.body.user)
+  var username = req.body.user
   var email = req.body.email
   var password = req.body.pass
   try
     {const login = await ax.post(`https://mix-elixir.herokuapp.com/signup`,{ 
-    user,
+    username,
     email,
     password })
     // console.log(login)

@@ -30,19 +30,13 @@ export default function SearchSelect() {
   const  [ user, setUser] = useState()
 
 
+
   useEffect(()=>{
-    setUserToken( window.localStorage.getItem('token'))
-    console.log(userToken)
-    
-    if(userToken != undefined)
-    {
-      const myDecodedToken = decodeToken(userToken);
-      setUser(myDecodedToken)
-    }
+    setUser( JSON.parse(window.localStorage.getItem('user')))
 
-  },[userToken])
+  },[])
 
-console.log(user)
+// console.log(user)
 // function to pass over a specified search filter to the api
 const inputFilter = async (value,p) =>{
 
@@ -75,13 +69,14 @@ const inputFilter = async (value,p) =>{
 
 const handleFavs = async(o)=>
 {
+  // console.log(o)
   try{
     const res = await ax.post("./api/drinks",{
-      favDrink:o,
-      user
+      favDrink:o._id,
+      user:user.user
     })
   }catch(err){console.log(err, 'request failed to execute')}
-  // console.log(o)
+  console.log(o)
 }
 
 // pagination============
@@ -105,7 +100,7 @@ const handleFavs = async(o)=>
     <Wrapper>
     <NavBar/>
     <h1>
-      Welcome {user != undefined && user.username} use the search bar below to search for a drink!
+      Welcome {user != undefined && user.user.username} use the search bar below to search for a drink!
     </h1>
     <input onChange={(e)=>inputFilter(e.target.value)}></input>
     <div style={{

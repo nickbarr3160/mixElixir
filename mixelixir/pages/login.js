@@ -31,15 +31,15 @@ const handleLogin=async()=>
     })
     // if(res.data[0] == 201)
     // {
-    //     router.push('/')
-    //     setToken(res.data[1])
-    //     localStorage.setItem('token',res.data[1])
+        router.push('/')
+        // console.log(res.data)
+        localStorage.setItem('user',JSON.stringify(res.data[1]))
     // }
-    console.log(res)
 
-    const myDecodedToken = decodeToken(res.data[1]);
-    console.log(myDecodedToken)
-    console.log(localStorage)
+
+    // const myDecodedToken = decodeToken(res.data[1]);
+    // console.log(myDecodedToken)
+    // console.log(localStorage)
 
 }
 

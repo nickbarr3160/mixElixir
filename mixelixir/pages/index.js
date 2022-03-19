@@ -16,6 +16,7 @@ import { DrinkResults, Wrapper, GeneratedCont, IngredientCont } from '@/styles/s
 import NavBar from '@/comps/NavBar';
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic';
 import { isExpired, decodeToken } from "react-jwt";
+import { concat } from '@/all_drinks';
 
 
 var timer = null
@@ -31,19 +32,13 @@ export default function Home() {
 
 
   useEffect(()=>{
-    setUserToken( window.localStorage.getItem('token'))
-    console.log(userToken)
-    
-    if(userToken != undefined)
-    {
-      const myDecodedToken = decodeToken(userToken);
-      setUser(myDecodedToken)
-    }
+    // console.log(JSON.parse(window.localStorage.getItem('user')))
+    setUser( JSON.parse(window.localStorage.getItem('user')))
 
-  },[userToken])
+  },[])
   const {search, setSearch} = useSearch()
   // console.log(search)
-// console.log(user)
+console.log(user)
   const handleValue = (e)=>
   {
     setVal(e.target.value)
@@ -92,7 +87,7 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
   
       <h1>Cocktail Generator</h1>
     <div>
-     welcome {user != undefined && user.username}
+      welcome {user != undefined && user.user.username}
     </div>
       <GeneratedCont>
           <Input
