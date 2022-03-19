@@ -1,7 +1,6 @@
 import {generate, filtering,GoToPage} from '../../utils/func'
 import all_drinks from '@/all_drinks';
 import ax from 'axios';
-import { useState } from 'react';
 
 
 export default async function handler(req, res) 
@@ -18,7 +17,59 @@ export default async function handler(req, res)
   const comparitiveArray = req.query['array[]']
   const {value,searchBy,page,d_id,curPage} = req.query;
 
-console.log(req.query)
+
+if (req.body.favDrink)
+{
+  var drink = req.body.favDrink
+  var user = req.body.user
+  console.log(req.body.user)
+  try{
+    const addFav = await ax.post(`https://mix-elixir.herokuapp.com/fav`,
+      {drink,
+      user
+    }
+    )
+
+  }
+  catch (err) {console.log(err)}
+  // console.log(req.body)
+}
+
+if(req.body.login)
+{
+  var email = req.body.email
+  var password = req.body.pass
+  try
+    {const login = await ax.post(`https://mix-elixir.herokuapp.com/login`,{ 
+    email,
+    password })
+    if(login.status ==201)
+    {
+      
+      cocktailMatches = [login.status,login.data]
+    }
+    console.log(login.data)
+  
+  }
+    catch (err) {console.log(err)}
+}
+
+
+if(req.body.signup)
+{
+  var user = req.body.user
+  var email = req.body.email
+  var password = req.body.pass
+  try
+    {const login = await ax.post(`https://mix-elixir.herokuapp.com/signup`,{ 
+    user,
+    email,
+    password })
+    // console.log(login)
+  
+  }
+    catch (err) {console.log(err)}
+}
 
 
   if (comparitiveArray)

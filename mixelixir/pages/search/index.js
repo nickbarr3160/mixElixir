@@ -10,7 +10,7 @@ import { Input } from '@/comps/InputBox'
 import { useSearch } from '@/utils/provider';
 import { search_types } from '@/utils/variables';
 import { SearchSelection } from '@/comps/SearchSelection';
-
+import { isExpired, decodeToken } from "react-jwt";
 import { DrinkResults, Wrapper } from '@/styles/styles';
 import NavBar from '@/comps/NavBar';
 
@@ -26,7 +26,23 @@ export default function SearchSelect() {
   const[curPage, setCurPage] = useState(1)
   const {search, setSearch} = useSearch()
   const [keyword,setKeyWord] = useState()
+  const [userToken, setUserToken] = useState()
+  const  [ user, setUser] = useState()
 
+
+  useEffect(()=>{
+    setUserToken( window.localStorage.getItem('token'))
+    console.log(userToken)
+    
+    if(userToken != undefined)
+    {
+      const myDecodedToken = decodeToken(userToken);
+      setUser(myDecodedToken)
+    }
+
+  },[userToken])
+
+console.log(user)
 // function to pass over a specified search filter to the api
 const inputFilter = async (value,p) =>{
 
@@ -52,12 +68,21 @@ const inputFilter = async (value,p) =>{
     setKeyWord(value)
     setSearchData(res.data)
     setCurPage(p != undefined? p:1 )//fail safe at the time when function runs
-    console.log(p)
+
   }, 100)  
 
 }
 
-
+const handleFavs = async(o)=>
+{
+  try{
+    const res = await ax.post("./api/drinks",{
+      favDrink:o,
+      user
+    })
+  }catch(err){console.log(err, 'request failed to execute')}
+  // console.log(o)
+}
 
 // pagination============
   const itemsPerPage = 15;
@@ -80,7 +105,7 @@ const inputFilter = async (value,p) =>{
     <Wrapper>
     <NavBar/>
     <h1>
-      Welcome use the search bar below to search for a drink!
+      Welcome {user != undefined && user.username} use the search bar below to search for a drink!
     </h1>
     <input onChange={(e)=>inputFilter(e.target.value)}></input>
     <div style={{
@@ -109,6 +134,7 @@ const inputFilter = async (value,p) =>{
               key={i} 
               name={o.strDrink} 
               imgSrc={o.strDrinkThumb}
+              onFavClick={()=>{handleFavs(o)}}
               >
             </DrinkCardUIStatic>))}
               

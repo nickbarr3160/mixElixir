@@ -6,9 +6,10 @@ const DrinkCardUIStatic = ({
     onClick=()=>{},
     name="Jake",
     display="flex",
-    imgSrc="https://placekitten.com/50/50"
+    imgSrc="https://placekitten.com/50/50",
+    onFavClick=()=>{},
 })=> {
-    return <CardContainer 
+    return (<> <CardContainer 
                 onClick={onClick}
                 display={display}>
         <ImageContainer>
@@ -21,6 +22,10 @@ const DrinkCardUIStatic = ({
         </h4>
         </TextCont>
     </CardContainer>
+        <button onClick={onFavClick} >add to favs</button>
+
+    </>
+    )
 }
 
 export default DrinkCardUIStatic;
