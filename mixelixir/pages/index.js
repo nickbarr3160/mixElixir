@@ -32,13 +32,12 @@ export default function Home() {
 
 
   useEffect(()=>{
-    // console.log(JSON.parse(window.localStorage.getItem('user')))
     setUser( JSON.parse(window.localStorage.getItem('user')))
 
   },[])
   const {search, setSearch} = useSearch()
   // console.log(search)
-console.log(user)
+
   const handleValue = (e)=>
   {
     setVal(e.target.value)
