@@ -48,59 +48,76 @@ export default function Sockets() {
   
   }
   
-const handleDrop=(item)=>
-{
-            const drink_id = uuidv4()
-            var dropped=[]
-            dropped.push(item)
-            setDroppedInfo(...droppedInfo,item)
-            console.log(dropped)
-
-            setDrink((prev)=>({
-                ...prev,
-                [drink_id]:{obj:item  },
-                // item
-              }
-              ))
-              console.log(drink)
-            // setDrink(...drink,drink.push(item))
-}
-
- 
-  // useEffect(()=>{
-  //   const socket = io("http://localhost:8888");
-
-  //   socket.on("joined", (id, txt)=>{
-  //     // alert(`${id} says ${txt}`)
-      
-  //     /*
-      
-  //     const new_msgs = [
-  //       ...msgs,
-  //       `${id} says ${txt}`
-  //     ]
-  //     setMsgs(new_msgs)
-
-  //     EQUIVALENT TO BELOW
-  //     */ 
-     
-  //     setMsgs((prev)=>[
-  //       ...prev,
-  //       `${id} says ${txt}`
-  //     ])
-
-
-  //   })
-
-  //   setMySoc(socket);
-  //   }, [])
   
-  //   const EmitToIo = async () =>{
-  //     //mySoc to emit
-  //     if (mySoc !== null){
-  //       mySoc.emit("user_ready", txt)
-  //     }
-  //   }
+  // const handleDrop=(item)=>
+  // {
+  //             const drink_id = uuidv4()
+  //             var dropped=[]
+  //             dropped.push(item)
+  //             setDroppedInfo(...droppedInfo,item)
+  
+              
+  //             setDrink((prev)=>({
+  //               ...prev,
+  //               [drink_id]:{obj:item  },
+  //               // item
+  //             }
+  //             ))
+  //             // EmitDrinkToIo(item)
+              
+  // }
+ 
+  useEffect(()=>{
+    
+    const socket = io("http://localhost:8888")
+    
+    socket.on("joined", (id, txt,)=>{      
+     
+      setMsgs((prev)=>[
+        ...prev,
+        `${id} says ${txt}`
+      ])
+
+    }),
+    
+    socket.on("dropped", (item)=>{
+      const drink_id = uuidv4()
+      var dropped=[]
+      dropped.push(item)
+      setDroppedInfo(...droppedInfo,item)
+
+      
+      setDrink((prev)=>({
+        ...prev,
+        [drink_id]:{obj:item},
+        // item
+      }
+      ))
+    })
+    
+    
+    
+    
+    console.log(drink)
+    setMySoc(socket);
+  }, [drink])
+  
+    const EmitToIo = async () =>{
+      //mySoc to emit
+      console.log(mySoc)
+      if (mySoc !== null){
+        mySoc.emit("user_ready", txt,)
+        console.log(mySoc, '========')
+      }
+    }
+    
+    const EmitDrinkToIo = async (item) =>{
+      const socket = io("http://localhost:8888")
+      // console.log(socket)
+      if (socket !== null){
+        socket.emit("dropped_drink", item)
+      }
+    }
     
     
 
@@ -139,11 +156,14 @@ const handleDrop=(item)=>
             <EventCard
             onInputChange={(e)=>
             setTxt(e.target.value)}
-            // onButtClick={EmitToIo}
+            onButtClick={EmitToIo}
             descrip={msgs}
             />
 
-            <Dropzone onDropItem={(item)=>{handleDrop(item)}}>
+            <Dropzone onDropItem={(item)=>{
+              // handleDrop(item)
+              EmitDrinkToIo(item)
+              }}>
               {Object.values(drink).map(o=><DrinkCardUI 
                 type='' 
                 name={o.obj.strDrink} 
@@ -158,6 +178,7 @@ const handleDrop=(item)=>
             </DrinkCardUI>
             )}
             </Dropzone>
+            {/* <button onClick={EmitDrinkToIo}>Save Dropped Drinks for others to see!</button> */}
           </EventContentCont>
 
         </DndProvider>

@@ -13,7 +13,7 @@ export default async function handler(req, res)
     const result = await ax.get('https://mix-elixir.herokuapp.com/')
     drinks = result.data
 
-  var cocktailMatches =[]
+  var cocktailMatches = []
   const receivedParams = req.query;
   const comparitiveArray = Object.values(receivedParams)
 
