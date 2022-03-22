@@ -1,4 +1,5 @@
 import React from 'react'
+import { MyButton } from '../Button'
 
 // styled component imports
 import { 
@@ -16,10 +17,10 @@ return (
     <InputCont>
         <InputField 
             onChange={onValChange} 
-            placeholder='add up to 4 ingredients' 
+            placeholder='Enter up to 4 ingredients you have!' 
             value={val}
             />
-        <AddButt onClick={onButtClick} > Add Item </AddButt>
+        <AddButt label="add" onClick={onButtClick} > Add </AddButt>
     </InputCont>
 )
 }

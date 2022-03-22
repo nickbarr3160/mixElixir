@@ -1,9 +1,10 @@
 import styled from "styled-components"
 
 export const ButtCont = styled.div`
-width:150px;
+width:120px;
 height:40px;
-background:#FF7259;
+border-radius:10px;
+background:${props=>props.bg};
 display:flex;
 justify-content:center;
 align-items:center;

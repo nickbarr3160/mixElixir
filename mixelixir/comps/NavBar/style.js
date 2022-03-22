@@ -8,13 +8,15 @@ height:15vh;
 width:100%;
 padding-left:1em;
 padding-right:1em;
-box-shadow:0 2px 4px rgb(0 0 0/20%);;
+box-shadow:0 2px 4px rgb(0 0 0/20%);
+background-color:${props=>props.bgcolor};
 `;
 
 export const Logo = styled.div`
 font-size:3em;
 margin:1em;
 font-weight:bold;
+font-family: 'Parisienne', cursive;
 color:${props=>props.color};
 &:hover{
 color: ${props=>props.hovColor}; 
@@ -41,6 +43,11 @@ width:75%;
 font-size:1.1em;
 }
 
+`;
 
+export const NavLink = styled.a`
+&:hover{
+    color:${props=>props.color};
+}
 `;
 
