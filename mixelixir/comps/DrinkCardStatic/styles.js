@@ -7,19 +7,23 @@ justify-content: space-between;
 align-items: center;
 text-align: center;
 color: #fff;
-width: 10vw;
-height: 30vh;
-background-color: #FF7259;
-border-radius: 15px;
-box-shadow: 2px 2px 5px 1px black;
+width: 200px;
+height: 300px;
+background-color: #242424;
+border:1px solid black;
+border-radius: 5px;
+// box-shadow: 2px 2px 5px 1px black;
 overflow: hidden;
 margin:1em;
 `;
 
+export const ImageContainer = styled.div`
+
+`
 export const DrinkImg = styled.img`
 display: flex;
 width: 100%;
-height:70%;
+height:100%;
 `;
 
 export const TextCont = styled.div`

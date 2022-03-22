@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import ax from 'axios'
 
 // component imports
-import DrinkCardUI from '@/comps/DrinkCard'
+import DrinkCardUIStatic from '@/comps/DrinkCardStatic'
 
 export default function Drink  () {
     const router  = useRouter()
@@ -32,10 +32,10 @@ export default function Drink  () {
 
   return (
     <div>  
-        <DrinkCardUI 
+        <DrinkCardUIStatic 
             name={data.strDrink} 
             imgSrc={data.strDrinkThumb}>
-        </DrinkCardUI> 
+    </DrinkCardUIStatic> 
     </div>
   )
 }

@@ -14,6 +14,9 @@ import { MyButton } from '@/comps/Button';
 import DrinkCardUI from '@/comps/DrinkCard';
 import { DrinkResults, Wrapper, GeneratedCont, IngredientCont } from '@/styles/styles';
 import NavBar from '@/comps/NavBar';
+import DrinkCardUIStatic from '@/comps/DrinkCardStatic';
+import { isExpired, decodeToken } from "react-jwt";
+import { concat } from '@/all_drinks';
 
 
 var timer = null
@@ -23,9 +26,15 @@ export default function Home() {
   const [val,setVal] = useState('')
   const [arr, setArr] = useState([])
   const [generateData, setGenerateData] = useState([]);
-  
-  
-  
+  const[curPage, setCurPage] = useState(1)
+  const [userToken, setUserToken] = useState()
+  const  [ user, setUser] = useState()
+
+
+  useEffect(()=>{
+    setUser( JSON.parse(window.localStorage.getItem('user')))
+
+  },[])
   const {search, setSearch} = useSearch()
   // console.log(search)
 
@@ -43,21 +52,42 @@ export default function Home() {
   }
 
   
-  // use the user inputted array of ingredients to compare witht the drinks dataset for cocktail generator feature
-  const compareIngs = async () =>{
+  // use the user inputted array of ingredients to compare with the drinks dataset for cocktail generator feature
+  const compareIngs = async (p) =>{
   const res = await ax.get('./api/drinks', {
-    params: arr
+    params: {
+      array:arr,
+      curPage
+    }
   })
+  // setCurPage(p != undefined? p:1 )
+  console.log(curPage)
   setGenerateData(res.data)
 }
 
+const itemsPerPage = 15;
+var butt_arr = [];
+
+var start = 1
+for (let i =1; i<600; i+= itemsPerPage )
+{
+  // 
+  butt_arr.push(((i-1)/itemsPerPage)+1)
+  // when i - 1 => 1-1/15 +1 = 1
+  //when i is 16(i+= items/page)=> 15-1/15+1 =2 and so on
+  start ++
+}
+
+butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
 
   return (
     <Wrapper>
       <NavBar/>
   
       <h1>Cocktail Generator</h1>
-    
+    <div>
+      welcome {user != undefined && user.user.username}
+    </div>
       <GeneratedCont>
           <Input
           val={val}
@@ -79,9 +109,24 @@ export default function Home() {
               ))}
         <MyButton onClick={compareIngs}/>
       </GeneratedCont>
-      
+      <div style={{
+        display:'flex', 
+        border:'2px solid red',
+        cursor:'pointer'
+        }} >
+    {butt_arr.map((o,i)=>(
+        
+            <button 
+              style={{background: o===curPage?"pink":'white' }}  
+              key={i} onClick={()=>{
+                compareIngs()
+                setCurPage(o)}}> 
+                {o} 
+            </button>
+    ) )}
+    </div>
       <DrinkResults>
-          {generateData.map((o,i)=><DrinkCardUI key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUI>)}
+          {generateData.map((o,i)=><DrinkCardUIStatic key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUIStatic>)}
       </DrinkResults>
     </Wrapper>
     )

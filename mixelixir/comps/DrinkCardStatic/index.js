@@ -1,23 +1,31 @@
 import styled from "styled-components";
 import React from "react";
-import { CardContainer, DrinkImg, TextCont } from "./styles";
+import { CardContainer, DrinkImg, TextCont, ImageContainer } from "./styles";
 
 const DrinkCardUIStatic = ({
     onClick=()=>{},
     name="Jake",
     display="flex",
-    imgSrc="https://placekitten.com/50/50"
+    imgSrc="https://placekitten.com/50/50",
+    onFavClick=()=>{},
 })=> {
-    return <CardContainer 
+    return (<> <CardContainer 
                 onClick={onClick}
                 display={display}>
-        <DrinkImg src={imgSrc} />
+        <ImageContainer>
+            <DrinkImg src={imgSrc} />
+
+        </ImageContainer>
         <TextCont>
         <h4>
         {name}
         </h4>
         </TextCont>
     </CardContainer>
+        <button onClick={onFavClick} >add to favs</button>
+
+    </>
+    )
 }
 
 export default DrinkCardUIStatic;

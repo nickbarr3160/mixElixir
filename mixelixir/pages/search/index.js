@@ -10,7 +10,7 @@ import { Input } from '@/comps/InputBox'
 import { useSearch } from '@/utils/provider';
 import { search_types } from '@/utils/variables';
 import { SearchSelection } from '@/comps/SearchSelection';
-
+import { isExpired, decodeToken } from "react-jwt";
 import { DrinkResults, Wrapper } from '@/styles/styles';
 import NavBar from '@/comps/NavBar';
 
@@ -26,7 +26,17 @@ export default function SearchSelect() {
   const[curPage, setCurPage] = useState(1)
   const {search, setSearch} = useSearch()
   const [keyword,setKeyWord] = useState()
+  const [userToken, setUserToken] = useState()
+  const  [ user, setUser] = useState()
 
+
+
+  useEffect(()=>{
+    setUser( JSON.parse(window.localStorage.getItem('user')))
+
+  },[])
+
+// console.log(user)
 // function to pass over a specified search filter to the api
 const inputFilter = async (value,p) =>{
 
@@ -51,13 +61,26 @@ const inputFilter = async (value,p) =>{
   // store the data in a state for mapping
     setKeyWord(value)
     setSearchData(res.data)
-    setCurPage(p)
+    setCurPage(p != undefined? p:1 )//fail safe at the time when function runs
 
   }, 100)  
 
 }
 
-const itemsPerPage = 15;
+const handleFavs = async(o)=>
+{
+  // console.log(o)
+  try{
+    const res = await ax.post("./api/drinks",{
+      favDrink:o._id,
+      user:user.user
+    })
+  }catch(err){console.log(err, 'request failed to execute')}
+  console.log(o)
+}
+
+// pagination============
+  const itemsPerPage = 15;
   var butt_arr = [];
 
   var start = 1
@@ -70,21 +93,20 @@ const itemsPerPage = 15;
     start ++
   }
   
-  // butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5
-  //   )
+  butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
+
 
   return (
     <Wrapper>
     <NavBar/>
     <h1>
-      Welcome use the search bar below to search for a drink!
+      Welcome {user != undefined && user.user.username} use the search bar below to search for a drink!
     </h1>
     <input onChange={(e)=>inputFilter(e.target.value)}></input>
     <div style={{
         display:'flex', 
         border:'2px solid red',
-        height:'100%',
-        width:'100%'
+        cursor:'pointer'
         }} >
     {butt_arr.map((o,i)=>(
         
@@ -107,6 +129,7 @@ const itemsPerPage = 15;
               key={i} 
               name={o.strDrink} 
               imgSrc={o.strDrinkThumb}
+              onFavClick={()=>{handleFavs(o)}}
               >
             </DrinkCardUIStatic>))}
               
