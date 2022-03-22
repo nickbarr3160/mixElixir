@@ -149,7 +149,7 @@ export default async function handler(req, res)
       var nuDrinks = generate(drinks, req.query['suggest[]'])
       
       // set cocktail matches to GoToPage that takes in nuDrinks as an argument to paginate all the results
-      cocktailMatches = GoToPage(nuDrinks,curPage,5)
+      cocktailMatches = GoToPage(nuDrinks,curPage,8)
       }
       
     

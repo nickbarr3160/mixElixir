@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import ax from 'axios'
 
 // styled component imports 
-import { DrinkResults, Wrapper } from '@/styles/styles';
+import { DrinkResults, Wrapper, } from '@/styles/styles';
 import { 
     DrinkWrap,
     DrinkInfo,
@@ -19,39 +19,53 @@ import {
 // component imports
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic'
 import NavBar from '@/comps/NavBar';
-
-
+import { Navigation } from '@/comps/HamNav';
+import { HeaderHam } from '@/comps/HeaderHam';
+import { NavigationHam } from '@/comps/NavigationHam';
 
 export default function Drink  () {
     const router  = useRouter()
     const {id} = router.query
     const [data,setData] = useState({ingredients:[]})
     const [suggest, setSuggest] = useState([])
+    // const [toggle,setToggle] = useState(false)
+    // const [hammer, setHammer]= useState(false)
+
+    // state to keep track of current screen size
+    const [sWidth, setSwidth] = useState()
+
+
     useEffect(()=>{
+    window.onload=()=>{setSwidth(window.innerWidth)}
+    window.onresize=()=>{setSwidth(window.innerWidth)}
+    setSwidth(window.innerWidth)
+
+    // detecting when the screen resizes
+    },[sWidth])
+
+    useEffect(()=>{
+        // if id exists 
         if(id)
         {
             const GetDrink = async()=>
             {
+                // make a get request and send in id as params
                 const res = await ax.get("/api/drinks",{
                     params:{
                         d_id:id
                     }
                 })
-                
+                // set data to whatever the request returned 
                 setData(res.data[0])
 
             }
-            GetDrink()
-            // console.log(data)
-
-
-            
-        
+            GetDrink()//calling the function
         }
     },[id])
 
     // function that sends the ingredients of the drink that was clicked on and putting them in the generate function to display suggestions of the similar drinks
-    useEffect(()=>{
+    useEffect(()=>
+    {
         const GetRelated = async ()=>
             {
                 const res = await ax.get("/api/drinks",{
@@ -60,12 +74,13 @@ export default function Drink  () {
                         suggest:data.ingredients
                     }
                 })
-                setSuggest(res.data)
+                const temp = res.data
+                // set suggestions to all the drinks received from the response, but exclude the drink that the user is currently looking at from suggestions.
+                const suggestions = temp.filter(o => o._id != data._id)
+                setSuggest(suggestions)
             }
             GetRelated()
-        },[data])
-        
-        
+    },[data])
 
         const handleFavs = async(o)=>
         {
@@ -78,9 +93,12 @@ export default function Drink  () {
         }catch(err){console.log(err, 'request failed to execute')}
         console.log(o)
         }
+
   return (
     <Wrapper>  
-        <NavBar/>
+    
+        {/* if the screen size is less than 600px */}
+        {sWidth<600?<NavigationHam/>: <NavBar/>}
         <DrinkWrap>
             {/* all the information about the drink */}
             <DrinkInfo>
@@ -118,6 +136,7 @@ export default function Drink  () {
                         {data.strGlass}
                     </InstructInfo>
                 </DrinkInstruct>
+
             </DrinkInfo>
 
             {/* Drink Image */}
@@ -126,7 +145,8 @@ export default function Drink  () {
             </DrinkImageCont>   
                         
         </DrinkWrap>
-
+        
+        {/* drink suggestions */}
         <Suggestions>
             {suggest.map((o,i)=>(
                 <DrinkCardUIStatic

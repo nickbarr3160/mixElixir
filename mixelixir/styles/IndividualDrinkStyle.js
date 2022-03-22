@@ -6,6 +6,10 @@ height:100%;
 display:flex;
 border:2px solid red;
 justify-content:space-around;
+@media (max-width: 600px) {
+    flex-direction:column;
+    
+}
 ` 
 
 export const DrinkInfo = styled.div`
@@ -35,11 +39,17 @@ width:50%;
 height:70%;
 align-items:flex-start;
 // border:2px solid blue;
+@media (max-width: 600px) {
+    order:-1;
+    
+}
+
 `
 export const DrinkImage = styled.img`
 object-fit:contain;
 width:100%;
 height:100%;
+
 `
 export const Suggestions = styled.div`
 display:flex;
