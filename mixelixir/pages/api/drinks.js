@@ -48,7 +48,7 @@ export default async function handler(req, res)
   {
     // whatever drink was favourited
     var favDrink = req.body.favDrink
-    // the use who favourited it
+    // the user who favourited it
     var user = req.body.user
 
     try{
@@ -117,6 +117,10 @@ export default async function handler(req, res)
       cocktailMatches = GoToPage(nuDrinks,curPage,5)
     }
       
+    // if(req.query.suggest)
+    // {
+    //   console.log(req.query.suggest)
+    // }
     
     
     // if searchBy Exist.
@@ -135,9 +139,19 @@ export default async function handler(req, res)
       if(req.query.d_id)
       {
         cocktailMatches = drinks.filter(o=> o.idDrink === Number(req.query.d_id))
+        
       }
 
-
+      // function that recieves the ingredients of the drink that was clicked on and putting them in the generate function to display suggestions of the similar drinks
+      if(req.query['suggest[]'])
+      {
+        // use the generate function to store all the matches in nuDrinks
+      var nuDrinks = generate(drinks, req.query['suggest[]'])
+      
+      // set cocktail matches to GoToPage that takes in nuDrinks as an argument to paginate all the results
+      cocktailMatches = GoToPage(nuDrinks,curPage,5)
+      }
+      
     
 
 
