@@ -34,8 +34,8 @@ export const comp_theme={
 
 
 //THEMES
-var black = '#000000' 
-var white = ' white'
+var black = 'black' 
+var white = 'white'
 var peach = '#FEE0CF' 
 var salsa = '#FF3549'
 var orange = '#F39C6B'
@@ -101,3 +101,30 @@ export const ButtonTheme = {
         bgcol:turq
     }
 }
+
+//INDIVIDUAL CARD
+export const IndDrinkTheme = {
+    default:{
+        headCol:white,
+        subHeadCol:orange,
+        bodyText:white
+    },
+
+    light:{
+        headCol:black,
+        subHeadCol:turq,
+        bodyText:black    
+    }
+}
+
+//DRINK CARD
+export const DrinkTheme = {
+    default:{
+        bgCol:orange
+    },
+
+    light:{
+        bgCol:turq   
+    }
+}
+

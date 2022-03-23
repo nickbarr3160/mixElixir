@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import React from "react";
-import { CardContainer, DrinkImg, TextCont, ImageContainer } from "./styles";
+import { CardContainer, DrinkImg, TextCont, TagCont, Tag} from "./styles";
+import { DrinkTheme } from "@/utils/variables";
+import {useTheme} from '../../utils/provider'
 
 const DrinkCardUIStatic = ({
     onClick=()=>{},
@@ -8,21 +10,29 @@ const DrinkCardUIStatic = ({
     display="flex",
     imgSrc="https://placekitten.com/50/50",
     onFavClick=()=>{},
+    tag=""
 })=> {
-    return (<> <CardContainer 
-                onClick={onClick}
-                display={display}>
-        <ImageContainer>
-            <DrinkImg src={imgSrc} />
+    const {theme} = useTheme();
+    return (<> 
+    <CardContainer 
+    onClick={onClick}
+    display={display}
+    imgSrc={imgSrc}
+    >
+        <TagCont>
+            <Tag bgcolor={DrinkTheme[theme].bgCol}>
+            {tag}
+            </Tag>
+        </TagCont>
 
-        </ImageContainer>
         <TextCont>
-        <h4>
-        {name}
-        </h4>
+            <h4 >
+            {name}
+            </h4>
         </TextCont>
+
     </CardContainer>
-        <button onClick={onFavClick} >add to favs</button>
+    <button onClick={onFavClick} >add to favs</button>
 
     </>
     )

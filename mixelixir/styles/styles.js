@@ -7,7 +7,6 @@ display:flex;
 flex-direction:column;
 justify-content:flex-start;
 align-items:center;
-height:100vh;
 width:100vw;
 
 `;
@@ -135,6 +134,8 @@ width:50%;
 border:2px solid green;
 background:pink;
 `;
+
+
 export const Container = styled.div`
   flex-grow: 1;
   // margin: 0 auto;

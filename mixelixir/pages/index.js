@@ -140,7 +140,7 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
        {/* Drink Results  */}
 
       <DrinkResults>
-          {generateData.map((o,i)=><DrinkCardUIStatic key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUIStatic>)}
+          {generateData.map((o,i)=><DrinkCardUIStatic key={i} name={o.strDrink} imgSrc={o.strDrinkThumb} tag={o.strCategory}></DrinkCardUIStatic>)}
       </DrinkResults>
       <div style={{
         display:'flex', 
