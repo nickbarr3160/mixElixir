@@ -9,6 +9,7 @@ justify-content:flex-start;
 align-items:center;
 height:100vh;
 width:100vw;
+
 `;
 
 // Settings page styling
@@ -134,3 +135,30 @@ width:50%;
 border:2px solid green;
 background:pink;
 `;
+export const Container = styled.div`
+  flex-grow: 1;
+  // margin: 0 auto;
+  // border:3px solid red;
+  left:0;
+  padding: 0 12px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  // @media (min-width: 1024px) {
+  //   max-width: 100vw;
+  // }
+  // @media (min-width: 1216px) {
+  //   max-width: 1100vw;
+  // }
+  // @media (min-width: 1408px) {
+  //   max-width: 1244px;
+  // }
+  ${props =>
+    props.fluid &&
+    css`
+    padding: 0;
+    margin: 0;
+    background: red;
+    max-width: 100% !important;
+    `}
+`
