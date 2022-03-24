@@ -34,7 +34,7 @@ export const comp_theme={
 
 
 //THEMES
-var black = 'black' 
+var black = '#000000' 
 var white = 'white'
 var peach = '#FEE0CF' 
 var salsa = '#FF3549'
@@ -128,3 +128,35 @@ export const DrinkTheme = {
     }
 }
 
+//SEARCH FILTER
+export const SearchFilterTheme = {
+    default:{
+        col:salsa
+    },
+
+    light:{
+        col:black   
+    }
+}
+
+
+//UNIVERSAL HEADINGS
+export const HeaderTheme = {
+    default:{
+        col:orange
+    },
+
+    light:{
+        col:turq  
+    }
+}
+
+export const SubHeaderTheme = {
+    default:{
+        col:salsa
+    },
+
+    light:{
+        col:black 
+    }
+}

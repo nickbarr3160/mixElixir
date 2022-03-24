@@ -7,14 +7,15 @@ import ax from 'axios';
 
 // components imports
 import { Input } from '@/comps/InputBox'
-import { useSearch } from '@/utils/provider';
+import { useSearch, useTheme } from '@/utils/provider';
 import { search_types } from '@/utils/variables';
 import { SearchSelection } from '@/comps/SearchSelection';
 import { isExpired, decodeToken } from "react-jwt";
-import { DrinkResults, Wrapper } from '@/styles/styles';
+import { DrinkResults, Wrapper, SearchWrapper, SearchBar, Heading, SubHeading } from '@/styles/styles';
 import NavBar from '@/comps/NavBar';
-
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic';
+import { HeaderTheme, SubHeaderTheme } from "@/utils/variables";
+
 
 var timer = null
 
@@ -28,7 +29,16 @@ export default function SearchSelect() {
   const [keyword,setKeyWord] = useState()
   const [userToken, setUserToken] = useState()
   const  [ user, setUser] = useState()
+  const {theme, setTheme} = useTheme()
+  const [favCol, setFavCol] = useState()
 
+  const setType = (txt)=>{
+      console.log("this is the arg", txt)
+      
+      setTimeout(()=>{
+        setSearch(txt)
+      },500)  
+    }
 
 
   useEffect(()=>{
@@ -70,6 +80,7 @@ const inputFilter = async (value,p) =>{
 const handleFavs = async(o)=>
 {
   // console.log(o)
+  setFavCol('red')
   try{
     const res = await ax.post("./api/drinks",{
       favDrink:o._id,
@@ -99,41 +110,38 @@ const handleFavs = async(o)=>
   return (
     <Wrapper>
     <NavBar/>
-    <h1>
+    <Heading color={HeaderTheme[theme].col}>
       Welcome {user != undefined && user.user.username} use the search bar below to search for a drink!
-    </h1>
-    <input onChange={(e)=>inputFilter(e.target.value)}></input>
-    <div style={{
-        display:'flex', 
-        border:'2px solid red',
-        cursor:'pointer'
-        }} >
-    {butt_arr.map((o,i)=>(
-        
-            <button 
-              style={{background: o===curPage?"pink":'white' }}  
-              key={i} onClick={()=>inputFilter(keyword,o)}> 
-                {o} 
-            </button>
-    ) )}
+    </Heading>
+    <SearchWrapper>
+      <SearchBar type="input" placeholder="Search for your favourite drinks!" onChange={(e)=>inputFilter(e.target.value)}></SearchBar>
+      <SearchSelection onSearch={(e)=> setType(e.target.value)}/>
+    </SearchWrapper>  
 
-
-    </div>
-    <h4> searching by {search} filter </h4>
+    <SubHeading color={SubHeaderTheme[theme].col}> searching by {search} filter </SubHeading>
     
     <DrinkResults>
     
             {searchData.map((o,i)=>(
-            <DrinkCardUIStatic 
+              <DrinkCardUIStatic 
               onClick={()=>router.push(`/search/${o.idDrink}`)}
               key={i} 
               name={o.strDrink} 
               imgSrc={o.strDrinkThumb}
+              tag={o.strCategory}
               onFavClick={()=>{handleFavs(o)}}
+              favCol={favCol}
               >
             </DrinkCardUIStatic>))}
               
     </DrinkResults>
+    {butt_arr.map((o,i)=>(
+      <button 
+      style={{background: o===curPage?"pink":'white' }}  
+      key={i} onClick={()=>inputFilter(keyword,o)}> 
+      {o} 
+      </button>
+      ) )}
 
         
     </Wrapper>

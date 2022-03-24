@@ -40,7 +40,7 @@ padding:1em;
 justify-content:center;
 align-items:center;
 flex-wrap:wrap;
-border:2px solid green;
+// border:2px solid green;
 `;
 
 export const GeneratedCont = styled.div`
@@ -163,3 +163,23 @@ export const Container = styled.div`
     max-width: 100% !important;
     `}
 `
+
+//Search Page
+
+export const SearchWrapper = styled.div`
+display:flex;
+width:70%;
+justify-content:space-evenly;
+`;
+
+export const SearchBar = styled.input`
+width:60%;
+`;
+
+export const Heading = styled.h1`
+color:${props=>props.color};
+`;
+
+export const SubHeading = styled.h4`
+color:${props=>props.color};
+`;

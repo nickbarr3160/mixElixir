@@ -15,6 +15,7 @@ const NavBar = ({
         <Logo color={NavbarTheme[theme].color}>{logoText}</Logo>
         <LinkCont color={NavbarTheme[theme].color}>
             <NavLink color={NavbarTheme[theme].color} href='/'>Home</NavLink>
+            <NavLink color={NavbarTheme[theme].color} href='/event'>Event Forum</NavLink>
             <NavLink color={NavbarTheme[theme].color} href='/search'>Search Drinks!</NavLink>
             <NavLink color={NavbarTheme[theme].color} href='/favourites'>Favourite Drinks!</NavLink>
             <NavLink color={NavbarTheme[theme].color} href='/settings'>Settings</NavLink>

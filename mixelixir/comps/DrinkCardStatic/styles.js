@@ -8,7 +8,7 @@ background-position: center;
 background-size: cover;
 background-repeat:no-repeat;
 flex-direction: column;
-justify-content: flex-end;
+justify-content: space-between;
 align-items: center;
 text-align: center;
 color: #fff;
@@ -38,11 +38,13 @@ flex-direction:row;
 justify-content:center;
 align-items:center;
 background-color:${props=>props.bgcolor};
-box-shadow: 2px 2px 5px 1px black;
-border-top-right-radius:25px;
-border-bottom-right-radius:25px;
+box-shadow: 2px 2px 3px 1px #00000050;
+border-top-right-radius:10px;
+border-bottom-right-radius:10px;
 font-weight:bold;
 font-size:12px;
+padding:0em 1em 0em 1em;
+line-height:1;
 `;
 
 export const TextCont = styled.div`
@@ -54,4 +56,12 @@ background: linear-gradient(180deg, rgba(255,255,255,0.001) 0%, rgba(0,0,0,0.85)
 flex-direction:row;
 justify-content:center;
 align-items:center;
+`;
+
+export const IconCont = styled.div`
+display:flex;
+justify-content:flex-end;
+padding:1em;
+align-items:center;
+width:100%;
 `;

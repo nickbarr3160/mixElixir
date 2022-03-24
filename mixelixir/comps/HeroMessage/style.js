@@ -11,7 +11,6 @@ align-items:center;
 
 export const HeroHeading = styled.h1`
 color:${props=>props.color};
-font-family: 'Parisienne', cursive;
 font-size:60px;
 `;
 
