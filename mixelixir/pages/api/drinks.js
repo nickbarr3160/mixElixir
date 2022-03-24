@@ -130,7 +130,7 @@ export default async function handler(req, res)
       // use the filering function to store all the matches in nuDrinks
       var nuDrinks = filtering(drinks, {
         [searchBy]:value
-      })
+      },value)
       // set cocktail matches to GoToPage that takes in nuDrinks as an argument to paginate all the results
       cocktailMatches = GoToPage(nuDrinks,page,5)
     }

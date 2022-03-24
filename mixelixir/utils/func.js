@@ -43,6 +43,7 @@ export function generate (data,ing)
 export function filtering(
   arr=[],
   config={strDrink:null, strAlcoholic:null,strGlass:null} //function taking 2 arguments an array and an object
+  ,val
 ){
   //console.log(arr.slice(0,5));
 
@@ -61,7 +62,12 @@ export function filtering(
   
       if(strAlcoholic){
         // if the value of the search bar exist in the databases drinks' type
-          cond = cond && o.strAlcoholic.toLowerCase()==='Non Alcoholic';
+          cond = cond && o.strAlcoholic ==='Non alcoholic';
+          if (cond)
+          {
+            // console.log(cond)
+            cond = cond && o.strDrink.toLowerCase().includes(val);
+          }
       }
 
       if(strGlass){
