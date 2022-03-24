@@ -1,18 +1,23 @@
 import styled from "styled-components";
-import {React,useEffect, useState} from "react";
-import { CardContainer, DrinkImg, TextCont } from "./style";
+import {React, useEffect, useState} from "react";
+import { CardContainer, DrinkImg, TextCont, TagCont, Tag, IconCont} from "./style";
+import { DrinkTheme } from "@/utils/variables";
+import {useTheme} from '../../utils/provider'
+import {AiFillHeart} from 'react-icons/ai'
 import { useDrag, useDrop } from 'react-dnd'
 
-const DrinkCardUI = ({
+const DrinkCardUIDrag = ({
     onClick=()=>{},
     name="Jake",
     display="flex",
-    imgSrc="https://placekitten.com/50/50",
-    type='drink',
     drinkpos=null,
-    onUpdateDrink=()=>{},
+    type='drink',
+    imgSrc="https://placekitten.com/50/50",
+    onFavClick=()=>{},
     onCardDrag=()=>{},
-    item= {}
+    item={},
+    favCol="",
+    tag=""
 })=> {
     const [pos, setPos] = useState(drinkpos || {
         left:0,
@@ -65,24 +70,34 @@ const DrinkCardUI = ({
         // console.log('DRAGGINNG')
     }
 
-    return <div ref={drag}>
-            <CardContainer 
-            onDrag={onCardDrag}
-            onClick={onClick}
-            display={display}
-            ref={dragPreview} {...sty}
-            >
-            <DrinkImg 
-            src={imgSrc} 
-            />
-            <TextCont
-            >
-                <h4>
-                    {name}
-                </h4>
-            </TextCont>
-        </CardContainer>
+    const {theme} = useTheme();
+    return (<div ref={drag}> 
+    <CardContainer 
+    onDrag={onCardDrag}
+    onClick={onClick}
+    display={display}
+    ref={dragPreview} {...sty}
+    imgSrc={imgSrc}
+    >
+        <IconCont onClick={onFavClick}>
+            <AiFillHeart size="2.5em" color={favCol}/>
+        </IconCont>
+
+        <TagCont>
+            <Tag bgcolor={DrinkTheme[theme].bgCol}>
+            {tag}
+            </Tag>
+        </TagCont>
+
+        <TextCont>
+            <h4 >
+            {name}
+            </h4>
+        </TextCont>
+
+    </CardContainer>
     </div>
+    )
 }
 
-export default DrinkCardUI;
+export default DrinkCardUIDrag;

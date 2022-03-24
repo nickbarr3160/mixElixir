@@ -1,6 +1,9 @@
 import styled from "styled-components";
-import React,{useState,useEffect} from "react";
-import { CardContainer, DrinkImg, TextCont, ImageContainer } from "./styles";
+import React from "react";
+import { CardContainer, DrinkImg, TextCont, TagCont, Tag, IconCont, ContentCont, Icon} from "./styles";
+import { DrinkTheme } from "@/utils/variables";
+import {useTheme} from '../../utils/provider'
+import {AiFillHeart} from 'react-icons/ai'
 
 const DrinkCardUIStatic = ({
     onClick=()=>{},
@@ -8,37 +11,36 @@ const DrinkCardUIStatic = ({
     display="flex",
     imgSrc="https://placekitten.com/50/50",
     onFavClick=()=>{},
+    favCol="",
+    tag=""
 })=> {
-
-    // state to keep track of current screen size
-    const [sWidth, setSwidth] = useState()
-
-
-useEffect(()=>{
-    window.onload=()=>{setSwidth(window.innerWidth)}
-    window.onresize=()=>{setSwidth(window.innerWidth)}
-    setSwidth(window.innerWidth)
-
-       // detecting when the screen resizes
-},[sWidth])
-
+    const {theme} = useTheme();
     return (<> 
-            <CardContainer 
-                onClick={onClick}
-                display={display}>
-                
-                <ImageContainer>
-                    <DrinkImg src={imgSrc} />
-                </ImageContainer>
+    <CardContainer 
+    display={display}
+    imgSrc={imgSrc}
+    >
 
-                <TextCont>
-                <h4>
-                {name}
-                </h4>
-                </TextCont>
-            </CardContainer>
-        <button onClick={onFavClick} >add to favs</button>
+        <IconCont>
+            <Icon onClick={onFavClick}>
+              <AiFillHeart size="2em" color={favCol}/>
+            </Icon>
+        </IconCont>
 
+        <ContentCont
+        onClick={onClick}
+        >
+        <TagCont>
+            <Tag bgcolor={DrinkTheme[theme].bgCol}>
+            {tag}
+            </Tag>
+        </TagCont>
+            <h4 >
+            {name}
+            </h4>
+        </ContentCont>
+
+    </CardContainer>
     </>
     )
 }

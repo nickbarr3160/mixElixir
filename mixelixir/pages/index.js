@@ -5,18 +5,21 @@ import {useState,useEffect} from 'react'
 import ax from 'axios';
 // components imports
 import { Input } from '../comps/InputBox'
-import { useSearch } from '../utils/provider';
+import { useSearch, useTheme } from '../utils/provider';
 import { search_types } from '@/utils/variables';
 import { SearchSelection } from '@/comps/SearchSelection';
 import Link from 'next/link';
 import { MyButt } from '@/comps/Button/style';
 import { MyButton } from '@/comps/Button';
-import DrinkCardUI from '@/comps/DrinkCard';
-import { DrinkResults, Wrapper, GeneratedCont, IngredientCont } from '@/styles/styles';
+import DrinkCardUI from '@/comps/DrinkCardDrag';
+import {LandingWrapper, DrinkResults, Wrapper, GeneratedCont, IngredientCont, HeroCont, HeroContentCont, IconCont, GenerateContent, MappedIngredients } from '@/styles/styles';
 import NavBar from '@/comps/NavBar';
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic';
-import { isExpired, decodeToken } from "react-jwt";
-import { concat } from '@/all_drinks';
+import {HeroMessage} from '@/comps/HeroMessage';
+import { DrinkGraphic } from '@/comps/DrinkGraphic';
+import {MdOutlineClose} from 'react-icons/md'
+import { GenerateTheme } from "@/utils/variables";
+
 
 
 var timer = null
@@ -29,7 +32,7 @@ export default function Home() {
   const[curPage, setCurPage] = useState(1)
   const [userToken, setUserToken] = useState()
   const  [ user, setUser] = useState()
-
+  const {theme, setTheme} = useTheme()
 
   useEffect(()=>{
     setUser( JSON.parse(window.localStorage.getItem('user')))
@@ -81,34 +84,64 @@ for (let i =1; i<600; i+= itemsPerPage )
 butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
 
   return (
-    <Wrapper>
-      <NavBar/>
+    <LandingWrapper>
+      <NavBar
+      themeToggle={()=>setTheme(
+        theme=== 'light'?'default':'light')}
+      />
   
-      <h1>Cocktail Generator</h1>
-    <div>
-      welcome {user != undefined && user.user.username}
-    </div>
-      <GeneratedCont>
-          <Input
-          val={val}
-          onValChange={handleValue}
-          onButtClick={addValueToArr}
-          />
+      {/* Hero Message */}
+
+      <HeroCont>
+        <HeroContentCont>
+          <HeroMessage/>
+        </HeroContentCont>
+
         
-          {arr.map((o,i) => (
-            <IngredientCont key={i}> 
-                <p> {o} </p>
-                <button onClick={()=>{
+        <HeroContentCont>
+          <DrinkGraphic imgSrc='/DrinkImage.svg'/>
+        </HeroContentCont>
+      </HeroCont>
+      
+       {/* Generate Content  */}
+
+      <GenerateContent>
+
+        <div>
+          <HeroMessage heading="Drink Generator" text="New tasty drinks for you to make based on what you have on hand"/>
+        </div>
+        <GeneratedCont 
+        bgcolor={GenerateTheme[theme].bgcol}
+        color={GenerateTheme[theme].col}
+        >
+            <Input
+            val={val}
+            onValChange={handleValue}
+            onButtClick={addValueToArr}
+            />
+        
+            <MappedIngredients>
+            {arr.map((o,i) => (
+                <IngredientCont key={i}> 
+                  <p> {o} </p>
+                  <IconCont onClick={()=>{
                   arr.splice(i,1)
                   setArr([...arr])
-            
-                  }}> del 
-                  </button>
-            </IngredientCont>
-              
+                  }}> 
+                    <MdOutlineClose color="#FF3864" size="2em"/> 
+                  </IconCont>
+                </IngredientCont>
               ))}
+            </MappedIngredients>
+        </GeneratedCont>
         <MyButton onClick={compareIngs}/>
-      </GeneratedCont>
+      </GenerateContent>
+      
+       {/* Drink Results  */}
+
+      <DrinkResults>
+          {generateData.map((o,i)=><DrinkCardUIStatic key={i} name={o.strDrink} imgSrc={o.strDrinkThumb} tag={o.strCategory}></DrinkCardUIStatic>)}
+      </DrinkResults>
       <div style={{
         display:'flex', 
         border:'2px solid red',
@@ -125,9 +158,6 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
             </button>
     ) )}
     </div>
-      <DrinkResults>
-          {generateData.map((o,i)=><DrinkCardUIStatic key={i} name={o.strDrink} imgSrc={o.strDrinkThumb}></DrinkCardUIStatic>)}
-      </DrinkResults>
-    </Wrapper>
+    </LandingWrapper>
     )
 }

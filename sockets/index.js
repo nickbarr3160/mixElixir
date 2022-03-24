@@ -17,12 +17,19 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
+
 io.on('connection', (socket) => {
   console.log('a user connected', socket.id);
 
 // io.emit("joined")
   socket.on("user_ready", (txt)=>{
+    // console.log(txt, 'text on the server')
     io.emit("joined", socket.id, txt);
+  })
+
+  socket.on("dropped_drink", (item)=>{
+    console.log(item, 'item on the server')
+    io.emit("dropped",item);
   })
 
 });

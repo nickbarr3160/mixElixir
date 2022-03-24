@@ -11,6 +11,8 @@ import {DrinkInformation } from '@/comps/DrinkInfo';
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic'
 import NavBar from '@/comps/NavBar';
 import { NavigationHam } from '@/comps/NavigationHam';
+import { IndDrinkTheme } from "@/utils/variables";
+import {useTheme} from '../../utils/provider'
 
 export default function Drink  () {
     const router  = useRouter()
@@ -19,7 +21,7 @@ export default function Drink  () {
     const [suggest, setSuggest] = useState([])
     // const [toggle,setToggle] = useState(false)
     // const [hammer, setHammer]= useState(false)
-
+    const {theme, setTheme} = useTheme();
     // state to keep track of current screen size
     const [sWidth, setSwidth] = useState()
 
@@ -89,10 +91,62 @@ export default function Drink  () {
     <Wrapper>  
     
         {/* if the screen size is less than 600px */}
-        {sWidth<600?<NavigationHam/>: <NavBar/>}
-    
-        <DrinkInformation defaultData={data} />
+        {sWidth<600?<NavigationHam/>: <NavBar
+      themeToggle={()=>setTheme(
+        theme=== 'light'?'default':'light')}
+      />}
+        <DrinkWrap>
+            {/* all the information about the drink */}
+            <DrinkInfo>
+                <DrinkHeading color={IndDrinkTheme[theme].headCol}> 
+                    {data.strDrink}
+                </DrinkHeading>
+
+                {/* ingredients, prep and glass*/}
+                <DrinkInstruct>
+                    <InstructHeading color={IndDrinkTheme[theme].subHeadCol}>
+                        Ingredients
+                    </InstructHeading>
+                    <InstructInfo  color={IndDrinkTheme[theme].bodyText}> 
+                        {data.ingredients.map((o,i)=>(
+                        <div key={i}>
+                            {o}
+                        </div>))}
+                    </InstructInfo>
+                </DrinkInstruct>
+
+                <DrinkInstruct>
+                    <InstructHeading color={IndDrinkTheme[theme].subHeadCol}>
+                        Preparation
+                    </InstructHeading>
+                    <InstructInfo  color={IndDrinkTheme[theme].bodyText}> 
+                        {data.strInstructions}
+                    </InstructInfo>
+                </DrinkInstruct>
+                
+                <DrinkInstruct>
+                    <InstructHeading color={IndDrinkTheme[theme].subHeadCol}>
+                        Glassware
+                    </InstructHeading>
+                    <InstructInfo  color={IndDrinkTheme[theme].bodyText}> 
+                        {data.strGlass}
+                    </InstructInfo>
+                </DrinkInstruct>
+
+            </DrinkInfo>
+
+
+            {/* Drink Image */}
+            <DrinkImageCont>
+                <DrinkImage alt='' src={data.strDrinkThumb} />
+            </DrinkImageCont>   
+                        
+        </DrinkWrap>
+        
         {/* drink suggestions */}
+        <InstructHeading color={IndDrinkTheme[theme].subHeadCol}>
+        Similar Drinks
+        </InstructHeading>
         <Suggestions>
             {suggest.map((o,i)=>(
                 <DrinkCardUIStatic
