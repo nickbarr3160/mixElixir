@@ -7,7 +7,7 @@ align-items:center;
 background:${({bg})=>bg || '#DDD'};
 width:90%;
 height:40%;
-border: 6px dashed #FF7259;
+border: 6px dashed #F39C6B;
 border-radius:10px;
 `;
 

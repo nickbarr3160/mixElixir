@@ -131,8 +131,6 @@ justify-content:space-evenly;
 align-items:center;
 height:100%;
 width:50%;
-border:2px solid green;
-background:pink;
 `;
 
 
@@ -168,12 +166,13 @@ export const Container = styled.div`
 
 export const SearchWrapper = styled.div`
 display:flex;
-width:70%;
-justify-content:space-evenly;
+width:90%;
+justify-content:flex-start;
 `;
 
 export const SearchBar = styled.input`
 width:60%;
+margin-right:2em;
 `;
 
 export const Heading = styled.h1`
@@ -182,4 +181,16 @@ color:${props=>props.color};
 
 export const SubHeading = styled.h4`
 color:${props=>props.color};
+`;
+
+export const HeadingCont = styled.div `
+width:90%;
+`;
+
+//PAGINATION CONT
+export const PaginationCont = styled.div`
+display:flex;
+2px solid red;
+align-items:center;
+justify-content:center;
 `;

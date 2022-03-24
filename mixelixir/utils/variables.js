@@ -1,7 +1,7 @@
 
 export const search_types = {
     'Cocktail Name':'strDrink',
-    'Non-Alcoholic':'strAlcoholic',
+    'Non Alcoholic':'strAlcoholic',
     'Glassware':"strGlass",
 }
 
@@ -39,8 +39,9 @@ var white = 'white'
 var peach = '#FEE0CF' 
 var salsa = '#FF3549'
 var orange = '#F39C6B'
-var grey = '#2E2B26'
+var grey = '#202223'
 var turq = '#3AAFB9'
+var altGrey = '#202223'
 // BODY 
 export const global_theme = {
     default:{
@@ -158,5 +159,20 @@ export const SubHeaderTheme = {
 
     light:{
         col:black 
+    }
+}
+
+//EVENT THEMES
+export const EventTheme = {
+    default:{
+        cardbgcol:altGrey,
+        dropzonebrdr:orange,
+        heading:salsa
+    },
+
+    light:{
+        cardbgcol:white,
+        dropzonebrdr:orange,
+        heading:turq
     }
 }

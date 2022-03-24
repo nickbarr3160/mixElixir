@@ -22,11 +22,12 @@ margin:1em;
 
 export const TagCont = styled.div`
 width:100%;
-height:20%;
+height:15%;
 display:flex;
 flex-direction:row;
 justify-content:flex-start;
 align-items:center;
+
 `;
 
 export const Tag = styled.div`
@@ -44,30 +45,28 @@ font-weight:bold;
 font-size:12px;
 padding:0em 1em 0em 1em;
 line-height:1;
+${({position, left, top})=>(position === 'fixed' || position === 'absolute') && `
+  left:${left}px;
+  top:${top}px;
+  position:${position};
+`}
 `;
 
-export const ContentCont = styled.div`
+export const TextCont = styled.div`
 width:100%;
-height:100%;
+height:30%;
 display:flex;
-flex-direction:column;
 // background-color:#00000020;
-background: linear-gradient(180deg, rgba(255,255,255,0.001) 0%, rgba(0,0,0,0.85) 98%);
-justify-content:space-evenly;
-align-items:center;
-`;
-
-export const Icon = styled.div`
-display:flex;
+background: linear-gradient(180deg, rgba(255,255,255,0.001) 0%, rgba(0,0,0,0.85) 78%);
+flex-direction:row;
 justify-content:center;
 align-items:center;
-padding:0.5em;
 `;
-
 
 export const IconCont = styled.div`
 display:flex;
 justify-content:flex-end;
+padding:1em;
 align-items:center;
 width:100%;
 `;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import { CardContainer, DrinkImg, TextCont, TagCont, Tag, IconCont} from "./styles";
+import { CardContainer, DrinkImg, TextCont, TagCont, Tag, IconCont, ContentCont, Icon} from "./styles";
 import { DrinkTheme } from "@/utils/variables";
 import {useTheme} from '../../utils/provider'
 import {AiFillHeart} from 'react-icons/ai'
@@ -17,25 +17,28 @@ const DrinkCardUIStatic = ({
     const {theme} = useTheme();
     return (<> 
     <CardContainer 
-    onClick={onClick}
     display={display}
     imgSrc={imgSrc}
     >
-        <IconCont onClick={onFavClick}>
-            <AiFillHeart size="2.5em" color={favCol}/>
+
+        <IconCont>
+            <Icon onClick={onFavClick}>
+              <AiFillHeart size="2em" color={favCol}/>
+            </Icon>
         </IconCont>
 
+        <ContentCont
+        onClick={onClick}
+        >
         <TagCont>
             <Tag bgcolor={DrinkTheme[theme].bgCol}>
             {tag}
             </Tag>
         </TagCont>
-
-        <TextCont>
             <h4 >
             {name}
             </h4>
-        </TextCont>
+        </ContentCont>
 
     </CardContainer>
     </>

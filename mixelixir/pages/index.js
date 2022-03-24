@@ -11,7 +11,7 @@ import { SearchSelection } from '@/comps/SearchSelection';
 import Link from 'next/link';
 import { MyButt } from '@/comps/Button/style';
 import { MyButton } from '@/comps/Button';
-import DrinkCardUI from '@/comps/DrinkCard';
+import DrinkCardUI from '@/comps/DrinkCardDrag';
 import {LandingWrapper, DrinkResults, Wrapper, GeneratedCont, IngredientCont, HeroCont, HeroContentCont, IconCont, GenerateContent, MappedIngredients } from '@/styles/styles';
 import NavBar from '@/comps/NavBar';
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic';

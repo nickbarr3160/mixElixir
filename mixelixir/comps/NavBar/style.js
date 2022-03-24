@@ -12,21 +12,21 @@ box-shadow:0 2px 4px rgb(0 0 0/20%);
 background-color:${props=>props.bgcolor};
 `;
 
-export const Logo = styled.div`
-font-size:3em;
-margin:1em;
-font-weight:bold;
-font-family: 'Parisienne', cursive;
-color:${props=>props.color};
-&:hover{
-color: ${props=>props.hovColor}; 
-cursor:pointer;
-}
-@media only screen and (max-width: 600px) {
-    margin:0;
-    font-size:2.8em;
-    }
-`;
+// export const Logo = styled.div`
+// font-size:3em;
+// margin:1em;
+// font-weight:bold;
+// font-family: 'Parisienne', cursive;
+// color:${props=>props.color};
+// &:hover{
+// color: ${props=>props.hovColor}; 
+// cursor:pointer;
+// }
+// @media only screen and (max-width: 600px) {
+//     margin:0;
+//     font-size:2.8em;
+//     }
+// `;
 
 export const LinkCont = styled.div`
 
@@ -49,5 +49,20 @@ export const NavLink = styled.a`
 &:hover{
     color:${props=>props.color};
 }
+`;
+
+
+export const LogoCont = styled.div`
+display:flex;
+height:80%;margin:2em;
+
+&:hover{
+opacity:70%;
+}
+`;
+
+export const Logo = styled.img`
+height:100%;
+width:100%;
 `;
 

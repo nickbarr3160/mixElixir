@@ -59,9 +59,9 @@ export function filtering(
         cond = cond && o.strDrink.toLowerCase().includes(strDrink);
       }
   
-      if(strAlcoholic){
+      if(strAlcoholic  && o.strAlcoholic==='Non alcoholic' && strDrink){
         // if the value of the search bar exist in the databases drinks' type
-          cond = cond && o.strAlcoholic.toLowerCase()==='Non Alcoholic';
+        cond = cond && o.strDrink.toLowerCase().includes(strDrink);
       }
 
       if(strGlass){
