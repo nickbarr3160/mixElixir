@@ -3,24 +3,13 @@ import { useRouter } from 'next/router'
 import ax from 'axios'
 
 // styled component imports 
-import { DrinkResults, Wrapper, } from '@/styles/styles';
-import { 
-    DrinkWrap,
-    DrinkInfo,
-    DrinkImageCont,
-    DrinkImage,
-    DrinkHeading,
-    DrinkInstruct,
-    InstructHeading,
-    InstructInfo,
-    Suggestions
-} from '@/styles/IndividualDrinkStyle';
+import {Wrapper,} from '@/styles/styles';
+import {Suggestions}from '@/styles/IndividualDrinkStyle';
 
 // component imports
+import {DrinkInformation } from '@/comps/DrinkInfo';
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic'
 import NavBar from '@/comps/NavBar';
-import { Navigation } from '@/comps/HamNav';
-import { HeaderHam } from '@/comps/HeaderHam';
 import { NavigationHam } from '@/comps/NavigationHam';
 import { IndDrinkTheme } from "@/utils/variables";
 import {useTheme} from '../../utils/provider'
@@ -38,10 +27,12 @@ export default function Drink  () {
 
 
     useEffect(()=>{
-    window.onload=()=>{setSwidth(window.innerWidth)}
-    window.onresize=()=>{setSwidth(window.innerWidth)}
-    setSwidth(window.innerWidth)
-
+        setSwidth(window.innerWidth)
+        window.onload=()=>{setSwidth(window.innerWidth)}
+        window.onresize=()=>{
+        setSwidth(window.innerWidth)
+        console.log(sWidth)
+    }
     // detecting when the screen resizes
     },[sWidth])
 

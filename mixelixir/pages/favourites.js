@@ -13,7 +13,7 @@ import { SearchSelection } from '@/comps/SearchSelection';
 import { isExpired, decodeToken } from "react-jwt";
 import { DrinkResults, Wrapper } from '@/styles/styles';
 import NavBar from '@/comps/NavBar';
-
+import { NavigationHam } from '@/comps/NavigationHam';
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic';
 
 var timer = null
@@ -24,15 +24,26 @@ export default function Favourites() {
     const router = useRouter()
   const [searchData, setSearchData] = useState([]);
   const[curPage, setCurPage] = useState(1)
-  const [favDrinks, setFavDrinks] = useState()
+  const [favDrinks, setFavDrinks] = useState([])
   const  [ user, setUser] = useState()
-
+// state to keep track of current screen size
+const [sWidth, setSwidth] = useState()
 
 
 useEffect(()=>{
   setUser( JSON.parse(window.localStorage.getItem('user')))
 },[])
-
+    
+    useEffect(()=>{
+        setSwidth(window.innerWidth)
+        window.onload=()=>{setSwidth(window.innerWidth)}
+        window.onresize=()=>{
+        setSwidth(window.innerWidth)
+        console.log(sWidth)
+    }
+    // detecting when the screen resizes
+    },[sWidth])
+    
 useEffect(()=>{
     const getFavs = async ()=>
     {
@@ -82,18 +93,17 @@ const handleFavs = async(o)=>
 
   return (
     <Wrapper>
-    <NavBar/>
-    
+      {/* show the hamburger if the screen size is less than 600px else regular navbar */}
+    {sWidth<600?<NavigationHam/>: <NavBar/>}
     <DrinkResults>
     
-            {searchData.map((o,i)=>(
+            {favDrinks.map((o,i)=>(
             <DrinkCardUIStatic 
-            onClick={()=>router.push(`/search/${o.idDrink}`)}
-            key={i} 
-            name={o.strDrink} 
-            imgSrc={o.strDrinkThumb}
-            onFavClick={()=>{handleFavs(o)}}
-            >
+              onClick={()=>router.push(`/search/${o.drink.idDrink}`)}
+              key={i} 
+              name={o.drink.strDrink} 
+              imgSrc={o.drink.strDrinkThumb}
+              onFavClick={()=>{handleFavs(o)}}>
             </DrinkCardUIStatic>))}
             
     </DrinkResults>

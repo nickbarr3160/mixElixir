@@ -18,6 +18,14 @@ border-radius: 5px;
 box-shadow: 2px 2px 5px 1px black;
 overflow: hidden;
 margin:1em;
+@media (max-width: 600px) {
+    height:100%;
+    flex-direction:row;
+    width:90%;
+    border:2px solid #FF3864;
+    border-radius: 10px;
+
+}
 `;
 
 export const TagCont = styled.div`

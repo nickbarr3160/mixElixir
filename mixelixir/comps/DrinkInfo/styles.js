@@ -4,6 +4,7 @@ export const DrinkWrap = styled.div`
 width:100%;
 height:100%;
 display:flex;
+// border:2px solid red;
 justify-content:space-around;
 @media (max-width: 600px) {
     flex-direction:column;
@@ -26,27 +27,24 @@ flex-direction:column;
 `
 
 export const DrinkHeading = styled.h1`
-color:${props=>props.color};
 `
 
 export const DrinkInstruct = styled.div`
 display:flex;
 flex-direction:column;
+// border:2px solid red;
 display:100%;
 `
 
-export const InstructHeading = styled.h3`
-color:${props=>props.color};
-`
-export const InstructInfo = styled.div`
-color:${props=>props.color};`
+export const InstructHeading = styled.h3``
+export const InstructInfo = styled.div``
 
 export const DrinkImageCont = styled.div`
 display:flex;
-width:40%;
-height:60%;
+width:50%;
+height:70%;
 align-items:flex-start;
-border:2px solid blue;
+// border:2px solid blue;
 @media (max-width: 600px) {
     order:-1;
     width:90%;

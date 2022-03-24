@@ -10,6 +10,14 @@ align-items:center;
 width:100vw;
 
 `;
+// header for all navigationHam component
+export const Header = styled.div`
+width:100%;
+display:flex;
+justify-content:flex-end;
+// border:2px solid green;
+`
+
 
 // Settings page styling
 
