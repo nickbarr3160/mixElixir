@@ -60,12 +60,11 @@ export function filtering(
         cond = cond && o.strDrink.toLowerCase().includes(strDrink);
       }
   
-      if(strAlcoholic  && o.strAlcoholic==='Non alcoholic' && strDrink){
+      if(strAlcoholic){
         // if the value of the search bar exist in the databases drinks' type
           cond = cond && o.strAlcoholic ==='Non alcoholic';
           if (cond)
           {
-            // console.log(cond)
             cond = cond && o.strDrink.toLowerCase().includes(val);
           }
       }

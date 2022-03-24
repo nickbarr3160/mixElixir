@@ -95,66 +95,19 @@ export default function Drink  () {
       themeToggle={()=>setTheme(
         theme=== 'light'?'default':'light')}
       />}
-        <DrinkWrap>
-            {/* all the information about the drink */}
-            <DrinkInfo>
-                <DrinkHeading color={IndDrinkTheme[theme].headCol}> 
-                    {data.strDrink}
-                </DrinkHeading>
-
-                {/* ingredients, prep and glass*/}
-                <DrinkInstruct>
-                    <InstructHeading color={IndDrinkTheme[theme].subHeadCol}>
-                        Ingredients
-                    </InstructHeading>
-                    <InstructInfo  color={IndDrinkTheme[theme].bodyText}> 
-                        {data.ingredients.map((o,i)=>(
-                        <div key={i}>
-                            {o}
-                        </div>))}
-                    </InstructInfo>
-                </DrinkInstruct>
-
-                <DrinkInstruct>
-                    <InstructHeading color={IndDrinkTheme[theme].subHeadCol}>
-                        Preparation
-                    </InstructHeading>
-                    <InstructInfo  color={IndDrinkTheme[theme].bodyText}> 
-                        {data.strInstructions}
-                    </InstructInfo>
-                </DrinkInstruct>
-                
-                <DrinkInstruct>
-                    <InstructHeading color={IndDrinkTheme[theme].subHeadCol}>
-                        Glassware
-                    </InstructHeading>
-                    <InstructInfo  color={IndDrinkTheme[theme].bodyText}> 
-                        {data.strGlass}
-                    </InstructInfo>
-                </DrinkInstruct>
-
-            </DrinkInfo>
-
-
-            {/* Drink Image */}
-            <DrinkImageCont>
-                <DrinkImage alt='' src={data.strDrinkThumb} />
-            </DrinkImageCont>   
-                        
-        </DrinkWrap>
-        
+    
+        <DrinkInformation defaultData={data} />
         {/* drink suggestions */}
-        <InstructHeading color={IndDrinkTheme[theme].subHeadCol}>
-        Similar Drinks
-        </InstructHeading>
+      
         <Suggestions>
             {suggest.map((o,i)=>(
                 <DrinkCardUIStatic
                     key={i}
+                    tag={o.strCategory}
                     name={o.strDrink} 
                     imgSrc={o.strDrinkThumb}
-                    onClick={()=>router.push(`/search/${o.idDrink}`)}
-                    >
+                    onClick={()=>router.push(`/search/${o.idDrink}`)
+                }>
                 </DrinkCardUIStatic> 
             
             ))}
