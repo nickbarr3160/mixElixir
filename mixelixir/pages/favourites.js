@@ -103,7 +103,9 @@ const handleFavs = async(o)=>
               key={i} 
               name={o.drink.strDrink} 
               imgSrc={o.drink.strDrinkThumb}
-              onFavClick={()=>{handleFavs(o)}}>
+              onFavClick={()=>{handleFavs(o)}}
+              favCol="#FF3549"
+              >
             </DrinkCardUIStatic>))}
             
     </DrinkResults>

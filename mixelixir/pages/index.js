@@ -66,6 +66,7 @@ export default function Home() {
   // setCurPage(p != undefined? p:1 )
   console.log(curPage)
   setGenerateData(res.data)
+  // setCurPage(p != undefined? p:1 )
 }
 
 const itemsPerPage = 15;

@@ -23,7 +23,7 @@ const DrinkCardUIStatic = ({
 
         <IconCont>
             <Icon onClick={onFavClick}>
-              <AiFillHeart size="2em" color={favCol}/>
+            <AiFillHeart size="2em" color={favCol}/>
             </Icon>
         </IconCont>
 
