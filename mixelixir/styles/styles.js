@@ -7,10 +7,18 @@ display:flex;
 flex-direction:column;
 justify-content:flex-start;
 align-items:center;
-height:100vh;
-width:100vw;
+height:100%;
+width:100%;
 
 `;
+// header for all navigationHam component
+export const Header = styled.div`
+width:100%;
+display:flex;
+justify-content:flex-end;
+// border:2px solid green;
+`
+
 
 // Settings page styling
 

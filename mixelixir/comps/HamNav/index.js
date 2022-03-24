@@ -23,18 +23,18 @@ export const Navigation = (
         },
         {
             id:1,
-            title:"About",
-            link:'/about'
+            title:"Search Drinks",
+            link:'/search'
         },
-        // {
-        //     id:2,
-        //     title:"Showcase",
-        //     link:'/work'
-        // },
+        {
+            id:2,
+            title:"Favourites",
+            link:'/favourites'
+        },
         {
             id:4,
-            title:"Resume",
-            link:'/AbhayBakshi.pdf'
+            title:"Settings",
+            link:'/settings'
         },
     ]
     
@@ -72,9 +72,8 @@ export const Navigation = (
                     <motion.div 
                         className='link'
                         initial={{x:0}}
-                        whileHover={{x:40}}
+                        whileHover={{x:40}}>
 
-                        >
                     <div onClick={()=>{ o.title==='Resume'? window.open("/AbhayBakshi.pdf", '_blank'): r.push(o.link)}}>
                         {o.title}
                     </div>

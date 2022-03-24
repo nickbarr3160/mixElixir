@@ -59,7 +59,7 @@ export default async function handler(req, res)
         user
       }
       )
-
+      console.log(addFav)
     }
     catch (err) {console.log(err)}
 

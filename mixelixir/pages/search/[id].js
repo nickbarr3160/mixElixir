@@ -3,24 +3,13 @@ import { useRouter } from 'next/router'
 import ax from 'axios'
 
 // styled component imports 
-import { DrinkResults, Wrapper, } from '@/styles/styles';
-import { 
-    DrinkWrap,
-    DrinkInfo,
-    DrinkImageCont,
-    DrinkImage,
-    DrinkHeading,
-    DrinkInstruct,
-    InstructHeading,
-    InstructInfo,
-    Suggestions
-} from '@/styles/IndividualDrinkStyle';
+import {Wrapper,} from '@/styles/styles';
+import {Suggestions}from '@/styles/IndividualDrinkStyle';
 
 // component imports
+import {DrinkInformation } from '@/comps/DrinkInfo';
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic'
 import NavBar from '@/comps/NavBar';
-import { Navigation } from '@/comps/HamNav';
-import { HeaderHam } from '@/comps/HeaderHam';
 import { NavigationHam } from '@/comps/NavigationHam';
 
 export default function Drink  () {
@@ -36,10 +25,12 @@ export default function Drink  () {
 
 
     useEffect(()=>{
-    window.onload=()=>{setSwidth(window.innerWidth)}
-    window.onresize=()=>{setSwidth(window.innerWidth)}
-    setSwidth(window.innerWidth)
-
+        setSwidth(window.innerWidth)
+        window.onload=()=>{setSwidth(window.innerWidth)}
+        window.onresize=()=>{
+        setSwidth(window.innerWidth)
+        console.log(sWidth)
+    }
     // detecting when the screen resizes
     },[sWidth])
 
@@ -99,53 +90,8 @@ export default function Drink  () {
     
         {/* if the screen size is less than 600px */}
         {sWidth<600?<NavigationHam/>: <NavBar/>}
-        <DrinkWrap>
-            {/* all the information about the drink */}
-            <DrinkInfo>
-                <DrinkHeading> 
-                    {data.strDrink}
-                </DrinkHeading>
-
-                {/* ingredients, prep and glass*/}
-                <DrinkInstruct>
-                    <InstructHeading>
-                        Ingredients
-                    </InstructHeading>
-                    <InstructInfo> 
-                        {data.ingredients.map((o,i)=>(
-                        <div key={i}>
-                            {o}
-                        </div>))}
-                    </InstructInfo>
-                </DrinkInstruct>
-
-                <DrinkInstruct>
-                    <InstructHeading>
-                        Preparation
-                    </InstructHeading>
-                    <InstructInfo> 
-                        {data.strInstructions}
-                    </InstructInfo>
-                </DrinkInstruct>
-                
-                <DrinkInstruct>
-                    <InstructHeading>
-                        Glassware
-                    </InstructHeading>
-                    <InstructInfo> 
-                        {data.strGlass}
-                    </InstructInfo>
-                </DrinkInstruct>
-
-            </DrinkInfo>
-
-            {/* Drink Image */}
-            <DrinkImageCont>
-                <DrinkImage alt='' src={data.strDrinkThumb} />
-            </DrinkImageCont>   
-                        
-        </DrinkWrap>
-        
+    
+        <DrinkInformation defaultData={data} />
         {/* drink suggestions */}
         <Suggestions>
             {suggest.map((o,i)=>(
