@@ -12,7 +12,6 @@ import Link from 'next/link';
 import { MyButt } from '@/comps/Button/style';
 import { MyButton } from '@/comps/Button';
 import DrinkCardUI from '@/comps/DrinkCardDrag';
-import {LandingWrapper, DrinkResults, Wrapper, GeneratedCont, IngredientCont, HeroCont, HeroContentCont, IconCont, GenerateContent, MappedIngredients } from '@/styles/styles';
 import NavBar from '@/comps/NavBar';
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic';
 import {HeroMessage} from '@/comps/HeroMessage';
@@ -21,8 +20,22 @@ import {MdOutlineClose} from 'react-icons/md'
 import { GenerateTheme } from "@/utils/variables";
 import {BsSunFill} from 'react-icons/bs';
 import {MdDarkMode} from 'react-icons/md';
-import {useRouter} from 'next/router' 
+import {useRouter} from 'next/router'
+import { NavigationHam } from '@/comps/NavigationHam';
 
+// styled components imports
+import {
+  LandingWrapper, 
+  DrinkResults, 
+  Wrapper, 
+  GeneratedCont, 
+  IngredientCont, 
+  HeroCont, 
+  HeroContentCont, 
+  IconCont, 
+  GenerateContent, 
+  MappedIngredients 
+} from '@/styles/styles';
 var timer = null
 
 export default function Home() {
@@ -33,9 +46,25 @@ export default function Home() {
   const  [curPage, setCurPage] = useState(1)
   const  [userToken, setUserToken] = useState()
   const  [ user, setUser] = useState()
-  const  {theme, setTheme} = useTheme()
+  const {theme, setTheme} = useTheme()
   const router= useRouter()
 
+
+  const [sWidth, setSwidth] = useState()
+
+
+  useEffect(()=>{
+      setSwidth(window.innerWidth)
+      window.onload=()=>{setSwidth(window.innerWidth)}
+      window.onresize=()=>{
+      setSwidth(window.innerWidth)
+  }
+  // detecting when the screen resizes
+  },[sWidth])
+
+  useEffect(()=>{
+    // console.log(window.localStorage.getItem('user'))
+  setUser( JSON.parse(window.localStorage.getItem('user')))
 
   useEffect(()=>{
     // setUser( JSON.parse(window.localStorage.getItem('user')))
@@ -71,7 +100,6 @@ export default function Home() {
       curPage
     }
   })
-  // setCurPage(p != undefined? p:1 )
   console.log(curPage)
   setGenerateData(res.data)
   // setCurPage(p != undefined? p:1 )
@@ -94,17 +122,20 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
 
   return (
     <LandingWrapper>
-      <NavBar
-      themeToggle={()=>setTheme(
-      theme=== 'light'?'default':'light')}
-      icon={theme==='light'?<MdDarkMode  size="1.5em"/>:<BsSunFill size="1.5em"/>}
-      />
+      {/* if the screen size is less than 600px */}
+      {sWidth<600?<NavigationHam/>:
+        <NavBar
+        themeToggle={()=>setTheme(
+        theme=== 'light'?'default':'light')}
+        icon={theme==='light'?<MdDarkMode  size="1.5em"/>:<BsSunFill size="1.5em"/>}
+        />}
+    
   
       {/* Hero Message */}
 
       <HeroCont>
         <HeroContentCont>
-          <HeroMessage heading={`Welcome ${user}`}/>
+          <HeroMessage heading={`Welcome ${user && user.user.username}`}/>
         </HeroContentCont>
 
         
@@ -116,12 +147,14 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
        {/* Generate Content  */}
 
       <GenerateContent>
+        <HeroCont>
+          <HeroContentCont>
+            <HeroMessage 
+              heading="Drink Generator" 
+              text="New tasty drinks for you to make based on what you have on hand"/>
+          </HeroContentCont>
+        </HeroCont>
 
-        <div>
-          <HeroMessage 
-            heading="Drink Generator" 
-            text="New tasty drinks for you to make based on what you have on hand"/>
-        </div>
         <GeneratedCont 
         bgcolor={GenerateTheme[theme].bgcol}
         color={GenerateTheme[theme].col}
@@ -182,3 +215,4 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
     </LandingWrapper>
     )
 }
+)}

@@ -19,7 +19,7 @@ box-shadow: 2px 2px 5px 1px black;
 overflow: hidden;
 margin:1em;
 @media (max-width: 600px) {
-    height:100%;
+    height:100px;
     flex-direction:row;
     width:90%;
     border:2px solid #FF3864;
@@ -30,7 +30,7 @@ margin:1em;
 
 export const TagCont = styled.div`
 width:100%;
-height:20%;
+height:50px;
 display:flex;
 flex-direction:row;
 justify-content:flex-start;

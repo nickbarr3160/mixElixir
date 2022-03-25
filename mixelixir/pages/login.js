@@ -25,8 +25,10 @@ const handleLogin=async()=>
         pass,
         login:'logg'
     })
+    if(res.status!=500)
+    {
         router.push('/')
-        localStorage.setItem('user',JSON.stringify(res.data[1]))
+        localStorage.setItem('user',JSON.stringify(res.data[1]))}
 }
 
 const handleSignup=async()=>

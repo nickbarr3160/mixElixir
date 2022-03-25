@@ -19,11 +19,11 @@ export default function Drink  () {
     const {id} = router.query
     const [data,setData] = useState({ingredients:[]})
     const [suggest, setSuggest] = useState([])
+    const {theme, setTheme} = useTheme();
+    const [sWidth, setSwidth] = useState()
     // const [toggle,setToggle] = useState(false)
     // const [hammer, setHammer]= useState(false)
-    const {theme, setTheme} = useTheme();
     // state to keep track of current screen size
-    const [sWidth, setSwidth] = useState()
 
 
     useEffect(()=>{
@@ -31,7 +31,6 @@ export default function Drink  () {
         window.onload=()=>{setSwidth(window.innerWidth)}
         window.onresize=()=>{
         setSwidth(window.innerWidth)
-        console.log(sWidth)
     }
     // detecting when the screen resizes
     },[sWidth])
@@ -92,13 +91,13 @@ export default function Drink  () {
     
         {/* if the screen size is less than 600px */}
         {sWidth<600?<NavigationHam/>: <NavBar
-      themeToggle={()=>setTheme(
+        themeToggle={()=>setTheme(
         theme=== 'light'?'default':'light')}
-      />}
+        />}
     
         <DrinkInformation defaultData={data} />
         {/* drink suggestions */}
-      
+
         <Suggestions>
             {suggest.map((o,i)=>(
                 <DrinkCardUIStatic

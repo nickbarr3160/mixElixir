@@ -37,6 +37,10 @@ justify-content:flex-start;
 align-items:center;
 height:100%;
 width:100vw;
+@media (max-width:600px)
+{
+
+}
 `;
 
 export const DrinkResults = styled.div`
@@ -60,9 +64,41 @@ width:40vw;
 color:${props=>props.color};
 border-radius:10px;
 padding:1em;
-box-shadow:0 2px 4px rgb(0 0 0/20%);;
-`;
+box-shadow:0 2px 4px rgb(0 0 0/20%);
+@media (max-width:600px)
+{
 
+  width:100%;
+}
+`;
+export const GenerateContent = styled.div `
+display:flex;
+flex-direction:column;
+justify-content:space-evenly;
+align-items:flex-start;
+width:100%;
+height:80vh;
+padding-left:4em;
+@media (max-width:600px)
+{
+  align-items:center;
+  padding:10px;
+}
+
+`;
+export const MappedIngredients = styled.div`
+width:70%;
+height:70%;
+display:flex;
+justify-content:space-evenly;
+flex-wrap:wrap;
+@media (max-width:600px)
+{
+  padding:5px;
+  height:100%;
+  width:100%;
+}
+`;
 export const IngredientCont = styled.div`
 display:flex;
 width:7em;
@@ -71,16 +107,19 @@ border-radius:10px;
 margin:1em;
 justify-content:space-between;
 align-items:center;
-// border:2px solid white;
 padding-left:1em;
 `;
 
 export const HeroCont = styled.div`
 width:100%;
-height:65vh;
 display:flex;
 justify-content:space-evenly;
 align-items:center;
+@media (max-width:600px)
+{
+  flex-direction:column;
+  align-items:center;
+}
 `;
 
 export const HeroContentCont = styled.div`
@@ -91,6 +130,12 @@ flex-direction:column;
 justify-content:space-evenly;
 align-items:center;
 padding-left:4em;
+@media (max-width:600px)
+{
+  justify-content:center;
+  padding:0;
+  width:100%;
+}
 `;
 
 export const IconCont = styled.div`
@@ -101,24 +146,9 @@ height:100%;
 width:40%;
 `;
 
-export const MappedIngredients = styled.div`
-width:70%;
-height:70%;
-display:flex;
-justify-content:space-evenly;
-flex-wrap:wrap;
 
-`;
 
-export const GenerateContent = styled.div `
-display:flex;
-flex-direction:column;
-justify-content:space-evenly;
-align-items:flex-start;
-width:100%;
-height:80vh;
-padding-left:4em;
-`;
+
 
 //Event page styling
 
