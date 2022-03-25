@@ -23,7 +23,6 @@ io.on('connection', (socket) => {
 
 // io.emit("joined")
   socket.on("user_ready", (txt, user)=>{
-    // console.log(txt, 'text on the server')
     io.emit("joined", user, txt);
   })
 

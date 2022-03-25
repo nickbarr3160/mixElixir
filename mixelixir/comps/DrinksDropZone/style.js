@@ -13,6 +13,6 @@ border-radius:10px;
 
 export const DropZoneText = styled.div`
 font-weight: 400;
-font-size: 50px;
+font-size: 60px;
 color: #FF3549;
 `;

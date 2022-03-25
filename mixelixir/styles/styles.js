@@ -57,28 +57,26 @@ export const GeneratedCont = styled.div`
 background-color:${props=>props.bgcolor};
 display:flex;
 justify-content:space-evenly;
-flex-direction:column;
 align-items:center;
-height:40%; 
-width:40vw;
+height:80%; 
+width:80%;
 color:${props=>props.color};
-border-radius:10px;
 padding:1em;
 box-shadow:0 2px 4px rgb(0 0 0/20%);
 @media (max-width:600px)
 {
-
   width:100%;
 }
+// border:2px solid red;
 `;
+
 export const GenerateContent = styled.div `
 display:flex;
 flex-direction:column;
 justify-content:space-evenly;
-align-items:flex-start;
+align-items:center;
 width:100%;
 height:80vh;
-padding-left:4em;
 @media (max-width:600px)
 {
   align-items:center;
@@ -86,12 +84,22 @@ padding-left:4em;
 }
 
 `;
+
+export const AddIngredientsColumn = styled.div `
+display:flex;
+flex-direction:column;
+height:100%;
+width:50%;
+// border:2px solid pink;
+`;
+
 export const MappedIngredients = styled.div`
 width:70%;
 height:70%;
 display:flex;
 justify-content:space-evenly;
 flex-wrap:wrap;
+// border:2px solid red;
 @media (max-width:600px)
 {
   padding:5px;
@@ -218,7 +226,7 @@ export const Container = styled.div`
 
 //Search Page
 
-export const SearchWrapper = styled.div`
+export const SearchBarWrapper = styled.div`
 display:flex;
 width:90%;
 justify-content:flex-start;
@@ -239,6 +247,7 @@ color:${props=>props.color};
 
 export const HeadingCont = styled.div `
 width:90%;
+padding-top:2em;
 `;
 
 //PAGINATION CONT
@@ -316,3 +325,4 @@ width:100%;
 display:flex;
 justify-content:flex-start;
 `;
+

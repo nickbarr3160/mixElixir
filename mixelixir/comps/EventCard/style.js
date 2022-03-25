@@ -44,5 +44,12 @@ width:70%;
 `;
 
 export const EventDescrip = styled.div`
-color:white;
+color:${props=>props.color};
+`;
+
+export const EventTitleCont = styled.div`
+display:flex;
+width:80%;
+justify-content:space-between;
+align-items:center;
 `;

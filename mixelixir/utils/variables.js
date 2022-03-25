@@ -70,7 +70,7 @@ export const NavbarTheme = {
 export const HeroTheme = {
     default:{
         headCol:white,
-        textCol:orange
+        textCol:salsa
     },
 
     light:{
@@ -82,7 +82,7 @@ export const HeroTheme = {
 //GENERATE CONTAINER
 export const GenerateTheme = {
     default:{
-        bgcol:grey,
+        bgcol:black,
         col:white
     },
 
@@ -121,7 +121,7 @@ export const IndDrinkTheme = {
 //DRINK CARD
 export const DrinkTheme = {
     default:{
-        bgCol:orange
+        bgCol:salsa
     },
 
     light:{
@@ -144,7 +144,7 @@ export const SearchFilterTheme = {
 //UNIVERSAL HEADINGS
 export const HeaderTheme = {
     default:{
-        col:orange
+        col:white
     },
 
     light:{
@@ -166,11 +166,15 @@ export const SubHeaderTheme = {
 export const EventTheme = {
     default:{
         cardbgcol:altGrey,
-        heading:white
+        heading:white,
+        userCol:salsa,
+        bodyText:white
     },
 
     light:{
         cardbgcol:white,
-        heading:turq
+        heading:turq,
+        userCol:turq,
+        bodyText:black
     }
 }

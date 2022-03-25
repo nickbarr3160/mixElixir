@@ -26,12 +26,12 @@ export default function Sockets() {
   const {theme, setTheme} = useTheme()
   const [dropMessage, setDropMessage] = useState("Drop Drinks Here")
   const [droppedInfo, setDroppedInfo] = useState([])
-  const  [ user, setUser] = useState()
+  const [user, setUser] = useState()
   
+  //Generate searched drinks
   const inputFilter = async (value) =>{
-
-    if (timer)
-      {
+   
+    if (timer){
         clearTimeout(timer)
         timer=null
       }
@@ -44,66 +44,57 @@ export default function Sockets() {
           searchBy: search_types[search]
         }
       })
-  
-      // console.log(res.data)
-      // store the data in a state for mapping
-      setSearchData(res.data)  
+      
+    // store the data in a state for mapping
+    setSearchData(res.data)  
     }, 500)
   
   }
   
   useEffect(()=>{
     
-      //Retrieve the username of the user from local storage
-      var userInfo = JSON.parse(localStorage.getItem('user'))
-      setUser(userInfo.user.username)
-      console.log(user)
+    const socket = io("http://localhost:8888")
   
-
-      const socket = io("http://localhost:8888")
     
-      socket.on("joined", (id, txt,)=>{      
-     
-      setMsgs((prev)=>[
-        ...prev,
-        `${user} says ${txt}`
-      ])
-
-      }),
+    // Retrieval of User Information
+    var userInfo=JSON.parse(window.localStorage.getItem('user'))
+   
+    if(userInfo!=null){
+        setUser(userInfo.user.username)
+    }
     
-      socket.on("dropped", (item)=>{
-      const drink_id = uuidv4()
-      // var dropped=[]
-      // dropped.push(item)
-      // setDroppedInfo(...droppedInfo,item)
-
-      
-      setDrink((prev)=>({
-        ...prev,
-        [drink_id]:{obj:item},
+    socket.on("joined", (id, txt,)=>{ 
+      setMsgs(`${user && user} says ${txt}`)
+    }),
+    
+    
+    //If the drink is not in its original state populate with the item and set it to it's previous state plus the new incoming change upon every drop in the dropzone
+    socket.on("dropped", (item)=>{  
+        const drink_id = uuidv4()
+        if (drink!={}){
+          setDrink({
+          ...drink,
+          [drink_id]:{obj:item}
+          })
       }
-      ))
-      console.log(drink)
-      })
-    
-    
-    
-    
-    setMySoc(socket);
-  },[])
+    })
   
+    setMySoc(socket);
+
+  },[drink, user])
+
+  
+    //sending the user suggestion and user to server
     const EmitToIo = async () =>{
       //mySoc to emit
-      console.log(mySoc)
       if (mySoc !== null){
-        mySoc.emit("user_ready", txt, user)
-        console.log(mySoc, '========')
+        mySoc.emit("user_ready", txt, user!= undefined && user)
       }
     }
     
+    //sending the dropped drink to the server
     const EmitDrinkToIo = async (item) =>{
       const socket = io("http://localhost:8888")
-      // console.log(socket)
       if (socket !== null){
         socket.emit("dropped_drink", item)
       }
@@ -133,8 +124,6 @@ export default function Sockets() {
             onChange={(e)=>inputFilter(e.target.value)}>
             </EventInput>
             
-            
-     
             <DrinkResults>
                   {searchData.map((o,i)=><DrinkCardUIDrag 
                   item={o}
@@ -142,7 +131,6 @@ export default function Sockets() {
                   name={o.strDrink} 
                   imgSrc={o.strDrinkThumb}
                   tag={o.strCategory}
-                  // onCardDrag={()=>{console.log(o)}}
                   >
 
                   </DrinkCardUIDrag>)}
@@ -152,7 +140,6 @@ export default function Sockets() {
 
           <EventContentCont>
   
-
             <EventCard
             onInputChange={(e)=>
             setTxt(e.target.value)}
@@ -163,7 +150,6 @@ export default function Sockets() {
             <Dropzone 
             dropMessage={dropMessage}
             onDropItem={(item)=>{
-              // handleDrop(item)
               EmitDrinkToIo(item)
               setDropMessage(null)
               }}>
@@ -174,19 +160,17 @@ export default function Sockets() {
                 key={o.id}
                 drinkpos={o.pos}
                 tag={o.obj.strCategory}
-                onUpdateDrink={(obj=>HandleUpdateDrink(o.id, obj))}
                 >
 
-            {o.id}
-            {/* {o.strDrink} */}
-            </DrinkCardUIDrag>
-            )}
+                {o.id}
+              </DrinkCardUIDrag>
+              )}
             </Dropzone>
-            {/* <button onClick={EmitDrinkToIo}>Save Dropped Drinks for others to see!</button> */}
           </EventContentCont>
 
         </DndProvider>
       </EventWrapper>
     </Wrapper>
-  )
+    )
+
 }

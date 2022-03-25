@@ -11,11 +11,12 @@ import { useSearch, useTheme } from '@/utils/provider';
 import { search_types } from '@/utils/variables';
 import { SearchSelection } from '@/comps/SearchSelection';
 import { isExpired, decodeToken } from "react-jwt";
-import { DrinkResults, Wrapper, SearchWrapper, SearchBar, Heading, SubHeading, HeadingCont, PaginationCont } from '@/styles/styles';
+import { DrinkResults, Wrapper, SearchBarWrapper, SearchBar, Heading, SubHeading, HeadingCont, PaginationCont } from '@/styles/styles';
 import NavBar from '@/comps/NavBar';
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic';
 import { HeaderTheme, SubHeaderTheme } from "@/utils/variables";
-
+import {BsSunFill} from 'react-icons/bs';
+import {MdDarkMode} from 'react-icons/md';
 
 var timer = null
 
@@ -111,9 +112,11 @@ const handleFavs = async(o, i)=>
 
   return (
     <Wrapper>
+    
     <NavBar
-      themeToggle={()=>setTheme(
+        themeToggle={()=>setTheme(
         theme=== 'light'?'default':'light')}
+        icon={theme==='light'?<MdDarkMode  size="1.5em"/>:<BsSunFill size="1.5em"/>}
     />
     
     <HeadingCont>
@@ -121,14 +124,14 @@ const handleFavs = async(o, i)=>
         Welcome {user != undefined && user.user.username} use the search bar below to search for a drink!
       </Heading>
       <SubHeading color={SubHeaderTheme[theme].col}> 
-        searching by {search} filter 
+        Searching by {search} filter 
       </SubHeading>
     </HeadingCont> 
 
-    <SearchWrapper>
+    <SearchBarWrapper>
       <SearchBar type="input" placeholder="Search for your favourite drinks!" onChange={(e)=>inputFilter(e.target.value)}></SearchBar>
       <SearchSelection onSearch={(e)=> setType(e.target.value)}/>
-    </SearchWrapper>  
+    </SearchBarWrapper>  
 
     
     <DrinkResults>

@@ -22,6 +22,7 @@ import {BsSunFill} from 'react-icons/bs';
 import {MdDarkMode} from 'react-icons/md';
 import {useRouter} from 'next/router'
 import { NavigationHam } from '@/comps/NavigationHam';
+import { Player, Controls } from '@lottiefiles/react-lottie-player';
 
 // styled components imports
 import {
@@ -34,17 +35,18 @@ import {
   HeroContentCont, 
   IconCont, 
   GenerateContent, 
-  MappedIngredients 
+  MappedIngredients ,
+  AddIngredientsColumn
 } from '@/styles/styles';
 var timer = null
 
 export default function Home() {
 
-  const  [val,setVal] = useState('')
-  const  [arr, setArr] = useState([])
-  const  [generateData, setGenerateData] = useState([]);
-  const  [curPage, setCurPage] = useState(1)
-  const  [userToken, setUserToken] = useState()
+  const [val,setVal] = useState('')
+  const [arr, setArr] = useState([])
+  const [generateData, setGenerateData] = useState([]);
+  const[curPage, setCurPage] = useState(1)
+  const [userToken, setUserToken] = useState()
   const  [ user, setUser] = useState()
   const {theme, setTheme} = useTheme()
   const router= useRouter()
@@ -63,18 +65,9 @@ export default function Home() {
   },[sWidth])
 
   useEffect(()=>{
-    // console.log(window.localStorage.getItem('user'))
-  setUser( JSON.parse(window.localStorage.getItem('user')))
+    setUser( JSON.parse(window.localStorage.getItem('user')))
 
-  useEffect(()=>{
-    // setUser( JSON.parse(window.localStorage.getItem('user')))
-    // let userInfo = JSON.parse(localStorage.getItem('user'))
-    // console.log(userInfo.user.username)
-  var userr = localStorage.getItem('user')
-  console.log(JSON.parse(userr.user))
-  
   },[])
-
   const {search, setSearch} = useSearch()
   // console.log(search)
 
@@ -147,6 +140,7 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
        {/* Generate Content  */}
 
       <GenerateContent>
+        
         <HeroCont>
           <HeroContentCont>
             <HeroMessage 
@@ -159,14 +153,16 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
         bgcolor={GenerateTheme[theme].bgcol}
         color={GenerateTheme[theme].col}
         >
-            <Input
-            val={val}
-            onValChange={handleValue}
-            onButtClick={addValueToArr}
-            />
+
+            <AddIngredientsColumn>
+              <Input
+              val={val}
+              onValChange={handleValue}
+              onButtClick={addValueToArr}
+              />
         
-            <MappedIngredients>
-            {arr.map((o,i) => (
+              <MappedIngredients>
+              {arr.map((o,i) => (
                 <IngredientCont key={i}> 
                   <p> {o} </p>
                   <IconCont onClick={()=>{
@@ -177,9 +173,20 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
                   </IconCont>
                 </IngredientCont>
               ))}
-            </MappedIngredients>
+              </MappedIngredients>
+            </AddIngredientsColumn>
+
+            <Player
+            autoplay
+            src="https://assets9.lottiefiles.com/packages/lf20_rlzyqo6a.json"
+            style={{ height: '300px', width: '300px', }} 
+            >
+            {/* <Controls visible={true} buttons={['play', 'repeat', 'frame', 'debug']} /> */}
+            </Player>
         </GeneratedCont>
+
         <MyButton onClick={compareIngs}/>
+
       </GenerateContent>
       
        {/* Drink Results  */}
@@ -215,4 +222,3 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
     </LandingWrapper>
     )
 }
-)}
