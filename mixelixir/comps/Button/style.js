@@ -2,8 +2,7 @@ import styled from "styled-components"
 
 export const ButtCont = styled.div`
 width:120px;
-height:40px;
-border-radius:10px;
+height:${props=>props.height};
 background:${props=>props.bg};
 display:flex;
 justify-content:center;

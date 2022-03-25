@@ -5,7 +5,7 @@ import { EventTheme } from "@/utils/variables";
 import {useTheme} from '../../utils/provider';
 
 export const EventCard = ({
-   event="Wedding Party",
+   event="Wedding Party Menu",
    onInputChange=()=>{},
    onButtClick=()=>{},
    descrip=""
@@ -15,9 +15,11 @@ export const EventCard = ({
     <EventCardCont bgcolor={EventTheme[theme].cardbgcol}>
         <EventHeading color={EventTheme[theme].heading}>{event}</EventHeading>
         <Divider/>
+        <EventDescrip>I am planning a wedding and am seeking the perfect beverage combinations to serve to my 200 guests!</EventDescrip>
+        <EventDescrip>I am inquiring if anyone has any ideas please let me know and post a suggestion below! You can also drag your drink ideas below the menu. P.S. No ginger as there are allergies!</EventDescrip>
         <InputCont>
-            <EventInput type='text' onChange={onInputChange}/>
-            <MyButton onClick={onButtClick}label="post"/>
+            <EventInput placeholder="post a drink!" type='text' onChange={onInputChange}/>
+            <MyButton height="100%" onClick={onButtClick}label="post"/>
         </InputCont>
         <EventDescrip>{descrip}</EventDescrip>
     </EventCardCont>

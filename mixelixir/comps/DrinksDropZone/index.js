@@ -23,7 +23,7 @@ const Dropzone = ({
 
 	return <DropZone
           ref={drop}
-          bg={canDrop && isOver ? '#000000' : '#DDD'}
+          bg={canDrop && isOver ? '#FF3549' : '#000000'}
           >
             {children}
             <DropZoneText>

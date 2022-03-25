@@ -6,10 +6,11 @@ import {useTheme} from '../../utils/provider';
 export const MyButton = ({
     onClick=()=>{},
     label="generate",
+    buttonHeight="40px"
 }) => {
   const {theme} = useTheme();
   return (
-    <ButtCont bg={ButtonTheme[theme].bgcol} onClick={onClick} >
+    <ButtCont height={buttonHeight} bg={ButtonTheme[theme].bgcol} onClick={onClick} >
        {label}
     </ButtCont>
   )

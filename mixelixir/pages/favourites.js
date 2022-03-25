@@ -7,7 +7,7 @@ import ax from 'axios';
 
 // components imports
 import { Input } from '@/comps/InputBox'
-import { useSearch } from '@/utils/provider';
+import { useSearch, useTheme } from '@/utils/provider';
 import { search_types } from '@/utils/variables';
 import { SearchSelection } from '@/comps/SearchSelection';
 import { isExpired, decodeToken } from "react-jwt";
@@ -15,6 +15,9 @@ import { DrinkResults, Wrapper } from '@/styles/styles';
 import NavBar from '@/comps/NavBar';
 import { NavigationHam } from '@/comps/NavigationHam';
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic';
+import {BsSunFill} from 'react-icons/bs';
+import {MdDarkMode} from 'react-icons/md';
+
 
 var timer = null
 
@@ -26,6 +29,7 @@ export default function Favourites() {
   const[curPage, setCurPage] = useState(1)
   const [favDrinks, setFavDrinks] = useState([])
   const  [ user, setUser] = useState()
+  const {theme, setTheme} = useTheme()
 // state to keep track of current screen size
 const [sWidth, setSwidth] = useState()
 
@@ -94,7 +98,11 @@ const handleFavs = async(o)=>
   return (
     <Wrapper>
       {/* show the hamburger if the screen size is less than 600px else regular navbar */}
-    {sWidth<600?<NavigationHam/>: <NavBar/>}
+    {sWidth<600?<NavigationHam/>: <NavBar
+    themeToggle={()=>setTheme(
+    theme=== 'light'?'default':'light')}
+    icon={theme==='light'?<MdDarkMode  size="1.5em"/>:<BsSunFill size="1.5em"/>}
+    />}
     <DrinkResults>
     
             {favDrinks.map((o,i)=>(

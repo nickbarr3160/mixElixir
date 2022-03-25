@@ -18,16 +18,16 @@ export default function Login() {
     const [token,setToken] = useState()
 
 
-const handleLogin=async()=>
-{
-    const res = await ax.post("./api/drinks",{
-        email,
-        pass,
-        login:'logg'
-    })
-        router.push('/')
-        localStorage.setItem('user',JSON.stringify(res.data[1]))
-}
+// const handleLogin=async()=>
+// {
+//     const res = await ax.post("./api/drinks",{
+//         email,
+//         pass,
+//         login:'logg'
+//     })
+//         router.push('/')
+//         localStorage.setItem('user',JSON.stringify(res.data[1]))
+// }
 
 const handleSignup=async()=>
 {
@@ -37,6 +37,7 @@ const handleSignup=async()=>
         email,
         pass,
         signup:'sign'})
+        router.push('/login')
     }
     catch(err){console.log(err, 'request failed to execute')}
 }
@@ -54,11 +55,12 @@ return (
 
             <AuthInput placeholder='Username' type='text'onChange={(e)=>setUser(e.target.value)} />
             <AuthInput placeholder='Email'    type='text'onChange={(e)=>setEmail(e.target.value)} />
-            <AuthInput placeholder='Password' type='password'onChange={(e)=>setPass(e.target.value)}  />
-            
+            <AuthInput placeholder='Password' type='text'onChange={(e)=>setPass(e.target.value)}  />
+                
             <AuthButtonCont>
-                <AuthButton onClick={handleLogin}> LOGIN </AuthButton>
+                <AuthButton onClick={handleSignup}> SIGN-UP </AuthButton>
             </AuthButtonCont>
+
             
         </AuthCont>
     </AuthWrapper>

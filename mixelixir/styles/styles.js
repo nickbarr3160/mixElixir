@@ -8,7 +8,6 @@ flex-direction:column;
 justify-content:flex-start;
 align-items:center;
 width:100vw;
-
 `;
 // header for all navigationHam component
 export const Header = styled.div`
@@ -48,7 +47,6 @@ padding:1em;
 justify-content:center;
 align-items:center;
 flex-wrap:wrap;
-// border:2px solid green;
 `;
 
 export const GeneratedCont = styled.div`
@@ -126,19 +124,37 @@ padding-left:4em;
 
 export const EventWrapper = styled.div`
 display:flex;
-justify-content:flex-start;
-align-items:center;
-height:100vh;
+justify-content:center;
+align-items:flex-start;
 width:100vw;
 `;
 
 export const EventContentCont = styled.div`
 display:flex;
 flex-direction:column;
+justify-content:flex-start;
+align-items:center;
+height:110vh;
+width:50%;
+`;
+
+export const EventInputContentCont = styled.div`
+display:flex;
+flex-direction:column;
 justify-content:space-evenly;
 align-items:center;
-height:100%;
 width:50%;
+margin-top:2em;
+`;
+
+export const EventInput = styled.input`
+width:80%;
+height:10%;
+background-color:#202223;
+color:white;
+border:none;
+padding:1em;
+font-family: 'Poppins', sans-serif;
 `;
 
 
@@ -201,4 +217,71 @@ display:flex;
 2px solid red;
 align-items:center;
 justify-content:center;
+`;
+
+//Login styling
+
+export const AuthInput = styled.input`
+width:100%;
+height:7%;
+background-color:#202223;
+color:white;
+border:none;
+padding:1em;
+font-family: 'Poppins', sans-serif;
+`;
+
+
+
+export const AuthWrapper = styled.div`
+display:flex;
+height:100vh;
+justify-content:center;
+align-items:center;
+width:100vw;
+`;
+
+export const AuthCont = styled.div`
+height:80%;
+width:50%;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:space-evenly;
+`;
+
+export const AuthTitleCont = styled.div`
+width:100%;
+display:flex;
+justify-content:space-evenly;
+`;
+
+export const AuthTitle = styled.div`
+color:#FF3864;;
+font-size:80px;
+font-weight:bold;
+`;
+
+export const AuthLogoCont = styled.div`
+display:flex;
+height:100%;
+width:15%;
+`;
+
+export const AuthLogo = styled.img`
+height:100%;
+width:100%;
+`;
+
+export const AuthButton = styled.button`
+background-color:#FF3864;
+padding:0.8em;
+color:white;
+border:none;
+`;
+
+export const AuthButtonCont = styled.div`
+width:100%;
+display:flex;
+justify-content:flex-start;
 `;

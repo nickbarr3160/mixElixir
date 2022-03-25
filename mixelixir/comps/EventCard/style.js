@@ -6,10 +6,10 @@ flex-direction:column;
 justify-content:space-evenly;
 align-items:flex-start;
 background-color:${props=>props.bgcolor};
-width:80%;
-height:40%;
-border-radius:10px;
+width:90%;
+height:80%;
 padding:1em;
+margin:2em;
 box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px;
 `;
 
@@ -23,21 +23,26 @@ ${props=>props.color};
 
 export const Divider = styled.div`
 width:90%;
-background-color:#F39C6B;
-border: 1px solid #FF7259;
+
+border: 1px solid  #FF3549;
 height:0px;
 `;
 
 export const EventInput = styled.input`
+width:60%;
+background-color:black;
+color:white;
+border:none;
+padding:1em;
+font-family: 'Poppins', sans-serif;
 `;
 
 export const InputCont = styled.div`
 display:flex;
-justify-content:space-evenly;
-width:50%;
-
+justify-content:space-between;
+width:70%;
 `;
 
 export const EventDescrip = styled.div`
-
+color:white;
 `;

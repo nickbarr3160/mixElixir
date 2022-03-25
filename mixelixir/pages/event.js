@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
-import { Wrapper, EventWrapper, EventContentCont, DrinkResults } from "@/styles/styles";
+import { Wrapper, EventWrapper, EventContentCont, DrinkResults, EventInput, EventInputContentCont} from "@/styles/styles";
 import Dropzone from "@/comps/DrinksDropZone";
 import { DndProvider } from 'react-dnd'
 import { TouchBackend } from 'react-dnd-touch-backend';
@@ -11,6 +11,8 @@ import ax from 'axios'
 import { v4 as uuidv4 } from 'uuid';
 import { EventCard } from "@/comps/EventCard";
 import DrinkCardUIDrag from '../comps/DrinkCardDrag'
+import {BsSunFill} from 'react-icons/bs';
+import {MdDarkMode} from 'react-icons/md';
 var timer = null
 
 export default function Sockets() {
@@ -22,6 +24,7 @@ export default function Sockets() {
   const {search, setSearch} = useSearch()
   const [drink, setDrink] = useState({})
   const {theme, setTheme} = useTheme()
+  const [dropMessage, setDropMessage] = useState("Drop Drinks Here")
   const [droppedInfo, setDroppedInfo] = useState([])
   
   const inputFilter = async (value) =>{
@@ -102,10 +105,13 @@ export default function Sockets() {
   
     return (
     <Wrapper>
+      
       <NavBar
       themeToggle={()=>setTheme(
-        theme=== 'light'?'default':'light')}
+      theme=== 'light'?'default':'light')}
+      icon={theme==='light'?<MdDarkMode  size="1.5em"/>:<BsSunFill size="1.5em"/>}
       />
+      
       <EventWrapper>
         <DndProvider 
           backend={TouchBackend} options={{
@@ -113,9 +119,14 @@ export default function Sockets() {
           enableMouseEvents:true
         }}
         >
-          <EventContentCont>
-            <input onChange={(e)=>inputFilter(e.target.value)}></input>
-            <h4> searching by {search} filter </h4>
+          <EventInputContentCont>
+            
+            <EventInput 
+            placeholder="Search for drinks to add to the menu" 
+            onChange={(e)=>inputFilter(e.target.value)}>
+            </EventInput>
+            
+            
      
             <DrinkResults>
                   {searchData.map((o,i)=><DrinkCardUIDrag 
@@ -129,7 +140,8 @@ export default function Sockets() {
 
                   </DrinkCardUIDrag>)}
             </DrinkResults>
-          </EventContentCont>
+
+          </EventInputContentCont>
 
           <EventContentCont>
   
@@ -141,9 +153,12 @@ export default function Sockets() {
             descrip={msgs}
             />
 
-            <Dropzone onDropItem={(item)=>{
+            <Dropzone 
+            dropMessage={dropMessage}
+            onDropItem={(item)=>{
               // handleDrop(item)
               EmitDrinkToIo(item)
+              setDropMessage(null)
               }}>
               {Object.values(drink).map(o=><DrinkCardUIDrag 
                 type='' 

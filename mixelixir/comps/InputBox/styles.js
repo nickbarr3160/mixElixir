@@ -16,4 +16,5 @@ width:100px;
 height:30px;
 background:black;
 color:white;
+border:none;
 `

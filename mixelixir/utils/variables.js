@@ -166,13 +166,11 @@ export const SubHeaderTheme = {
 export const EventTheme = {
     default:{
         cardbgcol:altGrey,
-        dropzonebrdr:orange,
-        heading:salsa
+        heading:white
     },
 
     light:{
         cardbgcol:white,
-        dropzonebrdr:orange,
         heading:turq
     }
 }

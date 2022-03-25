@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 const NavBar = ({
     logoText="ME",
     themeToggle=()=>{},
-    icon=<BsSunFill />,
+    icon=<BsSunFill size="1.5em"/>,
 }) => {
     const {theme} = useTheme();
     const router = useRouter();
@@ -21,9 +21,9 @@ const NavBar = ({
 
         <LinkCont color={NavbarTheme[theme].color}>
             {/* <NavLink color={NavbarTheme[theme].color} href='/'>Home</NavLink> */}
-            <NavLink color={NavbarTheme[theme].color} href='/search'>Search</NavLink>
-            <NavLink color={NavbarTheme[theme].color} href='/event'>Event Forum</NavLink>
-            <NavLink color={NavbarTheme[theme].color} href='/favourites'>Favourites</NavLink>
+            <NavLink color={NavbarTheme[theme].color} onClick={()=>router.push('/search')}>Search</NavLink>
+            <NavLink color={NavbarTheme[theme].color} onClick={()=>router.push('/event')}>Event Forum</NavLink>
+            <NavLink color={NavbarTheme[theme].color} onClick={()=>router.push('/favourites')}>Favourites</NavLink>
             <div  onClick={themeToggle}>
                 {icon}
             </div>

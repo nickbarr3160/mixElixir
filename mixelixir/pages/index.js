@@ -19,8 +19,8 @@ import {HeroMessage} from '@/comps/HeroMessage';
 import { DrinkGraphic } from '@/comps/DrinkGraphic';
 import {MdOutlineClose} from 'react-icons/md'
 import { GenerateTheme } from "@/utils/variables";
-
-
+import {BsSunFill} from 'react-icons/bs';
+import {MdDarkMode} from 'react-icons/md';
 
 var timer = null
 
@@ -87,7 +87,8 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
     <LandingWrapper>
       <NavBar
       themeToggle={()=>setTheme(
-        theme=== 'light'?'default':'light')}
+      theme=== 'light'?'default':'light')}
+      icon={theme==='light'?<MdDarkMode  size="1.5em"/>:<BsSunFill size="1.5em"/>}
       />
   
       {/* Hero Message */}

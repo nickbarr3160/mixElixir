@@ -45,17 +45,18 @@ font-size:1.1em;
 
 `;
 
-export const NavLink = styled.a`
+export const NavLink = styled.div`
 &:hover{
     color:${props=>props.color};
 }
+cursor:pointer;
 `;
 
 
 export const LogoCont = styled.div`
 display:flex;
-height:80%;margin:2em;
-
+height:80%;
+margin:2em;
 &:hover{
 opacity:70%;
 }
