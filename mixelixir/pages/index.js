@@ -21,6 +21,7 @@ import {MdOutlineClose} from 'react-icons/md'
 import { GenerateTheme } from "@/utils/variables";
 import {BsSunFill} from 'react-icons/bs';
 import {MdDarkMode} from 'react-icons/md';
+import router from 'next/router'
 
 var timer = null
 
@@ -33,7 +34,7 @@ export default function Home() {
   const [userToken, setUserToken] = useState()
   const  [ user, setUser] = useState()
   const {theme, setTheme} = useTheme()
-
+const router= useRouter()
   useEffect(()=>{
     setUser( JSON.parse(window.localStorage.getItem('user')))
 
@@ -66,6 +67,7 @@ export default function Home() {
   // setCurPage(p != undefined? p:1 )
   console.log(curPage)
   setGenerateData(res.data)
+  // setCurPage(p != undefined? p:1 )
 }
 
 const itemsPerPage = 15;
@@ -109,7 +111,9 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
       <GenerateContent>
 
         <div>
-          <HeroMessage heading="Drink Generator" text="New tasty drinks for you to make based on what you have on hand"/>
+          <HeroMessage 
+            heading="Drink Generator" 
+            text="New tasty drinks for you to make based on what you have on hand"/>
         </div>
         <GeneratedCont 
         bgcolor={GenerateTheme[theme].bgcol}
@@ -141,7 +145,16 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
        {/* Drink Results  */}
 
       <DrinkResults>
-          {generateData.map((o,i)=><DrinkCardUIStatic key={i} name={o.strDrink} imgSrc={o.strDrinkThumb} tag={o.strCategory}></DrinkCardUIStatic>)}
+          {generateData.map((o,i)=>
+          <DrinkCardUIStatic 
+          key={i} 
+          name={o.strDrink} 
+          imgSrc={o.strDrinkThumb} 
+          tag={o.strCategory}
+          onClick={()=>router.push(`/search/${o.idDrink}`)}
+          >
+
+          </DrinkCardUIStatic>)}
       </DrinkResults>
       <div style={{
         display:'flex', 

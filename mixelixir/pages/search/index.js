@@ -31,7 +31,7 @@ export default function SearchSelect() {
   const  [ user, setUser] = useState()
   const {theme, setTheme} = useTheme()
   const [favCol, setFavCol] = useState()
-
+  const  [ clicked, setClicked] = useState ()
   const setType = (txt)=>{
       console.log("this is the arg", txt)
       
@@ -66,7 +66,7 @@ const inputFilter = async (value,p) =>{
     
     })
 
-  // store the data in a state for mapping
+    // store the data in a state for mapping
     setKeyWord(value)
     setSearchData(res.data)
     setCurPage(p != undefined? p:1 )//fail safe at the time when function runs
@@ -75,11 +75,14 @@ const inputFilter = async (value,p) =>{
 
 }
 
+// console.log(searchData.length)
+
 
 const handleFavs = async(o, i)=>
 {
-  console.log(i)
-  setFavCol('#FF3549')
+  // console.log(o)
+  // setFavCol('#FF3549')
+  setClicked(i)
   try{
     const res = await ax.post("./api/drinks",{
       favDrink:o._id,
@@ -92,9 +95,9 @@ const handleFavs = async(o, i)=>
 // pagination============
   const itemsPerPage = 15;
   var butt_arr = [];
-
+  // var number = searchData.length<1?0:600
   var start = 1
-  for (let i =1; i<600; i+= itemsPerPage )
+  for (let i =1; i<500; i+= itemsPerPage )
   {
     // 
     butt_arr.push(((i-1)/itemsPerPage)+1)
@@ -103,7 +106,7 @@ const handleFavs = async(o, i)=>
     start ++
   }
   
-  butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
+  butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+1)
 
 
   return (
@@ -117,7 +120,9 @@ const handleFavs = async(o, i)=>
       <Heading color={HeaderTheme[theme].col}>
         Welcome {user != undefined && user.user.username} use the search bar below to search for a drink!
       </Heading>
-      <SubHeading color={SubHeaderTheme[theme].col}> searching by {search} filter </SubHeading>
+      <SubHeading color={SubHeaderTheme[theme].col}> 
+        searching by {search} filter 
+      </SubHeading>
     </HeadingCont> 
 
     <SearchWrapper>
@@ -135,15 +140,15 @@ const handleFavs = async(o, i)=>
               name={o.strDrink} 
               imgSrc={o.strDrinkThumb}
               tag={o.strCategory}
-              onFavClick={(i)=>{handleFavs(i)}}
-              favCol={favCol}
+              onFavClick={()=>{handleFavs(o,i)}}
+              favCol={clicked ===i?'#FF3549':null}
               >
             </DrinkCardUIStatic>))}
               
     </DrinkResults>
     
     <PaginationCont>
-      {butt_arr.map((o,i)=>(
+      {searchData.length>0 &&butt_arr.map((o,i)=>(
         <button 
         style={{background: o===curPage?"pink":'white' }}  
         key={i} onClick={()=>inputFilter(keyword,o)}> 
