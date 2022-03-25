@@ -59,7 +59,7 @@ export default async function handler(req, res)
         user
       }
       )
-      console.log(addFav)
+
     }
     catch (err) {console.log(err)}
 
@@ -110,11 +110,12 @@ export default async function handler(req, res)
     // if comparitive array exists 
     if (comparitiveArray)
     {
+      console.log(page)
       // use the generate function to store all the matches in nuDrinks
       var nuDrinks = generate(drinks, comparitiveArray)
       
       // set cocktail matches to GoToPage that takes in nuDrinks as an argument to paginate all the results
-      cocktailMatches = GoToPage(nuDrinks,curPage,5)
+      cocktailMatches = GoToPage(nuDrinks,page,10,nuDrinks.length)
     }
       
     // if(req.query.suggest)
@@ -132,7 +133,7 @@ export default async function handler(req, res)
         [searchBy]:value
       },value)
       // set cocktail matches to GoToPage that takes in nuDrinks as an argument to paginate all the results
-      cocktailMatches = GoToPage(nuDrinks,page,5)
+      cocktailMatches = GoToPage(nuDrinks,page,10, nuDrinks.length)
     }
       
       // function for when clicked on an individual drink and go to an individual drinks page

@@ -3,11 +3,15 @@ import {motion, AnimatePresence} from 'framer-motion'
 import Link from 'next/link';
 import { Router, useRouter } from 'next/router';
 
-import { HeaderHam} from '../HeaderHam';
-
 // styled components
+import { HeaderHam} from '../HeaderHam';
 import { Container } from '@/styles/styles';
 import { Nav, NavHeader,CloseNav, NavList, NavVideos, HamIconCont } from './styles';
+
+// provider imports
+import { useTheme } from '@/utils/provider'
+import { NavbarTheme } from '@/utils/variables'
+
 
 export const Navigation = (
     {
@@ -39,6 +43,11 @@ export const Navigation = (
     ]
     
     ) => {
+
+        
+    const{theme} = useTheme()//defining the custom hook
+    const themer = NavbarTheme[theme]//asigning a variable to use later on (ease of use)
+
     const r =useRouter()
     const [reveal,setReveal] = useState({
         show:false,
@@ -56,19 +65,17 @@ export const Navigation = (
         exit={{x:"-100%"}}
         animate={{x:toggleMenu?0:100}}
         transition={{duration:.8,ease:[.6,.05,-.01,.9]}}
-        listbg='blue'
-        >
+        listbg={themer.menuBg}>
     <Container>
         <NavHeader>
                 <HeaderHam
                     ham={myHam}
                     onHamClick={hamClick}/>       
         </NavHeader>
-        <NavList  linkCol='black'>
+        <NavList  linkCol={themer.links}>
             <ul>
                 {links.map((o,i)=> (<motion.li
-                                        key={i}
-                                        >
+                                        key={i}>
                     <motion.div 
                         className='link'
                         initial={{x:0}}
@@ -83,7 +90,7 @@ export const Navigation = (
             </ul>
         </NavList>
         <NavVideos  
-            revealBG='blue'>
+            revealBG={themer.menuBg}>
             <motion.div 
             className='reveal'
             animate={{width:reveal.show ? 0 :"100%"}}>

@@ -66,10 +66,15 @@ export default function Drink  () {
                         suggest:data.ingredients
                     }
                 })
-                const temp = res.data
+                
+                const temp = res.data.result
                 // set suggestions to all the drinks received from the response, but exclude the drink that the user is currently looking at from suggestions.
-                const suggestions = temp.filter(o => o._id != data._id)
-                setSuggest(suggestions)
+                if(temp!=undefined)
+                {
+                    const suggestions = temp.filter(o => o._id != data._id)
+                    setSuggest(suggestions)
+
+                }
             }
             GetRelated()
     },[data])

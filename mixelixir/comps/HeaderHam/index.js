@@ -1,6 +1,9 @@
 import React from 'react';
-import { useTheme } from '@/utils/provider';
-import { comp_theme } from '@/utils/variables';
+
+// provider imports
+import { useTheme } from '@/utils/provider'
+import { NavbarTheme } from '@/utils/variables'
+
 // styled components
 import { 
     HamContainer,
@@ -24,20 +27,25 @@ export const HeaderHam = (
     }
 ) => {
 
-    // const {theme, setTheme} = useTheme()
+    const{theme} = useTheme()//defining the custom hook
+    const themer = NavbarTheme[theme]//asigning a variable to use later on (ease of use)
+
     return<HamContainer onClick={onHamClick} >
         <HamLine1 
+            iconCol={themer.icon}
             LineTrans1={ ham ? transLine1Chain : transLine1}
             col='red'
         />
 
     
         <HamLine2 
+            iconCol={themer.icon}
             LineTransOp2={ ham ? transLineOp2Chain: transLineOp2}
             col='red'
         />
         
         <HamLine3 
+            iconCol={themer.icon}
             LineTrans3={ ham ? transLine3Chain : transLine3} 
             col='red'
             />

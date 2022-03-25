@@ -34,7 +34,7 @@ export const comp_theme={
 
 
 //THEMES
-var black = '#000000' 
+var black = '#141414' 
 var white = 'white'
 var peach = '#FEE0CF' 
 var salsa = '#FF3549'
@@ -42,6 +42,7 @@ var orange = '#F39C6B'
 var grey = '#202223'
 var turq = '#3AAFB9'
 var altGrey = '#202223'
+
 // BODY 
 export const global_theme = {
     default:{
@@ -57,12 +58,19 @@ export const global_theme = {
 export const NavbarTheme = {
     default:{
         bg:black,
-        color:white
+        color:white,
+        icon:salsa,
+        links:white,
+        menuBg:altGrey
+
     },
 
     light:{
-        bg:white,
-        color:salsa
+        bg:peach,
+        color:salsa,
+        icon:salsa,
+        links:salsa,
+        menuBg:altGrey
     }
 }
 
