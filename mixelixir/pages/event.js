@@ -26,6 +26,7 @@ export default function Sockets() {
   const {theme, setTheme} = useTheme()
   const [dropMessage, setDropMessage] = useState("Drop Drinks Here")
   const [droppedInfo, setDroppedInfo] = useState([])
+  const  [ user, setUser] = useState()
   
   const inputFilter = async (value) =>{
 
@@ -53,13 +54,19 @@ export default function Sockets() {
   
   useEffect(()=>{
     
+      //Retrieve the username of the user from local storage
+      var userInfo = JSON.parse(localStorage.getItem('user'))
+      setUser(userInfo.user.username)
+      console.log(user)
+  
+
       const socket = io("http://localhost:8888")
     
       socket.on("joined", (id, txt,)=>{      
      
       setMsgs((prev)=>[
         ...prev,
-        `${id} says ${txt}`
+        `${user} says ${txt}`
       ])
 
       }),
@@ -89,7 +96,7 @@ export default function Sockets() {
       //mySoc to emit
       console.log(mySoc)
       if (mySoc !== null){
-        mySoc.emit("user_ready", txt,)
+        mySoc.emit("user_ready", txt, user)
         console.log(mySoc, '========')
       }
     }

@@ -278,6 +278,7 @@ background-color:#FF3864;
 padding:0.8em;
 color:white;
 border:none;
+// font-weight:bold;
 `;
 
 export const AuthButtonCont = styled.div`

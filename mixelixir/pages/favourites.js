@@ -109,7 +109,8 @@ const handleFavs = async(o)=>
             <DrinkCardUIStatic 
               onClick={()=>router.push(`/search/${o.drink.idDrink}`)}
               key={i} 
-              name={o.drink.strDrink} 
+              name={o.drink.strDrink}
+              tag={o.drink.strCategory} 
               imgSrc={o.drink.strDrinkThumb}
               onFavClick={()=>{handleFavs(o)}}
               favCol="#FF3549"

@@ -22,9 +22,9 @@ io.on('connection', (socket) => {
   console.log('a user connected', socket.id);
 
 // io.emit("joined")
-  socket.on("user_ready", (txt)=>{
+  socket.on("user_ready", (txt, user)=>{
     // console.log(txt, 'text on the server')
-    io.emit("joined", socket.id, txt);
+    io.emit("joined", user, txt);
   })
 
   socket.on("dropped_drink", (item)=>{

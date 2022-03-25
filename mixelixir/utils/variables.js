@@ -49,7 +49,7 @@ export const global_theme = {
     },
 
     light:{
-        body:peach
+        body:white
     }
 } 
 
@@ -61,7 +61,7 @@ export const NavbarTheme = {
     },
 
     light:{
-        bg:peach,
+        bg:white,
         color:salsa
     }
 }

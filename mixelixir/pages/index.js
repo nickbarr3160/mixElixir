@@ -21,24 +21,31 @@ import {MdOutlineClose} from 'react-icons/md'
 import { GenerateTheme } from "@/utils/variables";
 import {BsSunFill} from 'react-icons/bs';
 import {MdDarkMode} from 'react-icons/md';
-import router from 'next/router'
+import {useRouter} from 'next/router' 
 
 var timer = null
 
 export default function Home() {
 
-  const [val,setVal] = useState('')
-  const [arr, setArr] = useState([])
-  const [generateData, setGenerateData] = useState([]);
-  const[curPage, setCurPage] = useState(1)
-  const [userToken, setUserToken] = useState()
+  const  [val,setVal] = useState('')
+  const  [arr, setArr] = useState([])
+  const  [generateData, setGenerateData] = useState([]);
+  const  [curPage, setCurPage] = useState(1)
+  const  [userToken, setUserToken] = useState()
   const  [ user, setUser] = useState()
-  const {theme, setTheme} = useTheme()
-const router= useRouter()
-  useEffect(()=>{
-    setUser( JSON.parse(window.localStorage.getItem('user')))
+  const  {theme, setTheme} = useTheme()
+  const router= useRouter()
 
+
+  useEffect(()=>{
+    // setUser( JSON.parse(window.localStorage.getItem('user')))
+    // let userInfo = JSON.parse(localStorage.getItem('user'))
+    // console.log(userInfo.user.username)
+  var userr = localStorage.getItem('user')
+  console.log(JSON.parse(userr.user))
+  
   },[])
+
   const {search, setSearch} = useSearch()
   // console.log(search)
 
@@ -97,7 +104,7 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
 
       <HeroCont>
         <HeroContentCont>
-          <HeroMessage/>
+          <HeroMessage heading={`Welcome ${user}`}/>
         </HeroContentCont>
 
         

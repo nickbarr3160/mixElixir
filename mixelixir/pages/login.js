@@ -52,7 +52,6 @@ return (
                 </AuthLogoCont>
             </AuthTitleCont>
 
-            <AuthInput placeholder='Username' type='text'onChange={(e)=>setUser(e.target.value)} />
             <AuthInput placeholder='Email'    type='text'onChange={(e)=>setEmail(e.target.value)} />
             <AuthInput placeholder='Password' type='password'onChange={(e)=>setPass(e.target.value)}  />
             
