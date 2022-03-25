@@ -63,7 +63,8 @@ export const NavList = styled.div`
     li {
       cursor:pointer;
       list-style: none;
-      font-size: 3rem;
+      font-size: 2em;
+      
       text-transform: uppercase;
       font-weight: 900;
       // border:2px solid yellow;

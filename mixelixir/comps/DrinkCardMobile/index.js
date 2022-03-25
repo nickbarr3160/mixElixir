@@ -1,9 +1,22 @@
 import styled from "styled-components";
 import React from "react";
-import { CardContainer, DrinkImg, TextCont, TagCont, Tag, IconCont, ContentCont, Icon} from "./styles";
+
 import { DrinkTheme } from "@/utils/variables";
 import {useTheme} from '../../utils/provider'
+
 import {AiFillHeart} from 'react-icons/ai'
+
+import { 
+    CardContainer, 
+    DrinkImg, 
+    TextCont, 
+    TagCont, 
+    Tag, 
+    IconCont, 
+    ContentCont, 
+    Icon,
+    Wrapper
+} from "./styles";
 
 export const DrinkCardMobile = ({
     onClick=()=>{},
@@ -15,7 +28,7 @@ export const DrinkCardMobile = ({
     tag=""
 })=> {
     const {theme} = useTheme();
-    return (<> 
+    return (<Wrapper> 
     <CardContainer 
     display={display}
     imgSrc={imgSrc}
@@ -26,22 +39,22 @@ export const DrinkCardMobile = ({
         <ContentCont
         onClick={onClick}
         >
-        <TagCont>
+        {/* <TagCont>
             <Tag bgcolor={DrinkTheme[theme].bgCol}>
             {tag}
             </Tag>
-        </TagCont>
+        </TagCont> */}
             <h4 >
             {name}
             </h4>
         </ContentCont>
+    </CardContainer>
         <IconCont>
             <Icon onClick={onFavClick}>
-            <AiFillHeart size="2em" color={favCol}/>
+            <AiFillHeart size="1.5em" color={favCol}/>
             </Icon>
         </IconCont>
-    </CardContainer>
-    </>
+    </Wrapper>
     )
 }
 

@@ -162,8 +162,7 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
 
         <GeneratedCont 
         bgcolor={GenerateTheme[theme].bgcol}
-        color={GenerateTheme[theme].col}
-        >
+        color={GenerateTheme[theme].col}>
             <Input
             val={val}
             onValChange={handleValue}
@@ -198,7 +197,12 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
           imgSrc={o.strDrinkThumb} 
           tag={o.strCategory}
           onClick={()=>router.push(`/search/${o.idDrink}`)}
-          />: <DrinkCardMobile/>
+          />: <DrinkCardMobile
+          key={i} 
+          name={o.strDrink} 
+          imgSrc={o.strDrinkThumb} 
+          tag={o.strCategory}
+          onClick={()=>router.push(`/search/${o.idDrink}`)}/>
         )}
 
       </DrinkResults>
@@ -206,7 +210,7 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
         display:'flex', 
         border:'2px solid red',
         cursor:'pointer'
-        }} >
+        }}>
         
     {butt_arr.map((o,i)=>(
             <button 

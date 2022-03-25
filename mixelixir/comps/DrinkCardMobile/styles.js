@@ -3,6 +3,8 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
 display:flex;
+width:100%;
+
 `
 
 
@@ -12,13 +14,12 @@ background-image: url(${props=>props.imgSrc});
 background-size:cover;
 margin:5px;
 color: #fff;
-border-radius: 5px;
 background-repeat:no-repeat;
-    height:100%;
-    flex-direction:row;
-    width:70%;
-    border:2px solid #FF3864;
-    border-radius: 10px;
+height:100%;
+flex-direction:row;
+width:100%;
+// border:2px solid #FF3864;
+border-radius: 5px;
 
 `;
 
@@ -57,13 +58,14 @@ flex-direction:column;
 background: linear-gradient(180deg, rgba(255,255,255,0.001) 0%, rgba(0,0,0,0.85) 98%);
 justify-content:space-evenly;
 align-items:center;
+border-radius:5px;
 `;
 
 export const Icon = styled.div`
 display:flex;
 justify-content:center;
 align-items:center;
-padding:0.5em;
+// padding:0.2em;
 `;
 
 
@@ -71,5 +73,6 @@ export const IconCont = styled.div`
 display:flex;
 justify-content:flex-end;
 align-items:center;
-width:100%;
+width:10%;
+color:white;
 `;
