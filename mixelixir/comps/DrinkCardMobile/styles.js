@@ -1,31 +1,25 @@
 import styled from 'styled-components'
 
+
+export const Wrapper = styled.div`
+display:flex;
+`
+
+
 export const CardContainer = styled.div`
 display:${props=>props.display};
 background-image: url(${props=>props.imgSrc});
-// background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(0,0,0,1) 78%);
-background-position: center;
-background-size: cover;
-background-repeat:no-repeat;
-flex-direction: column;
-justify-content: space-between;
-align-items: center;
-text-align: center;
+background-size:cover;
+margin:5px;
 color: #fff;
-width: 200px;
-height: 300px;
 border-radius: 5px;
-box-shadow: 2px 2px 5px 1px black;
-overflow: hidden;
-margin:1em;
-@media (max-width: 600px) {
+background-repeat:no-repeat;
     height:100%;
     flex-direction:row;
-    width:90%;
+    width:70%;
     border:2px solid #FF3864;
     border-radius: 10px;
 
-}
 `;
 
 export const TagCont = styled.div`

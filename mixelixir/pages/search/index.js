@@ -15,7 +15,7 @@ import { DrinkResults, Wrapper, SearchWrapper, SearchBar, Heading, SubHeading, H
 import NavBar from '@/comps/NavBar';
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic';
 import { HeaderTheme, SubHeaderTheme } from "@/utils/variables";
-
+import { Pagination } from '@/comps/Pagination';
 
 var timer = null
 
@@ -32,6 +32,11 @@ export default function SearchSelect() {
   const {theme, setTheme} = useTheme()
   const [favCol, setFavCol] = useState()
   const  [ clicked, setClicked] = useState ()
+  const [paginate, setPaginate] = useState(0)
+
+
+
+  
   const setType = (txt)=>{
       console.log("this is the arg", txt)
       
@@ -39,16 +44,14 @@ export default function SearchSelect() {
         setSearch(txt)
       },500)  
     }
-
-
+  
   useEffect(()=>{
     setUser( JSON.parse(window.localStorage.getItem('user')))
-
   },[])
 
 // function to pass over a specified search filter to the api
 const inputFilter = async (value,p) =>{
-
+console.log(keyword)
   if (timer)
     {
       clearTimeout(timer)
@@ -63,25 +66,22 @@ const inputFilter = async (value,p) =>{
           searchBy: search_types[search],
           page:p,
     }
-    
     })
 
     // store the data in a state for mapping
     setKeyWord(value)
-    setSearchData(res.data)
+    setSearchData(res.data.result)
     setCurPage(p != undefined? p:1 )//fail safe at the time when function runs
-
+    setPaginate(res.data.length)// setting the total number of items for the search result
   }, 100)  
 
 }
 
-// console.log(searchData.length)
+console.log(paginate)
 
 
 const handleFavs = async(o, i)=>
 {
-  // console.log(o)
-  // setFavCol('#FF3549')
   setClicked(i)
   try{
     const res = await ax.post("./api/drinks",{
@@ -93,11 +93,10 @@ const handleFavs = async(o, i)=>
 }
 
 // pagination============
-  const itemsPerPage = 15;
+  const itemsPerPage = 10;
   var butt_arr = [];
-  // var number = searchData.length<1?0:600
   var start = 1
-  for (let i =1; i<500; i+= itemsPerPage )
+  for (let i =1; i<paginate; i+= itemsPerPage )
   {
     // 
     butt_arr.push(((i-1)/itemsPerPage)+1)
@@ -105,8 +104,8 @@ const handleFavs = async(o, i)=>
     //when i is 16(i+= items/page)=> 15-1/15+1 =2 and so on
     start ++
   }
-  
-  butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+1)
+
+  butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
 
 
   return (
@@ -126,7 +125,10 @@ const handleFavs = async(o, i)=>
     </HeadingCont> 
 
     <SearchWrapper>
-      <SearchBar type="input" placeholder="Search for your favourite drinks!" onChange={(e)=>inputFilter(e.target.value)}></SearchBar>
+      <SearchBar 
+        type="input" 
+        placeholder="Search for your favourite drinks!" 
+        onChange={(e)=>inputFilter(e.target.value)}/>
       <SearchSelection onSearch={(e)=> setType(e.target.value)}/>
     </SearchWrapper>  
 
@@ -150,11 +152,13 @@ const handleFavs = async(o, i)=>
     <PaginationCont>
       {searchData.length>0 &&butt_arr.map((o,i)=>(
         <button 
-        style={{background: o===curPage?"pink":'white' }}  
-        key={i} onClick={()=>inputFilter(keyword,o)}> 
-        {o} 
+          style={{background: o===curPage?"pink":'white'}}  
+          key={i} 
+          onClick={()=>inputFilter(keyword,o)}> 
+            {o} 
         </button>
         ) )}
+
     </PaginationCont>
 
         

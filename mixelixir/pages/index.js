@@ -22,7 +22,7 @@ import {BsSunFill} from 'react-icons/bs';
 import {MdDarkMode} from 'react-icons/md';
 import {useRouter} from 'next/router'
 import { NavigationHam } from '@/comps/NavigationHam';
-
+import { DrinkCardMobile } from '@/comps/DrinkCardMobile';
 // styled components imports
 import {
   LandingWrapper, 
@@ -43,11 +43,13 @@ export default function Home() {
   const [val,setVal] = useState('')
   const [arr, setArr] = useState([])
   const [generateData, setGenerateData] = useState([]);
-  const[curPage, setCurPage] = useState(1)
+  const [curPage, setCurPage] = useState(1)
   const [userToken, setUserToken] = useState()
-  const  [ user, setUser] = useState()
+  const [ user, setUser] = useState()
   const {theme, setTheme} = useTheme()
   const router= useRouter()
+
+  const [paginate, setPaginate] = useState(0)
 
 
   const [sWidth, setSwidth] = useState()
@@ -63,8 +65,7 @@ export default function Home() {
   },[sWidth])
 
   useEffect(()=>{
-    // console.log(window.localStorage.getItem('user'))
-  setUser( JSON.parse(window.localStorage.getItem('user')))
+    setUser( JSON.parse(window.localStorage.getItem('user')))
 
   },[])
   const {search, setSearch} = useSearch()
@@ -86,22 +87,34 @@ export default function Home() {
   
   // use the user inputted array of ingredients to compare with the drinks dataset for cocktail generator feature
   const compareIngs = async (p) =>{
-  const res = await ax.get('./api/drinks', {
-    params: {
-      array:arr,
-      curPage
+    if (timer)
+    {
+      clearTimeout(timer)
+      timer=null
     }
-  })
-  console.log(curPage)
-  setGenerateData(res.data)
-  // setCurPage(p != undefined? p:1 )
+
+    if (timer === null )
+      timer = setTimeout(async()=>{
+        const res = await ax.get('./api/drinks', {
+          params: {
+            array:arr,
+            page:p
+          }
+        })
+        setGenerateData(res.data.result)
+        setPaginate(res.data.length)// setting the total number of items for the search result
+        setCurPage(p)
+        
+      },100)
+    
+
 }
 
-const itemsPerPage = 15;
+const itemsPerPage = 10;
 var butt_arr = [];
 
 var start = 1
-for (let i =1; i<600; i+= itemsPerPage )
+for (let i =1; i<paginate; i+= itemsPerPage )
 {
   // 
   butt_arr.push(((i-1)/itemsPerPage)+1)
@@ -171,38 +184,40 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
               ))}
             </MappedIngredients>
         </GeneratedCont>
-        <MyButton onClick={compareIngs}/>
+        <MyButton onClick={()=>compareIngs(curPage)}/>
       </GenerateContent>
       
        {/* Drink Results  */}
 
       <DrinkResults>
           {generateData.map((o,i)=>
+          sWidth >600 ?
           <DrinkCardUIStatic 
           key={i} 
           name={o.strDrink} 
           imgSrc={o.strDrinkThumb} 
           tag={o.strCategory}
           onClick={()=>router.push(`/search/${o.idDrink}`)}
-          >
+          />: <DrinkCardMobile/>
+        )}
 
-          </DrinkCardUIStatic>)}
       </DrinkResults>
       <div style={{
         display:'flex', 
         border:'2px solid red',
         cursor:'pointer'
         }} >
-    {butt_arr.map((o,i)=>(
         
+    {butt_arr.map((o,i)=>(
             <button 
               style={{background: o===curPage?"pink":'white' }}  
               key={i} onClick={()=>{
-                compareIngs()
-                setCurPage(o)}}> 
+                // setCurPage(o)
+                compareIngs(o)}}
+                > 
                 {o} 
             </button>
-    ) )}
+    ))}
     </div>
     </LandingWrapper>
     )
