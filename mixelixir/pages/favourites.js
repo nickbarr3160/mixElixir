@@ -6,11 +6,7 @@ import ax from 'axios';
 
 
 // components imports
-import { Input } from '@/comps/InputBox'
 import { useSearch, useTheme } from '@/utils/provider';
-import { search_types } from '@/utils/variables';
-import { SearchSelection } from '@/comps/SearchSelection';
-import { isExpired, decodeToken } from "react-jwt";
 import { DrinkResults, Wrapper } from '@/styles/styles';
 import NavBar from '@/comps/NavBar';
 import { NavigationHam } from '@/comps/NavigationHam';
@@ -23,22 +19,24 @@ var timer = null
 
 export default function Favourites() {
 
+  const {theme, setTheme} = useTheme()//using custom theme hook
     
-    const router = useRouter()
+  const router = useRouter()
   const [searchData, setSearchData] = useState([]);
-  const[curPage, setCurPage] = useState(1)
+  const [curPage, setCurPage] = useState(1)
   const [favDrinks, setFavDrinks] = useState([])
-  const  [ user, setUser] = useState()
-  const {theme, setTheme} = useTheme()
-// state to keep track of current screen size
-const [sWidth, setSwidth] = useState()
-const [clicked,setClicked] = useState()
+  const [ user, setUser] = useState()
 
+  // state to keep track of current screen size
+  const [sWidth, setSwidth] = useState()
+  const [clicked,setClicked] = useState()
 
+// useEffect retrieving the user Object from local storage
 useEffect(()=>{
   setUser( JSON.parse(window.localStorage.getItem('user')))
 },[])
     
+//useEffect detecting screen resizing
     useEffect(()=>{
         setSwidth(window.innerWidth)
         window.onload=()=>{setSwidth(window.innerWidth)}
@@ -49,6 +47,7 @@ useEffect(()=>{
     // detecting when the screen resizes
     },[sWidth])
     
+// use effect sending in a get request to the api to receive favourite drinks every time the user changes 
 useEffect(()=>{
     const getFavs = async ()=>
     {
@@ -63,13 +62,12 @@ useEffect(()=>{
       getFavs()
 },[user])
 
-console.log(favDrinks)
-// function to pass over a specified search filter to the api
 
 
+
+// function to send the drink id and user object to the REST API
 const handleFavs = async(o)=>
 {
-  // console.log(o)
   try{
     const res = await ax.post("./api/drinks",{
       favDrink:o._id,
@@ -79,30 +77,15 @@ const handleFavs = async(o)=>
   console.log(o)
 }
 
-// pagination============
-  const itemsPerPage = 15;
-  var butt_arr = [];
-
-  var start = 1
-  for (let i =1; i<600; i+= itemsPerPage )
-  {
-    // 
-    butt_arr.push(((i-1)/itemsPerPage)+1)
-    // when i - 1 => 1-1/15 +1 = 1
-    //when i is 16(i+= items/page)=> 15-1/15+1 =2 and so on
-    start ++
-  }
-  
-  butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
-
 
   return (
     <Wrapper>
       {/* show the hamburger if the screen size is less than 600px else regular navbar */}
-    {sWidth<600?<NavigationHam/>: <NavBar
-    themeToggle={()=>setTheme(
-    theme=== 'light'?'default':'light')}
-    icon={theme==='light'?<MdDarkMode  size="1.5em"/>:<BsSunFill size="1.5em"/>}
+    {sWidth<600?<NavigationHam/>: 
+    <NavBar
+      themeToggle={()=>setTheme(
+      theme=== 'light'?'default':'light')}
+      icon={theme==='light'?<MdDarkMode  size="1.5em"/>:<BsSunFill size="1.5em"/>}
     />}
     <DrinkResults>
     

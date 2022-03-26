@@ -22,9 +22,6 @@ import { search_types } from '@/utils/variables';
 import { HeaderTheme, SubHeaderTheme } from "@/utils/variables";
 
 // components imports
-import { Input } from '@/comps/InputBox'
-import { SearchSelection } from '@/comps/SearchSelection';
-import { isExpired, decodeToken } from "react-jwt";
 import NavBar from '@/comps/NavBar';
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic';
 import {BsSunFill} from 'react-icons/bs';
@@ -129,6 +126,9 @@ const handleFavs = async(o, i)=>
   const itemsPerPage = 10;
   var butt_arr = [];
   var start = 1
+  // paginate is a value that is returned by 4th argument of the GoToPage function to determine the total number of searches.
+  // this value is dynamic based on different searches
+  // hence it determines the number of pages 
   for (let i =1; i<paginate; i+= itemsPerPage )
   {
     // 
@@ -151,7 +151,8 @@ const handleFavs = async(o, i)=>
     
     <HeadingCont>
       <Heading color={HeaderTheme[theme].col}>
-        Welcome {user != undefined && user.user.username} use the search bar below to search for a drink!
+        Welcome {user != undefined && user.user.username}. 
+        <div>Use the search bar below to search for a drink!</div>
       </Heading>
       
     </HeadingCont> 
@@ -178,35 +179,28 @@ const handleFavs = async(o, i)=>
                   tag={o.strCategory}
                   onFavClick={()=>{handleFavs(o,i)}}
                   favCol={clicked ===i?'#FF3549':null}
-              /> : <DrinkCardMobile
-              key={i} 
-              name={o.strDrink} 
-              imgSrc={o.strDrinkThumb} 
-              tag={o.strCategory}
-              onClick={()=>router.push(`/search/${o.idDrink}`)}
-              onFavClick={()=>{handleFavs(o,i)}}
-              favCol={clicked ===i?'#FF3549':null}
+              /> : 
+              <DrinkCardMobile
+                  key={i} 
+                  name={o.strDrink} 
+                  imgSrc={o.strDrinkThumb} 
+                  tag={o.strCategory}
+                  onClick={()=>router.push(`/search/${o.idDrink}`)}
+                  onFavClick={()=>{handleFavs(o,i)}}
+                  favCol={clicked ===i?'#FF3549':null}
               /> ))}
               
     </DrinkResults>
     
-    
+      
+    {/* <div> */}
             <Pagination
               array={butt_arr}
               curPage={curPage}
               onClick={(o)=>{inputFilter(keyword,o)}}
               />
-      
-    {/* <PaginationCont>
-      {searchData.length>0 &&butt_arr.map((o,i)=>(
-        <button 
-          style={{background: o===curPage?"pink":'white'}}  
-          key={i} 
-          onClick={()=>inputFilter(keyword,o)}> 
-            {o} 
-        </button>
-        ) )}
-    </PaginationCont> */}
+    {/* </div> */}
+
 
 
         

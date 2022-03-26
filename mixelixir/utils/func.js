@@ -96,5 +96,6 @@ export function GoToPage(drinks=[], page=1, num=5, length)
     // what item to start from ((page-1)*num)
     // is the number of items  to be shown page * number ==> creating multiples of the same   
     const final = {result, length}
+    // length is used to return the length of the drinks[] that is used in the determining the total number of drinks while generating pagination 
     return final
 }

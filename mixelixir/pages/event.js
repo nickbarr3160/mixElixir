@@ -15,7 +15,7 @@ import {BsSunFill} from 'react-icons/bs';
 import {MdDarkMode} from 'react-icons/md';
 import { NavigationHam } from "@/comps/NavigationHam";
 import { DrinkDragCardMobile } from "@/comps/DrinkCardDragMobile";
-
+import { Pagination } from "@/comps/Pagination";
 var timer = null
 
 export default function Sockets() {
@@ -31,7 +31,9 @@ export default function Sockets() {
   const [droppedInfo, setDroppedInfo] = useState([])
   const [user, setUser] = useState()
   const [sWidth, setSwidth] = useState()
-
+  const [paginate, setPaginate] = useState(0)
+  const[curPage,setCurPage] = useState()
+  const [keyword,setKeyWord] = useState()
 
   //Grab the screen size and store it in a state
   useEffect(()=>{
@@ -43,27 +45,33 @@ export default function Sockets() {
   },[sWidth])
 
   //Generate searched drinks
-  const inputFilter = async (value) =>{
-   
-    if (timer){
-        clearTimeout(timer)
-        timer=null
-      }
-  
-    if (timer===null)
-    timer = setTimeout(async()=>{
-      const res = await ax.get('./api/drinks', {
-        params:{
-          value:value.toLowerCase(),
-          searchBy: search_types[search]
+  const inputFilter = async (value,p) =>{
+    console.log(keyword)
+      if (timer)
+        {
+          clearTimeout(timer)
+          timer=null
         }
-      })
-      
-    // store the data in a state for mapping
-    setSearchData(res.data.result)  
-    }, 500)
-  
-  }
+    
+      if (timer===null)
+      timer = setTimeout(async()=>{
+        const res = await ax.get('./api/drinks', {
+        params:{
+              value:value.toLowerCase(),
+              searchBy: search_types[search],
+              page:p,
+              // function taking in to a page param that is sent over from the butt_arr for pagination purposes
+        }
+        })
+    
+        // store the data in a state for mapping
+        setKeyWord(value)
+        setSearchData(res.data.result)
+        setCurPage(p != undefined? p:1 )//fail safe at the time when function runs
+        setPaginate(res.data.length)// setting the total number of items for the search result
+      }, 100)  
+    
+    }
   
   useEffect(()=>{
     
@@ -115,7 +123,25 @@ export default function Sockets() {
       }
     }
     
-  
+  // pagination============
+  const itemsPerPage = 10;
+  var butt_arr = [];
+  var start = 1
+  // paginate is a value that is returned by 4th argument of the GoToPage function to determine the total number of searches.
+  // this value is dynamic based on different searches
+  // hence it determines the number of pages 
+  for (let i =1; i<paginate; i+= itemsPerPage )
+  {
+    // 
+    butt_arr.push(((i-1)/itemsPerPage)+1)
+    // when i - 1 => 1-1/15 +1 = 1
+    //when i is 16(i+= items/page)=> 15-1/15+1 =2 and so on
+    start ++
+  }
+
+  butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
+
+
     if(sWidth<600){
       return (
         <Wrapper>
@@ -136,27 +162,29 @@ export default function Sockets() {
             }}
             >
               <EventInputContentCont>
-        
                 <EventInput 
                 placeholder="Search for drinks to add to the menu" 
                 onChange={(e)=>inputFilter(e.target.value)}>
-                </EventInput>
-                
+                </EventInput>                
                 <DrinkResults>
-                      {searchData.map((o,i)=><DrinkDragCardMobile 
+                      {searchData.map((o,i)=>(
+                      <DrinkDragCardMobile 
                       item={o}
                       key={i} 
                       name={o.strDrink} 
                       imgSrc={o.strDrinkThumb}
-                      tag={o.strCategory}
-                      >
-    
-                      </DrinkDragCardMobile>)}
+                      tag={o.strCategory}/>    
+                      ))}
                 </DrinkResults>
     
               </EventInputContentCont>
     
               <EventContentCont>
+                <Pagination
+                    array={butt_arr}
+                    curPage={curPage}
+                    onClick={(o)=>{inputFilter(keyword,o)}}
+                    />
     
                 <Dropzone 
                 dropMessage={dropMessage}
@@ -247,17 +275,23 @@ export default function Sockets() {
                 imgSrc={o.obj.strDrinkThumb}
                 key={o.id}
                 drinkpos={o.pos}
-                tag={o.obj.strCategory}
-                >
-
-                {o.id}
+                tag={o.obj.strCategory}>
+                  {o.id}
               </DrinkCardUIDrag>
+
               )}
             </Dropzone>
           </EventContentCont>
 
         </DndProvider>
+
       </EventWrapper>
+
+        <Pagination
+              array={butt_arr}
+              curPage={curPage}
+              onClick={(o)=>{inputFilter(keyword,o)}}
+              />
     </Wrapper>
     )
 

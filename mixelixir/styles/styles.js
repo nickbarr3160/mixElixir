@@ -313,6 +313,7 @@ width:100vw;
 `;
 
 export const AuthCont = styled.div`
+margin-top:1em;
 height:80%;
 width:50%;
 display:flex;
@@ -346,15 +347,27 @@ width:100%;
 
 export const AuthButton = styled.button`
 background-color:#FF3864;
-padding:0.8em;
+// padding:0.5em;
 color:white;
 border:none;
+height:30px;
+width:150px;
+cursor:pointer;
 // font-weight:bold;
 `;
 
 export const AuthButtonCont = styled.div`
 width:100%;
 display:flex;
-justify-content:flex-start;
+justify-content:space-between;
+align-items:center;
 `;
 
+export const SignupCont = styled.div`
+color:white;
+`
+
+export const SignupLink = styled.div`
+color:#FF3549;
+cursor:pointer;
+`

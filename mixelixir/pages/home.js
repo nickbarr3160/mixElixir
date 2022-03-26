@@ -138,9 +138,12 @@ const itemsPerPage = 10;
 var butt_arr = [];
 
 var start = 1
+// paginate is a value that is returned by 4th argument of the GoToPage function to determine the total number of searches.
+// this value is dynamic based on different searches
+// hence it determines the number of pages 
 for (let i =1; i<paginate; i+= itemsPerPage )
 {
-  // 
+  
   butt_arr.push(((i-1)/itemsPerPage)+1)
   // when i - 1 => 1-1/15 +1 = 1
   //when i is 16(i+= items/page)=> 15-1/15+1 =2 and so on
@@ -258,22 +261,6 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
               curPage={curPage}
               onClick={(o)=>{compareIngs(o)}}
               />
-      {/* <div style={{
-        display:'flex', 
-        border:'2px solid red',
-        cursor:'pointer'
-        }}>
-        
-    {butt_arr.map((o,i)=>(
-            <button 
-              style={{background: o===curPage?"pink":'white' }}  
-              key={i}
-              onClick={()=>{compareIngs(o)}}
-                > 
-                {o} 
-            </button>
-    ))}
-    </div> */}
     </LandingWrapper>
     )
 }

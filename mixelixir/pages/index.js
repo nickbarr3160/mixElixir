@@ -1,13 +1,21 @@
-import Link from 'next/link';
-import  {useSearch}  from '@/utils/provider';
-import {SearchSelection} from 'comps/SearchSelection'
-import styled from 'styled-components'
-import { AuthWrapper, AuthCont, AuthInput, AuthLogoCont, AuthLogo, AuthTitleCont, AuthTitle, AuthButton, AuthButtonCont } from '@/styles/styles';
-import NavBar from '@/comps/NavBar';
 import react,{useState,useEffect} from 'react';
 import ax from 'axios'
 import { useRouter } from 'next/router';
 
+import { 
+    AuthWrapper, 
+    AuthCont, 
+    AuthInput, 
+    AuthLogoCont, 
+    AuthLogo, 
+    AuthTitleCont, 
+    AuthTitle, 
+    AuthButton, 
+    AuthButtonCont,
+    SignupCont,
+    SignupLink
+
+} from '@/styles/styles';
 
 
 export default function Login() {
@@ -25,12 +33,12 @@ const handleLogin=async()=>
         pass,
         login:'logg'
     })
-    if(res.status!=500)
+    if(res.data[0]==201)
     {
         router.push('/home')
         localStorage.setItem('user',JSON.stringify(res.data[1]))
     }
-    else if (res.status ===500) alert('error')
+    else  alert('wrong credentials')
 }
 
 const handleSignup=async()=>
@@ -61,24 +69,16 @@ return (
             
             <AuthButtonCont>
                 <AuthButton onClick={handleLogin}> LOGIN </AuthButton>
-                <div style={{color:'white'}}> 
-                  Not a user? 
-                  <span 
-                    onClick={()=>router.push('/signup')} 
-                    style=
-                        {
-                          {
-                            color:'#FF3549',
-                            cursor:'pointer'
-                          }
-                        }
-                        > 
-                    Creat an account 
-                    </span> 
-                </div>
+                <SignupCont> 
+                    Not a user? 
+                    <SignupLink 
+                        onClick={()=>router.push('/signup')} > 
+                        Creat an account 
+                    </SignupLink> 
+                </SignupCont>
             </AuthButtonCont>
             
         </AuthCont>
     </AuthWrapper>
-  )
+)
 }
