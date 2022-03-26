@@ -18,7 +18,12 @@ import {useTheme} from '../../utils/provider'
 
 export const DrinkInformation = (
     {
-        defaultData = Drinks
+        defaultData = {
+            strDrink:'Gimlet',
+            ingredients:['gin','soda', 'Olives', 'Lime', 'Tonic Water'],
+            strInstructions:'shake and stir',
+            strDrinkThumb:'http://www.placekitten.com/50/50'
+        }
     }
 ) => {
     const {theme} = useTheme();

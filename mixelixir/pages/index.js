@@ -64,7 +64,7 @@ return (
             <AuthTitleCont>
                 <AuthTitle>MixElixir</AuthTitle>
                 <AuthLogoCont>
-                    <AuthLogo src='/logo.png'/>
+                    <AuthLogo src='/mix.svg'/>
                 </AuthLogoCont>
             </AuthTitleCont>
 

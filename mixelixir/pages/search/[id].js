@@ -63,6 +63,8 @@ export default function Drink  () {
     {
         const GetRelated = async ()=>
             {
+                
+                console.log(data.ingredients)
                 const res = await ax.get("/api/drinks",{
                     params: 
                     {

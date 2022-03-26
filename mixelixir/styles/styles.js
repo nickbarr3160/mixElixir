@@ -15,7 +15,7 @@ width:100%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-// border:2px solid green;
+
 `
 
 
@@ -359,6 +359,8 @@ export const AuthLogoCont = styled.div`
 display:flex;
 height:100%;
 width:15%;
+
+
 `;
 
 export const AuthLogo = styled.img`
