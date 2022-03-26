@@ -3,11 +3,15 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {useState,useEffect} from 'react'
 import ax from 'axios';
-// components imports
-import { Input } from '../comps/InputBox'
+
 import { useSearch, useTheme } from '../utils/provider';
 import { search_types } from '@/utils/variables';
 import { SearchSelection } from '@/comps/SearchSelection';
+import {useRouter} from 'next/router'
+
+
+// components imports
+import { Input } from '../comps/InputBox'
 import Link from 'next/link';
 import { MyButt } from '@/comps/Button/style';
 import { MyButton } from '@/comps/Button';
@@ -20,11 +24,12 @@ import {MdOutlineClose} from 'react-icons/md'
 import { GenerateTheme } from "@/utils/variables";
 import {BsSunFill} from 'react-icons/bs';
 import {MdDarkMode} from 'react-icons/md';
-import {useRouter} from 'next/router'
 import { NavigationHam } from '@/comps/NavigationHam';
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
-
 import { DrinkCardMobile } from '@/comps/DrinkCardMobile';
+import { Pagination } from '@/comps/Pagination';
+
+
 // styled components imports
 import {
   LandingWrapper, 
@@ -54,7 +59,6 @@ export default function Home() {
   const [playAnim, setPlayAnim] = useState()
   const [paginate, setPaginate] = useState(0)
   const [clicked,setClicked] = useState()
-
   const [sWidth, setSwidth] = useState()
 
 
@@ -239,9 +243,14 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
           favCol={clicked ===i?'#FF3549':null}
           />
         )}
-
       </DrinkResults>
-      <div style={{
+
+            <Pagination
+              array={butt_arr}
+              curPage={curPage}
+              onClick={(o)=>{compareIngs(o)}}
+              />
+      {/* <div style={{
         display:'flex', 
         border:'2px solid red',
         cursor:'pointer'
@@ -250,14 +259,13 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
     {butt_arr.map((o,i)=>(
             <button 
               style={{background: o===curPage?"pink":'white' }}  
-              key={i} onClick={()=>{
-                // setCurPage(o)
-                compareIngs(o)}}
+              key={i}
+              onClick={()=>{compareIngs(o)}}
                 > 
                 {o} 
             </button>
     ))}
-    </div>
+    </div> */}
     </LandingWrapper>
     )
 }

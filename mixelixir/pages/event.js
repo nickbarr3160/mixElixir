@@ -121,6 +121,12 @@ export default function Sockets() {
           
           <NavigationHam/>
           
+            <EventCard
+            onInputChange={(e)=>
+            setTxt(e.target.value)}
+            onButtClick={EmitToIo}
+            descrip={msgs}
+            />
           <EventWrapper>
             <DndProvider 
               backend={TouchBackend} options={{
@@ -128,12 +134,6 @@ export default function Sockets() {
               enableMouseEvents:true
             }}
             >
-                <EventCard
-                onInputChange={(e)=>
-                setTxt(e.target.value)}
-                onButtClick={EmitToIo}
-                descrip={msgs}
-                />
               <EventInputContentCont>
         
                 <EventInput 

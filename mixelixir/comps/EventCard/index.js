@@ -12,8 +12,8 @@ export const EventCard = ({
 }) => {
   const {theme} = useTheme();
   return (
+    
     <EventCardCont bgcolor={EventTheme[theme].cardbgcol}>
-        
         <EventTitleCont>
           <EventHeading color={EventTheme[theme].heading}>{event}</EventHeading>
           <EventDescrip color={EventTheme[theme].userCol}>posted by karenhill007</EventDescrip>

@@ -11,7 +11,11 @@ height:80%;
 padding:1em;
 margin:2em;
 box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px;
-
+border:2px solid yellow;
+@media (max-width:600px)
+{
+    height:500px;
+}
 `;
 
 export const EventHeading = styled.h1`
