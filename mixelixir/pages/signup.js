@@ -37,7 +37,7 @@ const handleSignup=async()=>
         email,
         pass,
         signup:'sign'})
-        router.push('/login')
+        router.push('/')
     }
     catch(err){console.log(err, 'request failed to execute')}
 }
