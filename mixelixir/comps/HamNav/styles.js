@@ -22,10 +22,12 @@ export const Nav = styled(motion.div)`
 `
 
 export const NavHeader = styled.div`
-  width:87vw;
-  max-width:87vw;
+  width:96vw;
+  max-width:96vw;
+  height:16%;
   display:flex;
   justify-content:flex-end;
+  align-items:flex-end;
   position: relative;
   h2 {
     color: ${props => props.theme.background};

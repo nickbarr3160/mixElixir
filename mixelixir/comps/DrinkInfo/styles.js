@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
 export const DrinkWrap = styled.div`
-width:100%;
+width:90%;
 height:100%;
 display:flex;
-// border:2px solid red;
-justify-content:space-around;
+justify-content:space-between;
+align-items:center;
 @media (max-width: 600px) {
     flex-direction:column;
     align-items:center;
@@ -67,6 +67,7 @@ display:flex;
 flex-wrap:wrap;
 width:100%;
 height:100%;
-border:2px solid yellow;
+
 // margin-top:10%;
 `
+

@@ -1,12 +1,27 @@
 import Link from 'next/link';
 import  {useSearch}  from '@/utils/provider';
-import {SearchSelection} from 'comps/SearchSelection'
 import styled from 'styled-components'
-import { AuthWrapper, AuthCont, AuthInput, AuthLogoCont, AuthLogo, AuthTitleCont, AuthTitle, AuthButton, AuthButtonCont } from '@/styles/styles';
-import NavBar from '@/comps/NavBar';
 import react,{useState,useEffect} from 'react';
 import ax from 'axios'
 import { useRouter } from 'next/router';
+
+//component imports 
+import {SearchSelection} from 'comps/SearchSelection'
+import NavBar from '@/comps/NavBar';
+import { 
+  AuthWrapper, 
+  AuthCont, 
+  AuthInput, 
+  AuthLogoCont, 
+  AuthLogo, 
+  AuthTitleCont, 
+  AuthTitle, 
+  AuthButton, 
+  AuthButtonCont, 
+  TextCont,
+  CreateAccount
+} 
+  from '@/styles/styles';
 
 
 
@@ -61,21 +76,22 @@ return (
             
             <AuthButtonCont>
                 <AuthButton onClick={handleLogin}> LOGIN </AuthButton>
-                <div style={{color:'white'}}> 
+                <TextCont> 
                   Not a user? 
-                  <span 
+                  <CreateAccount 
                     onClick={()=>router.push('/signup')} 
                     style=
                         {
                           {
+                            margin:'1em',
                             color:'#FF3549',
                             cursor:'pointer'
                           }
                         }
                         > 
-                    Creat an account 
-                    </span> 
-                </div>
+                    Create an account 
+                    </CreateAccount> 
+                </TextCont>
             </AuthButtonCont>
             
         </AuthCont>

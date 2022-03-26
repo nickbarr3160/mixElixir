@@ -10,7 +10,7 @@ import { Navigation } from '../HamNav'
 import { Header } from '@/styles/styles'
 import {BsSunFill} from 'react-icons/bs';
 import { Logo, LogoCont } from '../NavBar/style'
-
+import {FiLogOut} from 'react-icons/fi';
 
 export const NavigationHam = ({
   themeToggle=()=>{},

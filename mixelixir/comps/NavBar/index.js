@@ -5,6 +5,7 @@ import {BsSunFill} from 'react-icons/bs';
 import { NavbarTheme } from "@/utils/variables";
 import {useTheme} from '../../utils/provider';
 import { useRouter } from "next/router";
+import {FiLogOut} from 'react-icons/fi';
 
 const NavBar = ({
     logoText="ME",
@@ -32,8 +33,8 @@ const NavBar = ({
                     window.localStorage.removeItem('user')
                     router.push('/')
                 }}
-                style={{color:'#FF3549', cursor:'pointer'}} > 
-                Signout 
+            >
+                <FiLogOut size="1.5em" color={NavbarTheme[theme].signout}/>
             </div>
         </LinkCont>
     </NavCont>

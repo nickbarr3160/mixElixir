@@ -42,7 +42,8 @@ import {
   IconCont, 
   GenerateContent, 
   MappedIngredients ,
-  AddIngredientsColumn
+  AddIngredientsColumn,
+  ButtonCont
 } from '@/styles/styles';
 var timer = null
 
@@ -230,7 +231,11 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
             {/* <Controls visible={true} buttons={['play', 'repeat', 'frame', 'debug']} /> */}
             </Player>
         </Generator>
-        <MyButton onClick={()=>compareIngs(curPage)}/>
+        
+        <ButtonCont>
+          <MyButton onClick={()=>compareIngs(curPage)}/>
+        </ButtonCont> 
+         
       </GenerateContent>
       
        {/* Drink Results  */}

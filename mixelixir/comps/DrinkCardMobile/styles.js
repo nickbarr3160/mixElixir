@@ -18,7 +18,7 @@ background-repeat:no-repeat;
 height:100%;
 flex-direction:row;
 width:100%;
-border:.5px solid #FF3864;
+border:.1px solid grey;
 border-radius: 5px;
 justify-content:space-around;
 align-items:center;

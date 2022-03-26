@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const DrinkWrap = styled.div`
 width:100%;
-height:100%;
 display:flex;
 justify-content:space-around;
 @media (max-width: 600px) {
@@ -62,7 +61,7 @@ height:100%;
 export const Suggestions = styled.div`
 display:flex;
 flex-wrap:wrap;
-width:100%;
+width:90%;
 height:100%;
 // margin-top:10%;
 @media(max-width:600px)
@@ -70,3 +69,14 @@ height:100%;
     width:90%;
 }
 `
+export const SimilarDrinkHeading = styled.h1`
+color:white;
+`;
+
+export const SimilarDrinkHeadingCont = styled.div`
+width:90%;
+display:flex;
+justify-content:flex-start;
+align-items:center;
+height:150px;
+`;

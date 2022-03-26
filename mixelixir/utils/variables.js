@@ -61,7 +61,10 @@ export const NavbarTheme = {
         color:white,
         icon:salsa,
         links:white,
-        menuBg:altGrey
+        linksMob:white,
+        menuBg:altGrey,
+        signout:salsa,
+        signoutMob:salsa
 
     },
 
@@ -70,7 +73,10 @@ export const NavbarTheme = {
         color:salsa,
         icon:salsa,
         links:salsa,
-        menuBg:altGrey
+        linksMob:white,
+        menuBg:altGrey,
+        signout:black,
+        signoutMob:salsa
     }
 }
 
