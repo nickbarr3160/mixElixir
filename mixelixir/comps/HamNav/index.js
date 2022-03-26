@@ -7,6 +7,7 @@ import { Router, useRouter } from 'next/router';
 import { HeaderHam} from '../HeaderHam';
 import { Container } from '@/styles/styles';
 import { Nav, NavHeader,CloseNav, NavList, NavVideos, HamIconCont } from './styles';
+import {FiLogOut} from 'react-icons/fi';
 
 // provider imports
 import { useTheme } from '@/utils/provider'
@@ -73,7 +74,7 @@ export const Navigation = (
                     ham={myHam}
                     onHamClick={hamClick}/>       
         </NavHeader>
-        <NavList  linkCol={themer.links}>
+        <NavList  linkCol={themer.linksMob}>
             <ul>
                 {links.map((o,i)=> (<motion.li
                                         key={i}>
@@ -91,9 +92,8 @@ export const Navigation = (
                 onClick={()=>{
                     window.localStorage.removeItem('user')
                     r.push('/')
-                }}
-                style={{color:'#FF3549'}} > 
-                Signout 
+                }} > 
+                  <FiLogOut size="3em" color={NavbarTheme[theme].signoutMob}/>
             </div>
             </ul>
         </NavList>

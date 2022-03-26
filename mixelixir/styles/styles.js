@@ -13,7 +13,8 @@ width:100vw;
 export const Header = styled.div`
 width:100%;
 display:flex;
-justify-content:flex-end;
+justify-content:space-between;
+align-items:center;
 // border:2px solid green;
 `
 
@@ -151,6 +152,16 @@ height:100%;
 width:40%;
 `;
 
+export const ButtonCont = styled.div`
+width:100%;
+display:flex;
+padding-left:4em;
+@media (max-width:600px)
+{
+  justify-content:center;
+  padding-left:0em;
+}
+`;
 
 
 
@@ -306,10 +317,10 @@ font-family: 'Poppins', sans-serif;
 
 export const AuthWrapper = styled.div`
 display:flex;
-height:100%;
 justify-content:center;
 align-items:center;
-width:100vw;
+width:100%;
+height:100vh;
 `;
 
 export const AuthCont = styled.div`
@@ -318,8 +329,14 @@ height:80%;
 width:50%;
 display:flex;
 flex-direction:column;
+height:80%;
 align-items:center;
 justify-content:space-evenly;
+@media(max-width:600px)
+{
+width:90%;
+height:500px;
+}
 `;
 
 export const AuthTitleCont = styled.div`
@@ -332,6 +349,10 @@ export const AuthTitle = styled.div`
 color:#FF3864;;
 font-size:80px;
 font-weight:bold;
+@media(max-width:600px)
+{
+font-size:60px;
+}
 `;
 
 export const AuthLogoCont = styled.div`
@@ -358,6 +379,7 @@ cursor:pointer;
 
 export const AuthButtonCont = styled.div`
 width:100%;
+height:30%;
 display:flex;
 justify-content:space-between;
 align-items:center;

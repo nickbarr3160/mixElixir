@@ -4,7 +4,7 @@ import ax from 'axios'
 
 // styled component imports 
 import {Wrapper,} from '@/styles/styles';
-import {Suggestions}from '@/styles/IndividualDrinkStyle';
+import {Suggestions, SimilarDrinkHeading, SimilarDrinkHeadingCont}from '@/styles/IndividualDrinkStyle';
 
 // component imports
 import {DrinkInformation } from '@/comps/DrinkInfo';
@@ -14,6 +14,8 @@ import { NavigationHam } from '@/comps/NavigationHam';
 import { IndDrinkTheme } from "@/utils/variables";
 import {useTheme} from '../../utils/provider'
 import { DrinkCardMobile } from '@/comps/DrinkCardMobile';
+import {BsSunFill} from 'react-icons/bs';
+import {MdDarkMode} from 'react-icons/md';
 
 
 export default function Drink  () {
@@ -96,13 +98,22 @@ export default function Drink  () {
     <Wrapper>  
     
         {/* if the screen size is less than 600px */}
-        {sWidth<600?<NavigationHam/>: <NavBar
+        {sWidth<600?<NavigationHam
+        themeToggle={()=>setTheme(
+        theme=== 'light'?'default':'light')}
+        icon={theme==='light'?<MdDarkMode size="2em" color="#FF3549"/>:<BsSunFill size="2em" color="white" />}
+      />: <NavBar
         themeToggle={()=>setTheme(
         theme=== 'light'?'default':'light')}
         />}
     
         <DrinkInformation defaultData={data} />
         {/* drink suggestions */}
+        
+        <SimilarDrinkHeadingCont>
+            <SimilarDrinkHeading>Similar Drinks</SimilarDrinkHeading>    
+        </SimilarDrinkHeadingCont>
+
 
         <Suggestions>
             {suggest.map((o,i)=>(

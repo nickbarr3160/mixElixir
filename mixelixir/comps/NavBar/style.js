@@ -57,9 +57,16 @@ export const LogoCont = styled.div`
 display:flex;
 height:80%;
 margin:2em;
+
+@media (max-width:600px)
+{
+ height:100px;
+}
+
 &:hover{
 opacity:70%;
 }
+
 `;
 
 export const Logo = styled.img`
