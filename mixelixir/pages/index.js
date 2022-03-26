@@ -5,20 +5,6 @@ import { useRouter } from 'next/router';
 //component imports 
 import {SearchSelection} from 'comps/SearchSelection'
 import NavBar from '@/comps/NavBar';
-import { 
-  AuthWrapper, 
-  AuthCont, 
-  AuthInput, 
-  AuthLogoCont, 
-  AuthLogo, 
-  AuthTitleCont, 
-  AuthTitle, 
-  AuthButton, 
-  AuthButtonCont, 
-  TextCont,
-  CreateAccount
-} 
-  from '@/styles/styles';
 
 import { 
     AuthWrapper, 
