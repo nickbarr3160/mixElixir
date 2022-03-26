@@ -324,6 +324,8 @@ height:100vh;
 `;
 
 export const AuthCont = styled.div`
+margin-top:1em;
+height:80%;
 width:50%;
 display:flex;
 flex-direction:column;
@@ -366,9 +368,12 @@ width:100%;
 
 export const AuthButton = styled.button`
 background-color:#FF3864;
-padding:0.8em;
+// padding:0.5em;
 color:white;
 border:none;
+height:30px;
+width:150px;
+cursor:pointer;
 // font-weight:bold;
 `;
 
@@ -376,15 +381,15 @@ export const AuthButtonCont = styled.div`
 width:100%;
 height:30%;
 display:flex;
-flex-direction:column;
-justify-content:space-evenly;
-`;
-export const TextCont = styled.div`
-color:white;
+justify-content:space-between;
+align-items:center;
 `;
 
-export const CreateAccount = styled.span`
-margin:'1em';
-color:'##FF3864';
-cursor:'pointer';
-`;
+export const SignupCont = styled.div`
+color:white;
+`
+
+export const SignupLink = styled.div`
+color:#FF3549;
+cursor:pointer;
+`
