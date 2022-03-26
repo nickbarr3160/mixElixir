@@ -5,6 +5,11 @@ import { DrinkTheme } from "@/utils/variables";
 import {useTheme} from '../../utils/provider'
 import {AiFillHeart} from 'react-icons/ai'
 
+
+// library imports 
+import { motion, AnimatePresence } from "framer-motion";
+
+
 const DrinkCardUIStatic = ({
     onClick=()=>{},
     name="Jake",
@@ -16,7 +21,17 @@ const DrinkCardUIStatic = ({
 })=> {
     const {theme} = useTheme();
     return (<> 
-    <CardContainer 
+    <AnimatePresence 
+        
+        
+        >
+
+    <CardContainer
+    whileHover={{scale:1.2}}
+    initial={{scale:0}}
+    exit={{scale:0.2}}
+    animate={{scale:1}}
+    transition={{duration:.1, type:'spring', mass:.7}}
     display={display}
     imgSrc={imgSrc}
     >
@@ -31,7 +46,7 @@ const DrinkCardUIStatic = ({
         onClick={onClick}
         >
         <TagCont>
-            <Tag bgcolor={DrinkTheme[theme].bgCol}>
+            <Tag bgcolor='#24242498'>
             {tag}
             </Tag>
         </TagCont>
@@ -41,6 +56,7 @@ const DrinkCardUIStatic = ({
         </ContentCont>
 
     </CardContainer>
+    </AnimatePresence>
     </>
     )
 }

@@ -35,11 +35,7 @@ export const Navigation = (
             title:"Favourites",
             link:'/favourites'
         },
-        {
-            id:4,
-            title:"Settings",
-            link:'/settings'
-        },
+
     ]
     
     ) => {

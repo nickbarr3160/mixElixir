@@ -1,8 +1,11 @@
 import react from 'react';
 import {search_types} from '@/utils/variables';
-import {Input, SearchFilterContainer, Label} from './style'
 import {SearchFilterTheme } from "@/utils/variables";
 import {useTheme} from '../../utils/provider'
+
+// styled component imports 
+import {Input, SearchFilterContainer, Label, Wrapper} from './style'
+
 
 export const SearchSelection = ({
     onSearch=()=>{}
@@ -18,16 +21,23 @@ export const SearchSelection = ({
     const {theme} = useTheme();
     return (
         
-        <div>
+        <Wrapper>
             
-            <SearchFilterContainer>
-                <Label color={SearchFilterTheme[theme].col} for="searchTypes">Select search filter</Label>
-                <Input onChange={onSearch} list="searchTypes" placeholder="Search By:"/>
-            </SearchFilterContainer>    
+
+                <Label 
+                    color={SearchFilterTheme[theme].col} 
+                    for="searchTypes">
+                    Select search filter
+                </Label>
+                
+                <Input 
+                    onChange={onSearch} list="searchTypes" 
+                    placeholder="Search By:"/>
+
             <datalist id ="searchTypes">
                 {types.map((o,i)=> <option key={i} value={o}></option>)}
             </datalist>
-        </div>
+        </Wrapper>
     )
 }
 

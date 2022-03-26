@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import {motion} from 'framer-motion'
 
-export const CardContainer = styled.div`
+export const CardContainer = styled(motion.div)`
 display:${props=>props.display};
 background-image: url(${props=>props.imgSrc});
 // background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(0,0,0,1) 78%);
@@ -46,12 +47,13 @@ justify-content:center;
 align-items:center;
 background-color:${props=>props.bgcolor};
 box-shadow: 2px 2px 3px 1px #00000050;
-border-top-right-radius:10px;
-border-bottom-right-radius:10px;
+border-top-right-radius:3px;
+border-bottom-right-radius:3px;
 font-weight:bold;
 font-size:12px;
 padding:0em 1em 0em 1em;
 line-height:1;
+// filer:blur(50px)
 `;
 
 export const ContentCont = styled.div`

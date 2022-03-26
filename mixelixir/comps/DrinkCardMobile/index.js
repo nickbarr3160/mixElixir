@@ -15,7 +15,10 @@ import {
     IconCont, 
     ContentCont, 
     Icon,
-    Wrapper
+    Wrapper,
+    ImageContainer,
+    Image,
+    Name
 } from "./styles";
 
 export const DrinkCardMobile = ({
@@ -30,24 +33,32 @@ export const DrinkCardMobile = ({
     const {theme} = useTheme();
     return (<Wrapper> 
     <CardContainer 
-    display={display}
+        onClick={onClick}
+
     imgSrc={imgSrc}
+    display={display}
+
     >
 
         
-
+    <ImageContainer>
+        <Image src={imgSrc}/>
+    </ImageContainer>
         <ContentCont
-        onClick={onClick}
         >
         {/* <TagCont>
             <Tag bgcolor={DrinkTheme[theme].bgCol}>
             {tag}
             </Tag>
         </TagCont> */}
-            <h4 >
-            {name}
-            </h4>
+        
         </ContentCont>
+        <TagCont>
+            <Name >
+            {name}
+            </Name>
+
+        </TagCont>
     </CardContainer>
         <IconCont>
             <Icon onClick={onFavClick}>

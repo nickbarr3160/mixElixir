@@ -53,10 +53,22 @@ export default function Home() {
   const router= useRouter()
 
   const [paginate, setPaginate] = useState(0)
-
+  const [clicked,setClicked] = useState()
 
   const [sWidth, setSwidth] = useState()
 
+
+  const handleFavs = async(o, i)=>
+  {
+    setClicked(i)
+    try{
+      const res = await ax.post("./api/drinks",{
+        favDrink:o._id,
+        user:user.user
+      })
+    }catch(err){console.log(err, 'request failed to execute')}
+    console.log(o)
+  }
 
   useEffect(()=>{
       setSwidth(window.innerWidth)
@@ -213,12 +225,16 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
           imgSrc={o.strDrinkThumb} 
           tag={o.strCategory}
           onClick={()=>router.push(`/search/${o.idDrink}`)}
-          />: <DrinkCardMobile
+          />: 
+          <DrinkCardMobile
           key={i} 
           name={o.strDrink} 
           imgSrc={o.strDrinkThumb} 
           tag={o.strCategory}
-          onClick={()=>router.push(`/search/${o.idDrink}`)}/>
+          onClick={()=>router.push(`/search/${o.idDrink}`)}
+          onFavClick={()=>{handleFavs(o,i)}}
+          favCol={clicked ===i?'#FF3549':null}
+          />
         )}
 
       </DrinkResults>
