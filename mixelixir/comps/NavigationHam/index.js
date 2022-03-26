@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {useRouter} from 'next/router'
 
 // provider imports
 import { useTheme } from '@/utils/provider'
@@ -18,12 +19,13 @@ export const NavigationHam = ({
 }) => {
 const [toggle,setToggle] = useState(false)
 const [hammer, setHammer]= useState(false)
+const router = useRouter()
 
 const{theme} = useTheme()//defining the custom hook
   return (
    <Header>
     
-      <LogoCont>
+      <LogoCont onClick={()=>{router.push('/')}}>
           <Logo src='/mix.svg'/>
       </LogoCont>
   
