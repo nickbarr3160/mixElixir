@@ -257,7 +257,8 @@ width:90%;
 justify-content:flex-start;
 @media(max-width:600px)
 {
-  // border:2px solid yellow;
+  border:2px solid yellow;
+  margin-bottom:4em;
   flex-direction:column;
   height:300px;
 }
