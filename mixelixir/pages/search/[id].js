@@ -13,6 +13,8 @@ import NavBar from '@/comps/NavBar';
 import { NavigationHam } from '@/comps/NavigationHam';
 import { IndDrinkTheme } from "@/utils/variables";
 import {useTheme} from '../../utils/provider'
+import { DrinkCardMobile } from '@/comps/DrinkCardMobile';
+
 
 export default function Drink  () {
     const router  = useRouter()
@@ -20,6 +22,7 @@ export default function Drink  () {
     const [data,setData] = useState({ingredients:[]})
     const [suggest, setSuggest] = useState([])
     const {theme, setTheme} = useTheme();
+    const [clicked, setClicked] = useState()
     const [sWidth, setSwidth] = useState()
     // state to keep track of current screen size
 
@@ -47,9 +50,9 @@ export default function Drink  () {
                 })
                 // set data to whatever the request returned 
                 setData(res.data[0])
-
             }
             GetDrink()//calling the function
+
         }
     },[id])
 
@@ -107,15 +110,23 @@ export default function Drink  () {
 
         <Suggestions>
             {suggest.map((o,i)=>(
+                sWidth>600?
                 <DrinkCardUIStatic
                     key={i}
                     tag={o.strCategory}
                     name={o.strDrink} 
                     imgSrc={o.strDrinkThumb}
                     onClick={()=>router.push(`/search/${o.idDrink}`)
-                }>
-                </DrinkCardUIStatic> 
-            
+                }/>
+                :<DrinkCardMobile
+                key={i} 
+                name={o.strDrink} 
+                imgSrc={o.strDrinkThumb} 
+                tag={o.strCategory}
+                onClick={()=>router.push(`/search/${o.idDrink}`)}
+                onFavClick={()=>{handleFavs(o,i)}}
+                favCol={clicked ===i?'#FF3549':null}
+                />
             ))}
         </Suggestions>
     </Wrapper>

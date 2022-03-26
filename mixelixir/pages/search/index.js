@@ -32,6 +32,8 @@ import {MdDarkMode} from 'react-icons/md';
 import { Pagination } from '@/comps/Pagination';
 import { SearchBarInput } from '@/comps/SearchInput';
 import { NavigationHam } from '@/comps/NavigationHam';
+import { DrinkCardMobile } from '@/comps/DrinkCardMobile';
+
 
 var timer = null
 
@@ -171,6 +173,7 @@ const handleFavs = async(o, i)=>
     <DrinkResults>
     
             {searchData.map((o,i)=>(
+              sWidth>600?
               <DrinkCardUIStatic 
                   onClick={()=>router.push(`/search/${o.idDrink}`)}
                   key={i} 
@@ -179,12 +182,26 @@ const handleFavs = async(o, i)=>
                   tag={o.strCategory}
                   onFavClick={()=>{handleFavs(o,i)}}
                   favCol={clicked ===i?'#FF3549':null}
-              >
-            </DrinkCardUIStatic>))}
+              /> : <DrinkCardMobile
+              key={i} 
+              name={o.strDrink} 
+              imgSrc={o.strDrinkThumb} 
+              tag={o.strCategory}
+              onClick={()=>router.push(`/search/${o.idDrink}`)}
+              onFavClick={()=>{handleFavs(o,i)}}
+              favCol={clicked ===i?'#FF3549':null}
+              /> ))}
               
     </DrinkResults>
     
-    <PaginationCont>
+    
+            <Pagination
+              array={butt_arr}
+              curPage={curPage}
+              onClick={(o)=>{inputFilter(keyword,o)}}
+              />
+      
+    {/* <PaginationCont>
       {searchData.length>0 &&butt_arr.map((o,i)=>(
         <button 
           style={{background: o===curPage?"pink":'white'}}  
@@ -193,8 +210,8 @@ const handleFavs = async(o, i)=>
             {o} 
         </button>
         ) )}
+    </PaginationCont> */}
 
-    </PaginationCont>
 
         
     </Wrapper>

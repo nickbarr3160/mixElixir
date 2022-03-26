@@ -17,7 +17,7 @@ import { NavigationHam } from '@/comps/NavigationHam';
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic';
 import {BsSunFill} from 'react-icons/bs';
 import {MdDarkMode} from 'react-icons/md';
-
+import { DrinkCardMobile } from '@/comps/DrinkCardMobile';
 
 var timer = null
 
@@ -32,6 +32,7 @@ export default function Favourites() {
   const {theme, setTheme} = useTheme()
 // state to keep track of current screen size
 const [sWidth, setSwidth] = useState()
+const [clicked,setClicked] = useState()
 
 
 
@@ -111,18 +112,28 @@ const handleFavs = async(o)=>
     <DrinkResults>
     
             {favDrinks.map((o,i)=>(
+              sWidth > 600?
             <DrinkCardUIStatic 
               onClick={()=>router.push(`/search/${o.drink.idDrink}`)}
               key={i} 
               name={o.drink.strDrink}
               tag={o.drink.strCategory} 
               imgSrc={o.drink.strDrinkThumb}
-              onFavClick={()=>{handleFavs(o)}}
-              favCol="#FF3549"
-              >
-            </DrinkCardUIStatic>))}
-            
+              onFavClick={()=>{handleFavs(o,i)}}
+              favCol={clicked ===i?'#FF3549':null}
+              />
+              :<DrinkCardMobile
+              key={i} 
+              name={o.drink.strDrink} 
+              imgSrc={o.drink.strDrinkThumb} 
+              tag={o.drink.strCategory}
+              onClick={()=>router.push(`/search/${o.idDrink}`)}
+              onFavClick={()=>{handleFavs(o,i)}}
+              favCol={clicked ===i?'#FF3549':null}
+              />
+            ))}
     </DrinkResults>
+            
 
         
     </Wrapper>

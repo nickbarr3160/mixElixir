@@ -64,6 +64,9 @@ display:flex;
 flex-wrap:wrap;
 width:100%;
 height:100%;
-border:2px solid yellow;
 // margin-top:10%;
+@media(max-width:600px)
+{
+    width:90%;
+}
 `

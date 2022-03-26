@@ -23,7 +23,7 @@ export const Navigation = (
         {
             id:0,
             title:"Home",
-            link:'/'
+            link:'/home'
         },
         {
             id:1,
@@ -34,6 +34,11 @@ export const Navigation = (
             id:2,
             title:"Favourites",
             link:'/favourites'
+        },
+        {
+            id:3,
+            title:"Events",
+            link:'/event'
         },
 
     ]
@@ -76,13 +81,20 @@ export const Navigation = (
                         className='link'
                         initial={{x:0}}
                         whileHover={{x:40}}>
-
                     <div onClick={()=>{ o.title==='Resume'? window.open("/AbhayBakshi.pdf", '_blank'): r.push(o.link)}}>
                         {o.title}
                     </div>
                     </motion.div>
                 </motion.li>))}
                 
+            <div
+                onClick={()=>{
+                    window.localStorage.removeItem('user')
+                    r.push('/')
+                }}
+                style={{color:'#FF3549'}} > 
+                Signout 
+            </div>
             </ul>
         </NavList>
         <NavVideos  
