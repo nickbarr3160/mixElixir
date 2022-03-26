@@ -44,7 +44,7 @@ export const SearchBar = styled(motion.input)`
 width:50%;
 transition:all .5s;
 padding:1em;
-background-color:#34343450;
+background-color:#202223;
 border-radius:5px;
 border:none;
 color:white;
@@ -74,7 +74,7 @@ justify-content:space-between;
 `
 export const Input = styled.input`
 width:30%;
-background-color:#34343450;
+background-color:#202223;
 border:none;
 color:white;
 border-radius:2px;

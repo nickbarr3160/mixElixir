@@ -56,7 +56,6 @@ export default function Home() {
   const [ user, setUser] = useState()
   const {theme, setTheme} = useTheme()
   const router= useRouter()
-  const [playAnim, setPlayAnim] = useState()
   const [paginate, setPaginate] = useState(0)
   const [clicked,setClicked] = useState()
   const [sWidth, setSwidth] = useState()
@@ -100,21 +99,26 @@ export default function Home() {
   {
     arr.length <= 4-1 ? setArr([...arr, val]):null 
     console.log(arr)
-    setPlayAnim(true)
     // adding values from the input box to an array names arr if the length of the array is less than or equal to 4
   }
 
   
   // use the user inputted array of ingredients to compare with the drinks dataset for cocktail generator feature
   const compareIngs = async (p) =>{
-    if (timer)
-    {
-      clearTimeout(timer)
-      timer=null
+    if(arr.length<2){
+      alert("Please enter 2 or more ingredients")
     }
 
-    if (timer === null )
-      timer = setTimeout(async()=>{
+  //Execute the api call if there are more than 2 ingredients entered
+  if (arr.length>=2){
+      if (timer)
+      {
+      clearTimeout(timer)
+      timer=null
+      }
+
+      if (timer === null )
+        timer = setTimeout(async()=>{
         const res = await ax.get('./api/drinks', {
           params: {
             array:arr,
@@ -125,8 +129,8 @@ export default function Home() {
         setPaginate(res.data.length)// setting the total number of items for the search result
         setCurPage(p)
         
-      },100)
-    
+        },100)
+    }  
 
 }
 
@@ -211,7 +215,8 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
             </AddIngredientsColumn>
 
             <Player
-
+            autoplay={true}
+            loop={true}
             src="https://assets9.lottiefiles.com/packages/lf20_rlzyqo6a.json"
             style={{ height: '300px', width: '400px'}} 
             >
