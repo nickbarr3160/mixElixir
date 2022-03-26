@@ -17,7 +17,7 @@ const DrinkCardUIStatic = ({
     onFavClick=()=>{},
     favCol="",
     tag="",
-    iconDisplay="flex"
+    display="flex"
 })=> {
     const {theme} = useTheme();
     return (<> 
