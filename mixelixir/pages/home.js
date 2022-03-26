@@ -152,7 +152,11 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
   return (
     <LandingWrapper>
       {/* if the screen size is less than 600px */}
-      {sWidth<600?<NavigationHam/>:
+      {sWidth<600?<NavigationHam
+        themeToggle={()=>setTheme(
+        theme=== 'light'?'default':'light')}
+        icon={theme==='light'?<MdDarkMode size="2em" color="#FF3549"/>:<BsSunFill size="2em" color="white" />}
+      />:
         <NavBar
         themeToggle={()=>setTheme(
         theme=== 'light'?'default':'light')}
