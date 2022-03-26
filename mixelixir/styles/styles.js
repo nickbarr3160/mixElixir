@@ -13,7 +13,8 @@ width:100vw;
 export const Header = styled.div`
 width:100%;
 display:flex;
-justify-content:flex-end;
+justify-content:space-between;
+align-items:center;
 // border:2px solid green;
 `
 

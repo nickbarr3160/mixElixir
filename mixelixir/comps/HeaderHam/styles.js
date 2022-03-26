@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const HamContainer = styled.div `
 // position:absolute;
-
 right:${props => props.hamRight};
 z-index:1;
 transition: all 1s;
@@ -32,3 +31,10 @@ background-color:${props => props.iconCol};
 transition:all 1s;
 transform:${props=> props.LineTrans3};
 `
+
+export const NavTopCont = styled.div`
+width:100%;
+display:flex;
+justify-content:space-evenly;
+border:2px solid red;
+`;

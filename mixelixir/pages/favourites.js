@@ -34,6 +34,7 @@ export default function Favourites() {
 const [sWidth, setSwidth] = useState()
 
 
+
 useEffect(()=>{
   setUser( JSON.parse(window.localStorage.getItem('user')))
 },[])
@@ -98,7 +99,11 @@ const handleFavs = async(o)=>
   return (
     <Wrapper>
       {/* show the hamburger if the screen size is less than 600px else regular navbar */}
-    {sWidth<600?<NavigationHam/>: <NavBar
+    {sWidth<600?<NavigationHam
+        themeToggle={()=>setTheme(
+        theme=== 'light'?'default':'light')}
+        icon={theme==='light'?<MdDarkMode size="2em" color="#FF3549"/>:<BsSunFill size="2em" color="white" />}
+      />: <NavBar
     themeToggle={()=>setTheme(
     theme=== 'light'?'default':'light')}
     icon={theme==='light'?<MdDarkMode  size="1.5em"/>:<BsSunFill size="1.5em"/>}

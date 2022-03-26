@@ -67,7 +67,7 @@ export default function Sockets() {
   
   useEffect(()=>{
     
-    const socket = io("http://localhost:8888")
+    const socket = io("https://mixelixirsocket.vercel.app/")
   
     
     // Retrieval of User Information
@@ -109,7 +109,7 @@ export default function Sockets() {
     
     //sending the dropped drink to the server
     const EmitDrinkToIo = async (item) =>{
-      const socket = io("http://localhost:8888")
+      const socket = io("https://mixelixirsocket.vercel.app/")
       if (socket !== null){
         socket.emit("dropped_drink", item)
       }
@@ -120,7 +120,11 @@ export default function Sockets() {
       return (
         <Wrapper>
           
-          <NavigationHam/>
+          <NavigationHam
+        themeToggle={()=>setTheme(
+        theme=== 'light'?'default':'light')}
+        icon={theme==='light'?<MdDarkMode size="2em" color="#FF3549"/>:<BsSunFill size="2em" color="white" />}
+      />
           
             <EventCard
             onInputChange={(e)=>
