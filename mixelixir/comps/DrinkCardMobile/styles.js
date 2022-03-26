@@ -10,7 +10,7 @@ width:100%;
 
 export const CardContainer = styled.div`
 display:${props=>props.display};
-background-image: url(${props=>props.imgSrc});
+// background-image: url(${props=>props.imgSrc});
 background-size:cover;
 margin:5px;
 color: #fff;
@@ -18,22 +18,36 @@ background-repeat:no-repeat;
 height:100%;
 flex-direction:row;
 width:100%;
-// border:2px solid #FF3864;
+border:.5px solid #FF3864;
 border-radius: 5px;
-
+justify-content:space-around;
+align-items:center;
+position:relative;
 `;
 
-export const TagCont = styled.div`
+export const ImageContainer = styled.div`
+padding:5px;
+height:100px;
+width:100px;
+
+`
+export const Image= styled.img`
+object-fit:contain;
+height:100%;
 width:100%;
+border-radius:5px;
+`
+export const TagCont = styled.div`
+width:60%;
 height:20%;
 display:flex;
 flex-direction:row;
-justify-content:flex-start;
+justify-content:center;
 align-items:center;
 `;
 
 export const Tag = styled.div`
-width:50%;
+width:60%;
 height:80%;
 display:flex;
 flex-direction:row;
@@ -51,8 +65,10 @@ line-height:1;
 
 export const ContentCont = styled.div`
 width:100%;
-height:100%;
+height:100px;
 display:flex;
+position:absolute;
+z-index:-1;
 flex-direction:column;
 // background-color:#00000020;
 background: linear-gradient(180deg, rgba(255,255,255,0.001) 0%, rgba(0,0,0,0.85) 98%);
@@ -76,3 +92,9 @@ align-items:center;
 width:10%;
 color:white;
 `;
+
+export const Name = styled.div`
+font-size:17px;
+font-weight:800;
+tex-align:center;
+`

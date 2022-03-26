@@ -4,20 +4,34 @@ import { useRouter } from 'next/router';
 import {useState,useEffect} from 'react'
 import ax from 'axios';
 
+// styled components
+import { 
+  DrinkResults, 
+  Wrapper, 
+  SearchBarWrapper, 
+  SearchBar, 
+  Heading, 
+  SubHeading, 
+  HeadingCont, 
+  PaginationCont 
+} from '@/styles/styles';
+
+// custom hook and variables
+import { useSearch, useTheme } from '@/utils/provider';
+import { search_types } from '@/utils/variables';
+import { HeaderTheme, SubHeaderTheme } from "@/utils/variables";
 
 // components imports
 import { Input } from '@/comps/InputBox'
-import { useSearch, useTheme } from '@/utils/provider';
-import { search_types } from '@/utils/variables';
 import { SearchSelection } from '@/comps/SearchSelection';
 import { isExpired, decodeToken } from "react-jwt";
-import { DrinkResults, Wrapper, SearchBarWrapper, SearchBar, Heading, SubHeading, HeadingCont, PaginationCont } from '@/styles/styles';
 import NavBar from '@/comps/NavBar';
 import DrinkCardUIStatic from '@/comps/DrinkCardStatic';
-import { HeaderTheme, SubHeaderTheme } from "@/utils/variables";
 import {BsSunFill} from 'react-icons/bs';
 import {MdDarkMode} from 'react-icons/md';
 import { Pagination } from '@/comps/Pagination';
+import { SearchBarInput } from '@/comps/SearchInput';
+import { NavigationHam } from '@/comps/NavigationHam';
 
 var timer = null
 
@@ -25,19 +39,34 @@ export default function SearchSelect() {
 
   const router = useRouter()
 
+  const {theme, setTheme} = useTheme()
+
+
+
   const [searchData, setSearchData] = useState([]);
   const[curPage, setCurPage] = useState(1)
   const {search, setSearch} = useSearch()
   const [keyword,setKeyWord] = useState()
   const [userToken, setUserToken] = useState()
   const  [ user, setUser] = useState()
-  const {theme, setTheme} = useTheme()
   const [favCol, setFavCol] = useState()
   const  [ clicked, setClicked] = useState ()
   const [paginate, setPaginate] = useState(0)
 
+  const [inputWidth, setInputWidth] = useState('50%')
+
+  const [sWidth, setSwidth] = useState()
+  // state to keep track of current screen size
 
 
+  useEffect(()=>{
+      setSwidth(window.innerWidth)
+      window.onload=()=>{setSwidth(window.innerWidth)}
+      window.onresize=()=>{
+      setSwidth(window.innerWidth)
+  }
+  // detecting when the screen resizes
+  },[sWidth])
   
   const setType = (txt)=>{
       console.log("this is the arg", txt)
@@ -113,27 +142,25 @@ const handleFavs = async(o, i)=>
   return (
     <Wrapper>
     
-    <NavBar
+    {sWidth<600?<NavigationHam/>: <NavBar
         themeToggle={()=>setTheme(
         theme=== 'light'?'default':'light')}
-        icon={theme==='light'?<MdDarkMode  size="1.5em"/>:<BsSunFill size="1.5em"/>}
-    />
+        />}
     
     <HeadingCont>
       <Heading color={HeaderTheme[theme].col}>
         Welcome {user != undefined && user.user.username} use the search bar below to search for a drink!
       </Heading>
-      <SubHeading color={SubHeaderTheme[theme].col}> 
-        Searching by {search} filter 
-      </SubHeading>
+      
     </HeadingCont> 
 
     <SearchBarWrapper>
-      <SearchBar 
-        type="input" 
-        placeholder="Search for your favourite drinks!" 
-        onChange={(e)=>inputFilter(e.target.value)}/>
-      <SearchSelection onSearch={(e)=> setType(e.target.value)}/>
+        <SearchBarInput
+          search={search}
+          width={inputWidth}
+          onChange={(e)=>inputFilter(e.target.value)}
+          onSearch={(e)=> setType(e.target.value)}
+        />
     </SearchBarWrapper>  
 
     
@@ -141,13 +168,13 @@ const handleFavs = async(o, i)=>
     
             {searchData.map((o,i)=>(
               <DrinkCardUIStatic 
-              onClick={()=>router.push(`/search/${o.idDrink}`)}
-              key={i} 
-              name={o.strDrink} 
-              imgSrc={o.strDrinkThumb}
-              tag={o.strCategory}
-              onFavClick={()=>{handleFavs(o,i)}}
-              favCol={clicked ===i?'#FF3549':null}
+                  onClick={()=>router.push(`/search/${o.idDrink}`)}
+                  key={i} 
+                  name={o.strDrink} 
+                  imgSrc={o.strDrinkThumb}
+                  tag={o.strCategory}
+                  onFavClick={()=>{handleFavs(o,i)}}
+                  favCol={clicked ===i?'#FF3549':null}
               >
             </DrinkCardUIStatic>))}
               

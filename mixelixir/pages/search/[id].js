@@ -21,8 +21,6 @@ export default function Drink  () {
     const [suggest, setSuggest] = useState([])
     const {theme, setTheme} = useTheme();
     const [sWidth, setSwidth] = useState()
-    // const [toggle,setToggle] = useState(false)
-    // const [hammer, setHammer]= useState(false)
     // state to keep track of current screen size
 
 

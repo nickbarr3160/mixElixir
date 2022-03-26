@@ -241,13 +241,32 @@ export const Container = styled.div`
 
 export const SearchBarWrapper = styled.div`
 display:flex;
+height:100px;
 width:90%;
 justify-content:flex-start;
+@media(max-width:600px)
+{
+  // border:2px solid yellow;
+  flex-direction:column;
+  height:300px;
+}
 `;
 
 export const SearchBar = styled.input`
-width:60%;
+width:30%;
+padding:1em;
 margin-right:2em;
+background-color:#34343450;
+border-radius:5px;
+border:none;
+color:white;
+focus:none;
+@media(max-width:600px)
+{
+  flex-direction:column;
+}
+// width:100px;
+
 `;
 
 export const Heading = styled.h1`
