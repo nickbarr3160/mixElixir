@@ -13,6 +13,8 @@ import { EventCard } from "@/comps/EventCard";
 import DrinkCardUIDrag from '../comps/DrinkCardDrag'
 import {BsSunFill} from 'react-icons/bs';
 import {MdDarkMode} from 'react-icons/md';
+import { NavigationHam } from "@/comps/NavigationHam";
+
 var timer = null
 
 export default function Sockets() {
@@ -27,7 +29,18 @@ export default function Sockets() {
   const [dropMessage, setDropMessage] = useState("Drop Drinks Here")
   const [droppedInfo, setDroppedInfo] = useState([])
   const [user, setUser] = useState()
-  
+  const [sWidth, setSwidth] = useState()
+
+
+  //Grab the screen size and store it in a state
+  useEffect(()=>{
+      setSwidth(window.innerWidth)
+      window.onload=()=>{setSwidth(window.innerWidth)}
+      window.onresize=()=>{
+      setSwidth(window.innerWidth)
+  }
+  },[sWidth])
+
   //Generate searched drinks
   const inputFilter = async (value) =>{
    
@@ -46,7 +59,7 @@ export default function Sockets() {
       })
       
     // store the data in a state for mapping
-    setSearchData(res.data)  
+    setSearchData(res.data.result)  
     }, 500)
   
   }
@@ -63,6 +76,7 @@ export default function Sockets() {
         setUser(userInfo.user.username)
     }
     
+    //Upon recieval  of server response  
     socket.on("joined", (id, txt,)=>{ 
       setMsgs(`${user && user} says ${txt}`)
     }),
@@ -101,6 +115,78 @@ export default function Sockets() {
     }
     
   
+    if(sWidth<600){
+      return (
+        <Wrapper>
+          
+          <NavigationHam/>
+          
+          <EventWrapper>
+            <DndProvider 
+              backend={TouchBackend} options={{
+              enableTouchEvents:false,
+              enableMouseEvents:true
+            }}
+            >
+                <EventCard
+                onInputChange={(e)=>
+                setTxt(e.target.value)}
+                onButtClick={EmitToIo}
+                descrip={msgs}
+                />
+              <EventInputContentCont>
+        
+                <EventInput 
+                placeholder="Search for drinks to add to the menu" 
+                onChange={(e)=>inputFilter(e.target.value)}>
+                </EventInput>
+                
+                <DrinkResults>
+                      {searchData.map((o,i)=><DrinkCardUIDrag 
+                      item={o}
+                      key={i} 
+                      name={o.strDrink} 
+                      imgSrc={o.strDrinkThumb}
+                      tag={o.strCategory}
+                      >
+    
+                      </DrinkCardUIDrag>)}
+                </DrinkResults>
+    
+              </EventInputContentCont>
+    
+              <EventContentCont>
+    
+                <Dropzone 
+                dropMessage={dropMessage}
+                onDropItem={(item)=>{
+                  EmitDrinkToIo(item)
+                  setDropMessage(null)
+                  }}>
+                  {Object.values(drink).map(o=><DrinkCardUIDrag 
+                    type='' 
+                    name={o.obj.strDrink} 
+                    imgSrc={o.obj.strDrinkThumb}
+                    key={o.id}
+                    drinkpos={o.pos}
+                    tag={o.obj.strCategory}
+                    >
+    
+                    {o.id}
+                  </DrinkCardUIDrag>
+                  )}
+                </Dropzone>
+              </EventContentCont>
+    
+            </DndProvider>
+          </EventWrapper>
+        </Wrapper>
+        )
+    
+    }
+    
+  
+    else{
     return (
     <Wrapper>
       
@@ -173,4 +259,5 @@ export default function Sockets() {
     </Wrapper>
     )
 
+}
 }

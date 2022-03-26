@@ -79,10 +79,7 @@ const DrinkCardUIDrag = ({
     ref={dragPreview} {...sty}
     imgSrc={imgSrc}
     >
-        <IconCont onClick={onFavClick}>
-            <AiFillHeart size="2.5em" color={favCol}/>
-        </IconCont>
-
+     
         <TagCont>
             <Tag bgcolor={DrinkTheme[theme].bgCol}>
             {tag}

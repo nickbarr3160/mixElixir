@@ -8,11 +8,11 @@ import {AiFillHeart} from 'react-icons/ai'
 const DrinkCardUIStatic = ({
     onClick=()=>{},
     name="Jake",
-    display="flex",
     imgSrc="https://placekitten.com/50/50",
     onFavClick=()=>{},
     favCol="",
-    tag=""
+    tag="",
+    iconDisplay="flex"
 })=> {
     const {theme} = useTheme();
     return (<> 

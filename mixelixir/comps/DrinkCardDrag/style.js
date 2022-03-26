@@ -18,21 +18,24 @@ border-radius: 5px;
 box-shadow: 2px 2px 5px 1px black;
 overflow: hidden;
 margin:1em;
+${({position, left, top})=>(position === 'fixed' || position === 'absolute') && `
+  left:${left}px;
+  top:${top}px;
+  position:${position};
+`}
 `;
 
 export const TagCont = styled.div`
 width:100%;
-height:15%;
+height:70%;
 display:flex;
-flex-direction:row;
 justify-content:flex-start;
 align-items:center;
-
 `;
 
 export const Tag = styled.div`
 width:50%;
-height:80%;
+height:20%;
 display:flex;
 flex-direction:row;
 justify-content:center;
@@ -45,11 +48,6 @@ font-weight:bold;
 font-size:12px;
 padding:0em 1em 0em 1em;
 line-height:1;
-${({position, left, top})=>(position === 'fixed' || position === 'absolute') && `
-  left:${left}px;
-  top:${top}px;
-  position:${position};
-`}
 `;
 
 export const TextCont = styled.div`

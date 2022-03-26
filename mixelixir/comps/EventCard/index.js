@@ -5,7 +5,7 @@ import { EventTheme } from "@/utils/variables";
 import {useTheme} from '../../utils/provider';
 
 export const EventCard = ({
-   event="Wedding Party Menu",
+   event="Wedding Drink Menu",
    onInputChange=()=>{},
    onButtClick=()=>{},
    descrip=""

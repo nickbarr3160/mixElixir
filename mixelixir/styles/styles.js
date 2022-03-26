@@ -161,7 +161,11 @@ export const EventWrapper = styled.div`
 display:flex;
 justify-content:center;
 align-items:flex-start;
-width:100vw;
+width:100%;
+@media (max-width:600px)
+{
+  flex-direction:column;
+}
 `;
 
 export const EventContentCont = styled.div`
@@ -171,6 +175,10 @@ justify-content:flex-start;
 align-items:center;
 height:110vh;
 width:50%;
+@media (max-width:600px)
+{
+ width:100%;
+}
 `;
 
 export const EventInputContentCont = styled.div`
@@ -180,6 +188,10 @@ justify-content:space-evenly;
 align-items:center;
 width:50%;
 margin-top:2em;
+@media (max-width:600px)
+{
+ width:100%;
+}
 `;
 
 export const EventInput = styled.input`
@@ -190,6 +202,10 @@ color:white;
 border:none;
 padding:1em;
 font-family: 'Poppins', sans-serif;
+@media (max-width:600px)
+{
+ width:90%;
+}
 `;
 
 

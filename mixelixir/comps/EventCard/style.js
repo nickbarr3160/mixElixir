@@ -11,6 +11,7 @@ height:80%;
 padding:1em;
 margin:2em;
 box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px;
+
 `;
 
 export const EventHeading = styled.h1`
@@ -19,6 +20,10 @@ font-size: 24px;
 margin:0;
 color:
 ${props=>props.color};
+@media (max-width:600px)
+{
+ text-wrap:nowrap;
+}
 `;
 
 export const Divider = styled.div`
@@ -45,6 +50,10 @@ width:70%;
 
 export const EventDescrip = styled.div`
 color:${props=>props.color};
+@media (max-width:600px)
+{
+ font-size:14px;
+}
 `;
 
 export const EventTitleCont = styled.div`
