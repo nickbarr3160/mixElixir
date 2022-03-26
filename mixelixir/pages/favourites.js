@@ -108,7 +108,7 @@ const handleFavs = async(o)=>
               name={o.drink.strDrink} 
               imgSrc={o.drink.strDrinkThumb} 
               tag={o.drink.strCategory}
-              onClick={()=>router.push(`/search/${o.idDrink}`)}
+              onClick={()=>router.push(`/search/${o.drink.idDrink}`)}
               onFavClick={()=>{handleFavs(o,i)}}
               favCol={clicked ===i?'#FF3549':null}
               />

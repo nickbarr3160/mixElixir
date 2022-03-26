@@ -17,7 +17,7 @@ const NavBar = ({
     return <NavCont bgcolor={NavbarTheme[theme].bg}>
         
         <LogoCont onClick={()=>router.push('/home')}>
-            <Logo src='/logo.png'/>
+            <Logo src='/mix.svg'/>
         </LogoCont>
 
         <LinkCont color={NavbarTheme[theme].color}>

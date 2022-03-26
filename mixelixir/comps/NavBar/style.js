@@ -57,7 +57,8 @@ export const LogoCont = styled.div`
 display:flex;
 height:80%;
 margin:2em;
-
+// border:2px solid red;
+width:100px;
 @media (max-width:600px)
 {
  height:100px;

@@ -24,7 +24,7 @@ const{theme} = useTheme()//defining the custom hook
    <Header>
     
       <LogoCont>
-          <Logo src='/logo.png'/>
+          <Logo src='/mix.svg'/>
       </LogoCont>
   
    
