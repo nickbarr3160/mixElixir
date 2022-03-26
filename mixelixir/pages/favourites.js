@@ -114,8 +114,8 @@ const handleFavs = async(o)=>
               name={o.drink.strDrink}
               tag={o.drink.strCategory} 
               imgSrc={o.drink.strDrinkThumb}
-              onFavClick={()=>{handleFavs(o)}}
-              favCol="#FF3549"
+              onFavClick={()=>{handleFavs(o,i)}}
+              favCol={clicked ===i?'#FF3549':null}
               />
               :<DrinkCardMobile
               key={i} 

@@ -15,7 +15,7 @@ display:flex;
 justify-content:space-around;
 align-items:center;
 transition:all .2s;
-color:white;
+color:${props=>props.col};
 border-radius:50px;
 border:.5px solid #FF3549;
 height:${props=>props.height};

@@ -15,7 +15,7 @@ const NavBar = ({
     const router = useRouter();
     return <NavCont bgcolor={NavbarTheme[theme].bg}>
         
-        <LogoCont onClick={()=>router.push('/')}>
+        <LogoCont onClick={()=>router.push('/home')}>
             <Logo src='/logo.png'/>
         </LogoCont>
 
@@ -26,6 +26,14 @@ const NavBar = ({
             <NavLink color={NavbarTheme[theme].color} onClick={()=>router.push('/favourites')}>Favourites</NavLink>
             <div  onClick={themeToggle}>
                 {icon}
+            </div>
+            <div
+                onClick={()=>{
+                    window.localStorage.removeItem('user')
+                    router.push('/')
+                }}
+                style={{color:'#FF3549', cursor:'pointer'}} > 
+                Signout 
             </div>
         </LinkCont>
     </NavCont>
