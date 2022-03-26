@@ -24,6 +24,7 @@ font-size:60px;
 
 export const HeroWelcomeText = styled.div`
 font-size:18px;
+width:100%;
 color:${props=>props.color};
 @media (max-width: 600px) {
     text-align:center;

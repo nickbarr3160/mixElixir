@@ -77,13 +77,13 @@ export const NavbarTheme = {
 //HERO MESSAGE
 export const HeroTheme = {
     default:{
-        headCol:white,
-        textCol:salsa
+        headCol:salsa,
+        textCol:white
     },
 
     light:{
-        headCol:black,
-        textCol:salsa
+        headCol:salsa,
+        textCol:black
     }
 }
 

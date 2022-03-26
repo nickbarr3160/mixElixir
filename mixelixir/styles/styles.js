@@ -20,14 +20,14 @@ justify-content:flex-end;
 
 // Settings page styling
 
-export const SettingsWrapper = styled.div`
-display:flex;
-flex-direction:column;
-justify-content:flex-start;
-align-items:center;
-height:100vh;
-width:100vw;
-`;
+// export const SettingsWrapper = styled.div`
+// display:flex;
+// flex-direction:column;
+// justify-content:flex-start;
+// align-items:center;
+// height:100vh;
+// width:100vw;
+// `;
 
 // Landing Page styling
 export const LandingWrapper = styled.div`
@@ -35,8 +35,7 @@ display:flex;
 flex-direction:column;
 justify-content:flex-start;
 align-items:center;
-height:100%;
-width:100vw;
+width:100%;
 @media (max-width:600px)
 {
 
@@ -53,21 +52,19 @@ align-items:center;
 flex-wrap:wrap;
 `;
 
-export const GeneratedCont = styled.div`
+export const Generator = styled.div`
 background-color:${props=>props.bgcolor};
 display:flex;
-justify-content:space-evenly;
-align-items:center;
-height:80%; 
-width:80%;
+justify-content:space-between;
+align-items:center; 
+width:100%;
 color:${props=>props.color};
 padding:1em;
-box-shadow:0 2px 4px rgb(0 0 0/20%);
 @media (max-width:600px)
 {
+  flex-direction:column;
   width:100%;
 }
-// border:2px solid red;
 `;
 
 export const GenerateContent = styled.div `
@@ -76,30 +73,33 @@ flex-direction:column;
 justify-content:space-evenly;
 align-items:center;
 width:100%;
-height:80vh;
+height:80%;
 @media (max-width:600px)
 {
   align-items:center;
   padding:10px;
 }
-
 `;
 
 export const AddIngredientsColumn = styled.div `
 display:flex;
 flex-direction:column;
-height:100%;
+padding-left:3em;
+height:80%;
 width:50%;
-// border:2px solid pink;
+@media (max-width:600px)
+{
+  padding-left:0em;
+  width:90%;
+}
 `;
 
 export const MappedIngredients = styled.div`
 width:70%;
 height:70%;
 display:flex;
-justify-content:space-evenly;
+justify-content:flex-start;
 flex-wrap:wrap;
-// border:2px solid red;
 @media (max-width:600px)
 {
   padding:5px;
@@ -110,9 +110,7 @@ flex-wrap:wrap;
 export const IngredientCont = styled.div`
 display:flex;
 width:7em;
-height:2em;
 border-radius:10px;
-margin:1em;
 justify-content:space-between;
 align-items:center;
 padding-left:1em;
@@ -121,7 +119,7 @@ padding-left:1em;
 export const HeroCont = styled.div`
 width:100%;
 display:flex;
-justify-content:space-evenly;
+justify-content:flex-start;
 align-items:center;
 @media (max-width:600px)
 {
@@ -132,7 +130,6 @@ align-items:center;
 
 export const HeroContentCont = styled.div`
 width:50%;
-height:100%;
 display:flex;
 flex-direction:column;
 justify-content:space-evenly;
@@ -274,7 +271,7 @@ font-family: 'Poppins', sans-serif;
 
 export const AuthWrapper = styled.div`
 display:flex;
-height:100vh;
+height:100%;
 justify-content:center;
 align-items:center;
 width:100vw;

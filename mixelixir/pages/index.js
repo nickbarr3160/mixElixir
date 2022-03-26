@@ -30,7 +30,7 @@ import {
   LandingWrapper, 
   DrinkResults, 
   Wrapper, 
-  GeneratedCont, 
+  Generator, 
   IngredientCont, 
   HeroCont, 
   HeroContentCont, 
@@ -51,7 +51,7 @@ export default function Home() {
   const [ user, setUser] = useState()
   const {theme, setTheme} = useTheme()
   const router= useRouter()
-
+  const [playAnim, setPlayAnim] = useState()
   const [paginate, setPaginate] = useState(0)
 
 
@@ -84,6 +84,7 @@ export default function Home() {
   {
     arr.length <= 4-1 ? setArr([...arr, val]):null 
     console.log(arr)
+    setPlayAnim(true)
     // adding values from the input box to an array names arr if the length of the array is less than or equal to 4
   }
 
@@ -156,15 +157,17 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
 
       <GenerateContent>
         
+
         <HeroCont>
           <HeroContentCont>
             <HeroMessage 
-              heading="Drink Generator" 
-              text="New tasty drinks for you to make based on what you have on hand"/>
+            heading="Drink Generator"
+            text="Tired of the same old drinks? Or maybe your not sure what you can make. Enter up to 4 ingredients you have on hand to see what you can create!"
+            />
           </HeroContentCont>
         </HeroCont>
 
-        <GeneratedCont 
+        <Generator 
         bgcolor={GenerateTheme[theme].bgcol}
         color={GenerateTheme[theme].col}
         >
@@ -192,13 +195,13 @@ butt_arr = butt_arr.slice(curPage-5<0?0:curPage-5,curPage+5)
             </AddIngredientsColumn>
 
             <Player
-            autoplay
+
             src="https://assets9.lottiefiles.com/packages/lf20_rlzyqo6a.json"
-            style={{ height: '300px', width: '300px', }} 
+            style={{ height: '300px', width: '400px'}} 
             >
             {/* <Controls visible={true} buttons={['play', 'repeat', 'frame', 'debug']} /> */}
             </Player>
-        </GeneratedCont>
+        </Generator>
         <MyButton onClick={()=>compareIngs(curPage)}/>
       </GenerateContent>
       
