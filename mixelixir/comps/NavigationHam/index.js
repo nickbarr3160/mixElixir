@@ -25,7 +25,7 @@ const{theme} = useTheme()//defining the custom hook
   return (
    <Header>
     
-      <LogoCont onClick={()=>{router.push('/')}}>
+      <LogoCont onClick={()=>{router.push('/home')}}>
           <Logo src='/mix.svg'/>
       </LogoCont>
   
