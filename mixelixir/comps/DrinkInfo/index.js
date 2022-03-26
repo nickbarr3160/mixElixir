@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { IndDrinkTheme } from '@/utils/variables';
 import { 
     DrinkWrap,
     DrinkInfo,
@@ -14,26 +14,28 @@ import {
 
 // data imports 
 import { Drinks } from '@/props';
+import {useTheme} from '../../utils/provider'
 
 export const DrinkInformation = (
     {
         defaultData = Drinks
     }
 ) => {
-  return (
+    const {theme} = useTheme();
+    return (
     <DrinkWrap>
     {/* all the information about the drink */}
     <DrinkInfo>
-        <DrinkHeading> 
+        <DrinkHeading color={IndDrinkTheme[theme].headCol}> 
             {defaultData.strDrink}
         </DrinkHeading>
 
         {/* ingredients, prep and glass*/}
         <DrinkInstruct>
-            <InstructHeading>
+            <InstructHeading color={IndDrinkTheme[theme].headCol}>
                 Ingredients
             </InstructHeading>
-            <InstructInfo> 
+            <InstructInfo color={IndDrinkTheme[theme].bodyText}> 
                 {defaultData.ingredients.map((o,i)=>(
                 <div key={i}>
                     {o}
@@ -42,19 +44,19 @@ export const DrinkInformation = (
         </DrinkInstruct>
 
         <DrinkInstruct>
-            <InstructHeading>
+            <InstructHeading color={IndDrinkTheme[theme].headCol}>
                 Preparation
             </InstructHeading>
-            <InstructInfo> 
+            <InstructInfo color={IndDrinkTheme[theme].bodyText}> 
                 {defaultData.strInstructions}
             </InstructInfo>
         </DrinkInstruct>
         
         <DrinkInstruct>
-            <InstructHeading>
+            <InstructHeading color={IndDrinkTheme[theme].headCol}>
                 Glassware
             </InstructHeading>
-            <InstructInfo> 
+            <InstructInfo color={IndDrinkTheme[theme].bodyText}> 
                 {defaultData.strGlass}
             </InstructInfo>
         </DrinkInstruct>

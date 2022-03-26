@@ -66,7 +66,7 @@ export const NavbarTheme = {
     },
 
     light:{
-        bg:peach,
+        bg:white,
         color:salsa,
         icon:salsa,
         links:salsa,
@@ -107,20 +107,20 @@ export const ButtonTheme = {
     },
 
     light:{
-        bgcol:turq
+        bgcol:salsa
     }
 }
 
 //INDIVIDUAL CARD
 export const IndDrinkTheme = {
     default:{
-        headCol:white,
-        subHeadCol:orange,
+        headCol:salsa,
+        subHeadCol:white,
         bodyText:white
     },
 
     light:{
-        headCol:black,
+        headCol:salsa,
         subHeadCol:turq,
         bodyText:black    
     }
@@ -144,7 +144,7 @@ export const SearchFilterTheme = {
     },
 
     light:{
-        col:black   
+        col:salsa  
     }
 }
 
@@ -156,7 +156,7 @@ export const HeaderTheme = {
     },
 
     light:{
-        col:turq  
+        col:salsa  
     }
 }
 
@@ -180,9 +180,9 @@ export const EventTheme = {
     },
 
     light:{
-        cardbgcol:white,
-        heading:turq,
-        userCol:turq,
-        bodyText:black
+        cardbgcol:altGrey,
+        heading:white,
+        userCol:salsa,
+        bodyText:white
     }
 }

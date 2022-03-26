@@ -27,6 +27,7 @@ flex-direction:column;
 `
 
 export const DrinkHeading = styled.h1`
+color:${props=>props.color};
 `
 
 export const DrinkInstruct = styled.div`
@@ -36,13 +37,17 @@ flex-direction:column;
 display:100%;
 `
 
-export const InstructHeading = styled.h3``
-export const InstructInfo = styled.div``
+export const InstructHeading = styled.h3`
+color:${props=>props.color};`
+
+export const InstructInfo = styled.div`
+color:${props=>props.color};
+`
 
 export const DrinkImageCont = styled.div`
 display:flex;
-width:50%;
-height:70%;
+width:30%;
+height:50%;
 align-items:flex-start;
 // border:2px solid blue;
 @media (max-width: 600px) {

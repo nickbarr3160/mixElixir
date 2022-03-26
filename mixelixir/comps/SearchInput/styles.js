@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 export const MainWrapper = styled.div`
 display:flex;
 flex-direction:row;
-border:1px solid yellow;
 width:100%;
 height:100%;
 
@@ -45,7 +44,7 @@ export const SearchBar = styled(motion.input)`
 width:50%;
 transition:all .5s;
 padding:1em;
-background-color:#34343450;
+background-color:#202223;
 border-radius:5px;
 border:none;
 color:white;
@@ -75,7 +74,7 @@ justify-content:space-between;
 `
 export const Input = styled.input`
 width:30%;
-background-color:#34343450;
+background-color:#202223;
 border:none;
 color:white;
 border-radius:2px;

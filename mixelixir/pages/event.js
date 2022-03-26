@@ -14,6 +14,7 @@ import DrinkCardUIDrag from '../comps/DrinkCardDrag'
 import {BsSunFill} from 'react-icons/bs';
 import {MdDarkMode} from 'react-icons/md';
 import { NavigationHam } from "@/comps/NavigationHam";
+import { DrinkDragCardMobile } from "@/comps/DrinkCardDragMobile";
 
 var timer = null
 
@@ -121,6 +122,12 @@ export default function Sockets() {
           
           <NavigationHam/>
           
+            <EventCard
+            onInputChange={(e)=>
+            setTxt(e.target.value)}
+            onButtClick={EmitToIo}
+            descrip={msgs}
+            />
           <EventWrapper>
             <DndProvider 
               backend={TouchBackend} options={{
@@ -128,12 +135,6 @@ export default function Sockets() {
               enableMouseEvents:true
             }}
             >
-                <EventCard
-                onInputChange={(e)=>
-                setTxt(e.target.value)}
-                onButtClick={EmitToIo}
-                descrip={msgs}
-                />
               <EventInputContentCont>
         
                 <EventInput 
@@ -142,7 +143,7 @@ export default function Sockets() {
                 </EventInput>
                 
                 <DrinkResults>
-                      {searchData.map((o,i)=><DrinkCardUIDrag 
+                      {searchData.map((o,i)=><DrinkDragCardMobile 
                       item={o}
                       key={i} 
                       name={o.strDrink} 
@@ -150,7 +151,7 @@ export default function Sockets() {
                       tag={o.strCategory}
                       >
     
-                      </DrinkCardUIDrag>)}
+                      </DrinkDragCardMobile>)}
                 </DrinkResults>
     
               </EventInputContentCont>
@@ -163,17 +164,18 @@ export default function Sockets() {
                   EmitDrinkToIo(item)
                   setDropMessage(null)
                   }}>
-                  {Object.values(drink).map(o=><DrinkCardUIDrag 
+                  {Object.values(drink).map(o=><DrinkDragCardMobile 
                     type='' 
                     name={o.obj.strDrink} 
                     imgSrc={o.obj.strDrinkThumb}
                     key={o.id}
                     drinkpos={o.pos}
                     tag={o.obj.strCategory}
+                    display="flex"
                     >
     
                     {o.id}
-                  </DrinkCardUIDrag>
+                  </DrinkDragCardMobile>
                   )}
                 </Dropzone>
               </EventContentCont>
