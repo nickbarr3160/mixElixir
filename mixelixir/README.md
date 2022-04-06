@@ -35,3 +35,5 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 * There is a basic communication setup between the two programs. 
 * Text and saved react states are sent to the io from one singular socket and is then sent back by the io allowing for access of many sockets to view the text and saved states. 
 * The socket will run perfectly when ran on localhost however is not setup on a live server.
+* # backend  https://github.com/npm-i-abhay/mixElixirAPI
+
