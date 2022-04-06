@@ -1,5 +1,8 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+##backend 
+https://github.com/npm-i-abhay/mixElixirAPI
+
 ## Getting Started
 * start with npm install to install dependencies in both directories. mixElixir and Socket
 
